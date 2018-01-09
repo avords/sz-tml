@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <title>立可-关于立可</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <script>
+        window.onload = function () {
+            var nav = document.getElementsByClassName("nav")[0];
+            var lis = nav.getElementsByTagName("li");
+            var platforms = document.getElementsByClassName("about");
+            for (var i = 0; i < lis.length; i++) {
+                (function (i) {
+                    lis[i].onclick = function () {
+                        for (var j = 0; j < platforms.length; j++) {
+                            if (j == i) {
+                                platforms[j].className = "about active";
+                                lis[j].className = "active";
+
+                            } else {
+                                platforms[j].className = "about";
+                                lis[j].className = "";
+                            }
+                        }
+                    }
+                })(i);
+            };
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <img class="banner" src="images/about-banner.jpg" />
+    </header>
+    <nav>
+        <ul class="nav">
+            <li class="active">
+                <a href="#">立可设计</a>
+            </li>
+            <li>
+                <a href="#">立可科技</a>
+            </li>
+            <li>
+                <a href="#">立可空间</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="wrapper">
+        <div class="about active">
+            <h2>核心建筑方案创作+全过程咨询技术统筹</h2>
+            <p>以“聚焦方案创作，提高设计品质”为核心服务理念同时提供建筑工程项目的全过程咨询技术统筹的创建设计机构</p>
+            <img class="top30" src="images/about-pic-01.jpg" alt="" />
+            <img src="images/about-pic-02.jpg" alt="" />
+            <img src="images/about-pic-03.jpg" alt="" />
+            <p>南区江北新区展览馆（新区市民中心）</p>
+            <img class="top30" src="images/about-pic-04.jpg" alt="" />
+            <p>立可设计英迈思经典案例</p>
+        </div>
+        <div class="about">立可科技</div>
+        <div class="about">立可空间</div>
+    </div>
+</body>
+
+</html>

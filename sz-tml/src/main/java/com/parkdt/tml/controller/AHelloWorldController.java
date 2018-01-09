@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping(value = "/hello")
-public class vController {
+public class AHelloWorldController {
 
     @RequestMapping("world")
     public String helloWorld(Model model, HttpServletRequest req) {
         model.addAttribute("username", "000");
-
         return "helloWorld";
     }
 }

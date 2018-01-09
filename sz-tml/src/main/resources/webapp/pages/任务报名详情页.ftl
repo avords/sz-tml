@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <title>任务报名-详情页</title>
+    <link href="/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container article">
+            <h1>高新公寓保障性住房项目</h1>
+            <div class="author">
+                <span class="view"> 浏览人数：104</span>
+                <span class="claim"> 认领人数：0</span>
+                <br>
+                <span class="countdown"> 截止时间：00 天 23 小时 23 分 24 秒</span>
+            </div>
+            <p class="title">项目说明</p>
+            <p>
+                <strong>建设单位</strong>深圳市城市规划设计研究院有限公司</p>
+            <p>
+                <strong>项目类型</strong>国企委托前期</p>
+            <p>
+                <strong>项目简介</strong>高新公寓保障性住房项目位于南山区白石路高新技术产业园区，总用地面积52697.5㎡，建筑容积率1.6，总建筑面积77591.85㎡，1998年竣工。其中：住宅建筑面积76891.4㎡，商业建筑面积700.45㎡，服务用房建筑面积198.10㎡，图书室建筑面积104㎡，警务室建筑面积76㎡。
+                高新公寓共有住宅1828套，均为多层住宅。其中：政府产权的公共租赁住房1517套（建筑面积63701.3㎡）；另有311套住房（建筑面积13190.1㎡）出售给15家企业。小区规划停车位60个。
+                <br>项目产值 300000.00 成果要求 文本
+                <br>计划时间 2018-01-03 ~ 2018-01-17
+                <br>项目周期 15天
+                <br>人员要求 项目经理一名，团队成员若干
+                <br>项目详情 高新公寓保障性住房项目位于南山区白石路高新技术产业园区，总用地面积52697.5㎡，建筑容积率1.6，总建筑面积77591.85㎡，1998年竣工。其中：住宅建筑面积76891.4㎡，商业建筑面积700.45㎡，服务用房建筑面积198.10㎡，图书室建筑面积104㎡，警务室建筑面积76㎡。
+                高新公寓共有住宅1828套，均为多层住宅。其中：政府产权的公共租赁住房1517套（建筑面积63701.3㎡）；另有311套住房（建筑面积13190.1㎡）出售给15家企业。小区规划停车位60个。
+            </p>
+            <p class="attachment">
+                项目附件
+                <br>
+                <a> 2017.7.18高新公寓基本情况.doc </a>
+                <a> 方案二-R3.dwg </a>
+                <a> 方案二R3.pptx </a>
+                <a> 方案一 学校.dwg </a>
+                <a> 方案一.pptx </a>
+                <a> 高新技术区南区法定图则.jpg </a>
+            </p>
+        </div>
+        <div class="container article">
+            <form>
+                <p class="title">认领方案</p>
+                <div class="claim">
+                    报价产值
+                    <input type="text" placeholder="请输入产值...">
+                </div>
+                <div class="row">
+                    <div class="claim" style="width:62%;">
+                        工作周期
+                        <input type="text" placeholder="" style="width:100px;">
+                    </div>
+                    <span class="sp">~</span>
+                    <div class="claim" style="width:30%;float:right;">
+                        <input type="text" placeholder="" style="width:100%;">
+                    </div>
+                </div>
+                <p class="title">邀请设计师</p>
+                <div class="invite">
+                    <input type="button" value="+ 独立认领">
+                    <input type="button" value="+ 已有心仪的设计师" class="alt">
+
+                </div>
+                <p class="title">工作计划</p>
+                <div class="plane">
+                    <textarea cols="30" rows="10" placeholder="请输入报名说明..."></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
