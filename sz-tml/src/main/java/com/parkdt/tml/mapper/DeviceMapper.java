@@ -1,7 +1,9 @@
 package com.parkdt.tml.mapper;
 
 import com.parkdt.tml.domain.Device;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface DeviceMapper {
     int deleteByPrimaryKey(Integer id);
 
