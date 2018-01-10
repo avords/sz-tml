@@ -2,3 +2,9 @@
 
 15999602929     cc666888   发布账号（导入方）
 13590355802    cc666888   其他账号（设计师）
+
+
+http://manager.teamlinks.cn/manager/login.do 后台管理
+admin 123456
+
+数据库名 : likekeji
