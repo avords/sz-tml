@@ -1,12 +1,7 @@
 package com.parkdt.tml.config;
 
 import com.github.pagehelper.PageHelper;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +28,7 @@ public class MybatisConfig {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "sqlSessionFactory")
+    /*@Bean(name = "sqlSessionFactory")
     @ConditionalOnMissingBean
     public SqlSessionFactory sqlSessionFactory(PageHelper pageHelper) {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
@@ -46,7 +41,7 @@ public class MybatisConfig {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
 //	@Bean
 //	public MapperHelper mapperHelper(){
@@ -65,10 +60,10 @@ public class MybatisConfig {
         return pageHelper;
     }
 
-    @Bean
+    /*@Bean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
-    }
+    }*/
 
     // 创建事务管理器
     @Bean(name = "txManager1")

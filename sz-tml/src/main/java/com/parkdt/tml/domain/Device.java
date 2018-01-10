@@ -1,78 +1,57 @@
 package com.parkdt.tml.domain;
 
-import com.parkdt.tml.consist.Constant;
+import java.io.Serializable;
 
-/**
- * Created by guojianhua on 2017/12/15.
- */
-public class Device {
+public class Device implements Serializable {
+    private Integer id;
 
-    private int id;
+    private String devicecode;
 
-    private String deviceCode;
+    private String devicename;
 
-    private String deviceName;
+    private String devicetype;
 
-    private String deviceType;
+    private Integer devicestate;
 
-    private int deviceState;
+    private static final long serialVersionUID = 1L;
 
-    private String state;
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getDeviceCode() {
-        return deviceCode;
+    public String getDevicecode() {
+        return devicecode;
     }
 
-    public void setDeviceCode(String deviceCode) {
-        this.deviceCode = deviceCode;
+    public void setDevicecode(String devicecode) {
+        this.devicecode = devicecode == null ? null : devicecode.trim();
     }
 
-    public String getDeviceName() {
-        return deviceName;
+    public String getDevicename() {
+        return devicename;
     }
 
-    public void setDeviceName(String deviceName) {
-        this.deviceName = deviceName;
+    public void setDevicename(String devicename) {
+        this.devicename = devicename == null ? null : devicename.trim();
     }
 
-    public String getDeviceType() {
-        return deviceType;
+    public String getDevicetype() {
+        return devicetype;
     }
 
-    public void setDeviceType(String deviceType) {
-        this.deviceType = deviceType;
+    public void setDevicetype(String devicetype) {
+        this.devicetype = devicetype == null ? null : devicetype.trim();
     }
 
-    public int getDeviceState() {
-        return deviceState;
+    public Integer getDevicestate() {
+        return devicestate;
     }
 
-    public void setDeviceState(int deviceState) {
-
-        if (deviceState == Constant.Device_State.NoIni.getCode()) {
-            setState(Constant.Device_State.NoIni.getCnName());
-        } else if (deviceState == Constant.Device_State.IN.getCode()) {
-            setState(Constant.Device_State.IN.getCnName());
-        } else if (deviceState == Constant.Device_State.OUT.getCode()) {
-            setState(Constant.Device_State.OUT.getCnName());
-        }
-
-        this.deviceState = deviceState;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
+    public void setDevicestate(Integer devicestate) {
+        this.devicestate = devicestate;
     }
 }

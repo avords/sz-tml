@@ -1,108 +1,77 @@
 package com.parkdt.tml.domain;
 
-import com.parkdt.tml.utils.DateUtil;
+import java.io.Serializable;
 
-import java.util.Date;
+public class DeviceUseRecord implements Serializable {
+    private Integer id;
 
-/**
- * Created by guojianhua on 2017/12/15.
- */
-public class DeviceUseRecord {
+    private Integer deviceid;
 
-    private int id;
+    private String username;
 
-    private int deviceId;
+    private String useproject;
 
-    private String userName;
+    private String usetime;
 
-    private String useProject;
+    private String backtime;
 
-    private Date useTime;
+    private String usenote;
 
-    private Date backTime;
+    private static final long serialVersionUID = 1L;
 
-    private String useNote;
-
-    private String useTimeStr;
-
-    private String backTimeStr="";
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getDeviceId() {
-        return deviceId;
+    public Integer getDeviceid() {
+        return deviceid;
     }
 
-    public void setDeviceId(int deviceId) {
-        this.deviceId = deviceId;
+    public void setDeviceid(Integer deviceid) {
+        this.deviceid = deviceid;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
-    public String getUseProject() {
-        return useProject;
+    public String getUseproject() {
+        return useproject;
     }
 
-    public void setUseProject(String useProject) {
-        this.useProject = useProject;
+    public void setUseproject(String useproject) {
+        this.useproject = useproject == null ? null : useproject.trim();
     }
 
-    public Date getUseTime() {
-        return useTime;
+    public String getUsetime() {
+        return usetime;
     }
 
-    public void setUseTime(Date useTime) {
-        if (null != useTime) {
-            setUseTimeStr(DateUtil.formatDate(useTime, "yyyy-MM-dd"));
-        }
-        this.useTime = useTime;
+    public void setUsetime(String usetime) {
+        this.usetime = usetime == null ? null : usetime.trim();
     }
 
-    public Date getBackTime() {
-        return backTime;
+    public String getBacktime() {
+        return backtime;
     }
 
-    public void setBackTime(Date backTime) {
-
-        if (null != backTime) {
-            setBackTimeStr(DateUtil.formatDate(backTime, "yyyy-MM-dd"));
-        }
-        this.backTime = backTime;
+    public void setBacktime(String backtime) {
+        this.backtime = backtime == null ? null : backtime.trim();
     }
 
-    public String getUseNote() {
-        return useNote;
+    public String getUsenote() {
+        return usenote;
     }
 
-    public void setUseNote(String useNote) {
-        this.useNote = useNote;
-    }
-
-    public String getUseTimeStr() {
-        return useTimeStr;
-    }
-
-    public void setUseTimeStr(String useTimeStr) {
-        this.useTimeStr = useTimeStr;
-    }
-
-    public String getBackTimeStr() {
-        return backTimeStr;
-    }
-
-    public void setBackTimeStr(String backTimeStr) {
-        this.backTimeStr = backTimeStr;
+    public void setUsenote(String usenote) {
+        this.usenote = usenote == null ? null : usenote.trim();
     }
 }
