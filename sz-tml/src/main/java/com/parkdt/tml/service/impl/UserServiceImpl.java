@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserService {
     public void updatePersonInfo(PersonalLoginInfo personalLoginInfo, PersonalBaseInfo personalBaseInfo, TeamMember teamMember) {
 
     }
+
+    @Override
+    public PersonalLoginInfo getPersonalLoginInfoById(Long id) {
+        return null;
+    }
 }

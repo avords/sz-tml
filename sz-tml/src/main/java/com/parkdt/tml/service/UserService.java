@@ -22,4 +22,11 @@ public interface UserService {
      * @param teamMember
      */
     void updatePersonInfo(PersonalLoginInfo personalLoginInfo, PersonalBaseInfo personalBaseInfo, TeamMember teamMember);
+
+    /**
+     * 通过用户id得到个人登录信息
+     * @param id
+     * @return
+     */
+    PersonalLoginInfo getPersonalLoginInfoById(Long id);
 }

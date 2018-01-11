@@ -4,6 +4,11 @@ package com.parkdt.tml.consist;
  * Created by guojianhua on 2017/12/15.
  */
 public class Constant {
+    //用户角色
+    public static final int USER_ROLE_EVERYMAN=1;//普通人
+    public static final int USER_ROLE_DESIGNER=2;//设计师
+    public static final int USER_ROLE_PROJECT_MANAGER=3;//项目经理
+    public static final int USER_ROLE_PROJECT_PUBLISHER=4;//项目导入方
 
     public static enum Device_State {
         NoIni("未知", 0),
