@@ -1,7 +1,9 @@
 package com.parkdt.tml.mapper;
 
 import com.parkdt.tml.domain.PersonalLoginInfo;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface PersonalLoginInfoMapper {
     int deleteByPrimaryKey(Long id);
 
