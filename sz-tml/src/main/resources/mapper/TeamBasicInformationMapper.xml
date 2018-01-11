@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parkdt.tml.mapper.TeamBasicInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.TeamBasicInformation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="BIGINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="detailed_address" property="detailedAddress" jdbcType="VARCHAR" />
+    <result column="representative_person" property="representativePerson" jdbcType="VARCHAR" />
+    <result column="contact_number" property="contactNumber" jdbcType="VARCHAR" />
+    <result column="certification_introduction" property="certificationIntroduction" jdbcType="VARCHAR" />
+    <result column="founder" property="founder" jdbcType="BIGINT" />
+    <result column="certifier" property="certifier" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="first_certification_time" property="firstCertificationTime" jdbcType="TIMESTAMP" />
+    <result column="final_certification_time" property="finalCertificationTime" jdbcType="TIMESTAMP" />
+    <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR" />
+    <result column="cover" property="cover" jdbcType="VARCHAR" />
+    <result column="details_img" property="detailsImg" jdbcType="VARCHAR" />
+    <result column="show_introduction" property="showIntroduction" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_time_temp" property="createTimeTemp" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="recommend" property="recommend" jdbcType="SMALLINT" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, industry, address, detailed_address, representative_person, contact_number, 
+    certification_introduction, founder, certifier, status, first_certification_time, 
+    final_certification_time, head_portrait, cover, details_img, show_introduction, create_time, 
+    create_time_temp, update_time, recommend, province_id, province_name, city_id, city_name, 
+    area_id, area_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_team_basic_information
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_team_basic_information
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.parkdt.tml.domain.TeamBasicInformation" >
+    insert into t_team_basic_information (id, name, industry, 
+      address, detailed_address, representative_person, 
+      contact_number, certification_introduction, 
+      founder, certifier, status, 
+      first_certification_time, final_certification_time, 
+      head_portrait, cover, details_img, 
+      show_introduction, create_time, create_time_temp, 
+      update_time, recommend, province_id, 
+      province_name, city_id, city_name, 
+      area_id, area_name)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{industry,jdbcType=BIGINT}, 
+      #{address,jdbcType=VARCHAR}, #{detailedAddress,jdbcType=VARCHAR}, #{representativePerson,jdbcType=VARCHAR}, 
+      #{contactNumber,jdbcType=VARCHAR}, #{certificationIntroduction,jdbcType=VARCHAR}, 
+      #{founder,jdbcType=BIGINT}, #{certifier,jdbcType=BIGINT}, #{status,jdbcType=SMALLINT}, 
+      #{firstCertificationTime,jdbcType=TIMESTAMP}, #{finalCertificationTime,jdbcType=TIMESTAMP}, 
+      #{headPortrait,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{detailsImg,jdbcType=VARCHAR}, 
+      #{showIntroduction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createTimeTemp,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{recommend,jdbcType=SMALLINT}, #{provinceId,jdbcType=BIGINT}, 
+      #{provinceName,jdbcType=VARCHAR}, #{cityId,jdbcType=BIGINT}, #{cityName,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=BIGINT}, #{areaName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.TeamBasicInformation" >
+    insert into t_team_basic_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="detailedAddress != null" >
+        detailed_address,
+      </if>
+      <if test="representativePerson != null" >
+        representative_person,
+      </if>
+      <if test="contactNumber != null" >
+        contact_number,
+      </if>
+      <if test="certificationIntroduction != null" >
+        certification_introduction,
+      </if>
+      <if test="founder != null" >
+        founder,
+      </if>
+      <if test="certifier != null" >
+        certifier,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="firstCertificationTime != null" >
+        first_certification_time,
+      </if>
+      <if test="finalCertificationTime != null" >
+        final_certification_time,
+      </if>
+      <if test="headPortrait != null" >
+        head_portrait,
+      </if>
+      <if test="cover != null" >
+        cover,
+      </if>
+      <if test="detailsImg != null" >
+        details_img,
+      </if>
+      <if test="showIntroduction != null" >
+        show_introduction,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createTimeTemp != null" >
+        create_time_temp,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedAddress != null" >
+        #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="representativePerson != null" >
+        #{representativePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null" >
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationIntroduction != null" >
+        #{certificationIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        #{founder,jdbcType=BIGINT},
+      </if>
+      <if test="certifier != null" >
+        #{certifier,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="firstCertificationTime != null" >
+        #{firstCertificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalCertificationTime != null" >
+        #{finalCertificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="headPortrait != null" >
+        #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null" >
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsImg != null" >
+        #{detailsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="showIntroduction != null" >
+        #{showIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTimeTemp != null" >
+        #{createTimeTemp,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=SMALLINT},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.TeamBasicInformation" >
+    update t_team_basic_information
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedAddress != null" >
+        detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="representativePerson != null" >
+        representative_person = #{representativePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null" >
+        contact_number = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationIntroduction != null" >
+        certification_introduction = #{certificationIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        founder = #{founder,jdbcType=BIGINT},
+      </if>
+      <if test="certifier != null" >
+        certifier = #{certifier,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="firstCertificationTime != null" >
+        first_certification_time = #{firstCertificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalCertificationTime != null" >
+        final_certification_time = #{finalCertificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="headPortrait != null" >
+        head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null" >
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsImg != null" >
+        details_img = #{detailsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="showIntroduction != null" >
+        show_introduction = #{showIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTimeTemp != null" >
+        create_time_temp = #{createTimeTemp,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=SMALLINT},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.TeamBasicInformation" >
+    update t_team_basic_information
+    set name = #{name,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=BIGINT},
+      address = #{address,jdbcType=VARCHAR},
+      detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      representative_person = #{representativePerson,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=VARCHAR},
+      certification_introduction = #{certificationIntroduction,jdbcType=VARCHAR},
+      founder = #{founder,jdbcType=BIGINT},
+      certifier = #{certifier,jdbcType=BIGINT},
+      status = #{status,jdbcType=SMALLINT},
+      first_certification_time = #{firstCertificationTime,jdbcType=TIMESTAMP},
+      final_certification_time = #{finalCertificationTime,jdbcType=TIMESTAMP},
+      head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      details_img = #{detailsImg,jdbcType=VARCHAR},
+      show_introduction = #{showIntroduction,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_time_temp = #{createTimeTemp,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      recommend = #{recommend,jdbcType=SMALLINT},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=BIGINT},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      area_name = #{areaName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

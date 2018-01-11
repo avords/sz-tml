@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parkdt.tml.mapper.PersonalBaseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.PersonalBaseInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="authentication_type" property="authenticationType" jdbcType="SMALLINT" />
+    <result column="entry_type" property="entryType" jdbcType="SMALLINT" />
+    <result column="team_name" property="teamName" jdbcType="VARCHAR" />
+    <result column="team_id" property="teamId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="SMALLINT" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="job_title" property="jobTitle" jdbcType="VARCHAR" />
+    <result column="school_name" property="schoolName" jdbcType="VARCHAR" />
+    <result column="attendance_start_time" property="attendanceStartTime" jdbcType="TIMESTAMP" />
+    <result column="attendance_end_time" property="attendanceEndTime" jdbcType="TIMESTAMP" />
+    <result column="faculty" property="faculty" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="education_id" property="educationId" jdbcType="BIGINT" />
+    <result column="diploma" property="diploma" jdbcType="VARCHAR" />
+    <result column="professional_certificate" property="professionalCertificate" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_id" property="updateId" jdbcType="BIGINT" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="is_upgrade" property="isUpgrade" jdbcType="SMALLINT" />
+    <result column="work_experience_id" property="workExperienceId" jdbcType="BIGINT" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="specific_address" property="specificAddress" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="working_post" property="workingPost" jdbcType="VARCHAR" />
+    <result column="personal_description" property="personalDescription" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="BIGINT" />
+    <result column="good_character" property="goodCharacter" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, authentication_type, entry_type, team_name, team_id, name, id_card, 
+    gender, email, phone, job_title, school_name, attendance_start_time, attendance_end_time, 
+    faculty, profession, education_id, diploma, professional_certificate, create_time, 
+    update_time, update_id, update_name, is_upgrade, work_experience_id, province_id, 
+    province_name, city_id, city_name, area_id, area_name, city, birthday, location, 
+    specific_address, company, working_post, personal_description, is_del, good_character
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_personal_base_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_personal_base_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.parkdt.tml.domain.PersonalBaseInfo" >
+    insert into t_personal_base_info (id, member_id, authentication_type, 
+      entry_type, team_name, team_id, 
+      name, id_card, gender, 
+      email, phone, job_title, 
+      school_name, attendance_start_time, attendance_end_time, 
+      faculty, profession, education_id, 
+      diploma, professional_certificate, create_time, 
+      update_time, update_id, update_name, 
+      is_upgrade, work_experience_id, province_id, 
+      province_name, city_id, city_name, 
+      area_id, area_name, city, 
+      birthday, location, specific_address, 
+      company, working_post, personal_description, 
+      is_del, good_character)
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{authenticationType,jdbcType=SMALLINT}, 
+      #{entryType,jdbcType=SMALLINT}, #{teamName,jdbcType=VARCHAR}, #{teamId,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{gender,jdbcType=SMALLINT}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{jobTitle,jdbcType=VARCHAR}, 
+      #{schoolName,jdbcType=VARCHAR}, #{attendanceStartTime,jdbcType=TIMESTAMP}, #{attendanceEndTime,jdbcType=TIMESTAMP}, 
+      #{faculty,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{educationId,jdbcType=BIGINT}, 
+      #{diploma,jdbcType=VARCHAR}, #{professionalCertificate,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, 
+      #{isUpgrade,jdbcType=SMALLINT}, #{workExperienceId,jdbcType=BIGINT}, #{provinceId,jdbcType=INTEGER}, 
+      #{provinceName,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, #{cityName,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=INTEGER}, #{areaName,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{location,jdbcType=VARCHAR}, #{specificAddress,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR}, #{workingPost,jdbcType=VARCHAR}, #{personalDescription,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=BIGINT}, #{goodCharacter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.PersonalBaseInfo" >
+    insert into t_personal_base_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="authenticationType != null" >
+        authentication_type,
+      </if>
+      <if test="entryType != null" >
+        entry_type,
+      </if>
+      <if test="teamName != null" >
+        team_name,
+      </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="jobTitle != null" >
+        job_title,
+      </if>
+      <if test="schoolName != null" >
+        school_name,
+      </if>
+      <if test="attendanceStartTime != null" >
+        attendance_start_time,
+      </if>
+      <if test="attendanceEndTime != null" >
+        attendance_end_time,
+      </if>
+      <if test="faculty != null" >
+        faculty,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="educationId != null" >
+        education_id,
+      </if>
+      <if test="diploma != null" >
+        diploma,
+      </if>
+      <if test="professionalCertificate != null" >
+        professional_certificate,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+      <if test="isUpgrade != null" >
+        is_upgrade,
+      </if>
+      <if test="workExperienceId != null" >
+        work_experience_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="specificAddress != null" >
+        specific_address,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="workingPost != null" >
+        working_post,
+      </if>
+      <if test="personalDescription != null" >
+        personal_description,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="goodCharacter != null" >
+        good_character,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="authenticationType != null" >
+        #{authenticationType,jdbcType=SMALLINT},
+      </if>
+      <if test="entryType != null" >
+        #{entryType,jdbcType=SMALLINT},
+      </if>
+      <if test="teamName != null" >
+        #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamId != null" >
+        #{teamId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=SMALLINT},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="jobTitle != null" >
+        #{jobTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolName != null" >
+        #{schoolName,jdbcType=VARCHAR},
+      </if>
+      <if test="attendanceStartTime != null" >
+        #{attendanceStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attendanceEndTime != null" >
+        #{attendanceEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="faculty != null" >
+        #{faculty,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="educationId != null" >
+        #{educationId,jdbcType=BIGINT},
+      </if>
+      <if test="diploma != null" >
+        #{diploma,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalCertificate != null" >
+        #{professionalCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpgrade != null" >
+        #{isUpgrade,jdbcType=SMALLINT},
+      </if>
+      <if test="workExperienceId != null" >
+        #{workExperienceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="specificAddress != null" >
+        #{specificAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="workingPost != null" >
+        #{workingPost,jdbcType=VARCHAR},
+      </if>
+      <if test="personalDescription != null" >
+        #{personalDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=BIGINT},
+      </if>
+      <if test="goodCharacter != null" >
+        #{goodCharacter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.PersonalBaseInfo" >
+    update t_personal_base_info
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="authenticationType != null" >
+        authentication_type = #{authenticationType,jdbcType=SMALLINT},
+      </if>
+      <if test="entryType != null" >
+        entry_type = #{entryType,jdbcType=SMALLINT},
+      </if>
+      <if test="teamName != null" >
+        team_name = #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamId != null" >
+        team_id = #{teamId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=SMALLINT},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="jobTitle != null" >
+        job_title = #{jobTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolName != null" >
+        school_name = #{schoolName,jdbcType=VARCHAR},
+      </if>
+      <if test="attendanceStartTime != null" >
+        attendance_start_time = #{attendanceStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attendanceEndTime != null" >
+        attendance_end_time = #{attendanceEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="faculty != null" >
+        faculty = #{faculty,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="educationId != null" >
+        education_id = #{educationId,jdbcType=BIGINT},
+      </if>
+      <if test="diploma != null" >
+        diploma = #{diploma,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalCertificate != null" >
+        professional_certificate = #{professionalCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpgrade != null" >
+        is_upgrade = #{isUpgrade,jdbcType=SMALLINT},
+      </if>
+      <if test="workExperienceId != null" >
+        work_experience_id = #{workExperienceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="specificAddress != null" >
+        specific_address = #{specificAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="workingPost != null" >
+        working_post = #{workingPost,jdbcType=VARCHAR},
+      </if>
+      <if test="personalDescription != null" >
+        personal_description = #{personalDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=BIGINT},
+      </if>
+      <if test="goodCharacter != null" >
+        good_character = #{goodCharacter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.PersonalBaseInfo" >
+    update t_personal_base_info
+    set member_id = #{memberId,jdbcType=BIGINT},
+      authentication_type = #{authenticationType,jdbcType=SMALLINT},
+      entry_type = #{entryType,jdbcType=SMALLINT},
+      team_name = #{teamName,jdbcType=VARCHAR},
+      team_id = #{teamId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=SMALLINT},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      job_title = #{jobTitle,jdbcType=VARCHAR},
+      school_name = #{schoolName,jdbcType=VARCHAR},
+      attendance_start_time = #{attendanceStartTime,jdbcType=TIMESTAMP},
+      attendance_end_time = #{attendanceEndTime,jdbcType=TIMESTAMP},
+      faculty = #{faculty,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      education_id = #{educationId,jdbcType=BIGINT},
+      diploma = #{diploma,jdbcType=VARCHAR},
+      professional_certificate = #{professionalCertificate,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=BIGINT},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      is_upgrade = #{isUpgrade,jdbcType=SMALLINT},
+      work_experience_id = #{workExperienceId,jdbcType=BIGINT},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=INTEGER},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=INTEGER},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      location = #{location,jdbcType=VARCHAR},
+      specific_address = #{specificAddress,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      working_post = #{workingPost,jdbcType=VARCHAR},
+      personal_description = #{personalDescription,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIGINT},
+      good_character = #{goodCharacter,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
