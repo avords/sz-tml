@@ -2,7 +2,6 @@ package com.parkdt.tml.service.impl;
 
 import com.parkdt.tml.domain.PersonalBaseInfo;
 import com.parkdt.tml.domain.PersonalLoginInfo;
-import com.parkdt.tml.domain.TeamMember;
 import com.parkdt.tml.mapper.PersonalBaseInfoMapper;
 import com.parkdt.tml.mapper.PersonalLoginInfoMapper;
 import com.parkdt.tml.service.UserService;
@@ -27,12 +26,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePersonInfo(PersonalLoginInfo personalLoginInfo, PersonalBaseInfo personalBaseInfo, TeamMember teamMember) {
-
+    public void updatePersonInfo(PersonalBaseInfo personalBaseInfo) {
+        if(personalBaseInfo.getId()==null){
+            personalBaseInfoMapper.insertSelective(personalBaseInfo);
+        }else {
+            personalBaseInfoMapper.updateByPrimaryKeySelective(personalBaseInfo);
+        }
     }
 
     @Override
     public PersonalLoginInfo getPersonalLoginInfoById(Long id) {
         return null;
+    }
+
+    @Override
+    public PersonalBaseInfo getPersonalBaseInfoByMemberId(Long memberId) {
+        return personalBaseInfoMapper.getByMemberId(memberId);
     }
 }

@@ -16,4 +16,6 @@ public interface PersonalBaseInfoMapper {
     int updateByPrimaryKeySelective(PersonalBaseInfo record);
 
     int updateByPrimaryKey(PersonalBaseInfo record);
+    
+    PersonalBaseInfo getByMemberId(Long memberId);
 }

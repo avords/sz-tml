@@ -352,4 +352,7 @@
       area_name = #{areaName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getAllTeamBasicInfo" resultMap="BaseResultMap">
+    SELECT * from t_team_basic_information
+  </select>
 </mapper>

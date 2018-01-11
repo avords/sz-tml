@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/hello")
 public class AHelloWorldController {
     @Autowired
-    private DeviceService[] deviceService;
+    private DeviceService deviceService;
     @RequestMapping("world")
     public String helloWorld(Model model, HttpServletRequest req) {
-        Device device = deviceService[0].selectByPrimaryKey(1);
+        Device device = deviceService.selectByPrimaryKey(1);
         model.addAttribute("username", device.getDevicename());
         return "helloWorld";
     }

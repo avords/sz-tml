@@ -21,7 +21,7 @@ public interface UserService {
      * @param personalBaseInfo
      * @param teamMember
      */
-    void updatePersonInfo(PersonalLoginInfo personalLoginInfo, PersonalBaseInfo personalBaseInfo, TeamMember teamMember);
+    void updatePersonInfo(PersonalBaseInfo personalBaseInfo);
 
     /**
      * 通过用户id得到个人登录信息
@@ -29,4 +29,10 @@ public interface UserService {
      * @return
      */
     PersonalLoginInfo getPersonalLoginInfoById(Long id);
+    /**
+     * 通过用户id得到个人基本信息
+     * @param id
+     * @return
+     */
+    PersonalBaseInfo getPersonalBaseInfoByMemberId(Long memberId);
 }

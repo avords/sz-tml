@@ -183,6 +183,7 @@ h1 {
 }
 
 .data_form input[type=text],
+.data_form input[type=date],
 .data_form input[type=password],
 .data_form select {
   width: 100%;

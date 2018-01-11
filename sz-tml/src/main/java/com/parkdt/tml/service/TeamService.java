@@ -13,7 +13,7 @@ public interface TeamService {
      * 得到所有的团队信息
      * @return
      */
-    List<TeamBasicInformation> getAllTeam();
+    List<TeamBasicInformation> getAllTeamBasicInfo();
 
     /**
      * 通过memberId得到所属团队
@@ -34,4 +34,11 @@ public interface TeamService {
      * @param teamMember
      */
     void saveTeamMember(TeamMember teamMember);
+
+    /**
+     * 通过主键得到团队信息
+     * @param teamId
+     * @return
+     */
+    TeamBasicInformation getByTeamId(Long teamId);
 }

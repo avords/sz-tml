@@ -22,8 +22,8 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamMemberMapper teamMemberMapper;
     @Override
-    public List<TeamBasicInformation> getAllTeam() {
-        return null;
+    public List<TeamBasicInformation> getAllTeamBasicInfo() {
+        return teamBasicInformationMapper.getAllTeamBasicInfo();
     }
 
     @Override
@@ -39,5 +39,10 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public void saveTeamMember(TeamMember teamMember) {
 
+    }
+
+    @Override
+    public TeamBasicInformation getByTeamId(Long teamId) {
+        return teamBasicInformationMapper.selectByPrimaryKey(teamId);
     }
 }

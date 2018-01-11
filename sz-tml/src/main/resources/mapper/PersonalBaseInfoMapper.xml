@@ -515,4 +515,7 @@
       good_character = #{goodCharacter,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getByMemberId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT * from t_personal_base_info WHERE member_id = #{memberId,jdbcType=BIGINT}
+  </select>
 </mapper>
