@@ -3,7 +3,9 @@ package com.parkdt.tml.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+//sss
 public class OffiContent implements Serializable {
+
     private Long id;
 
     private String title;
