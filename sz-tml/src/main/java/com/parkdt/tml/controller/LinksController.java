@@ -22,16 +22,16 @@ public class LinksController {
 
     @RequestMapping("platform")
     public String platform(Model model, HttpServletRequest req) {
-        return "立可平台";
+        return "likePlatfom";
     }
 
     @RequestMapping("Resources")
     public String Resources(Model model, HttpServletRequest req) {
-        return "资源中心";
+        return "resCenter";
     }
 
     @RequestMapping("about")
     public String about(Model model, HttpServletRequest req) {
-        return "关于立可";
+        return "aboutLike";
     }
 }

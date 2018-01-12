@@ -17,11 +17,11 @@ public class BizController {
 
     @RequestMapping("publish")
     public String publish(Model model, HttpServletRequest req) {
-        return "我发布的";
+        return "publishList";
     }
 
     @RequestMapping("take")
     public String take(Model model, HttpServletRequest req) {
-        return "我参与的";
+        return "takeList";
     }
 }
