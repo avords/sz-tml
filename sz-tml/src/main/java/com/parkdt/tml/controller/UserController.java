@@ -46,9 +46,11 @@ public class UserController {
     @RequestMapping("savePersonal")
     public String savePersonal(PersonalBaseInfo personalBaseInfo) {
         Long teamId = personalBaseInfo.getTeamId();
-        TeamBasicInformation teamBasicInformation = teamService.getByTeamId(teamId);
-        if(teamBasicInformation!=null){
-            personalBaseInfo.setTeamName(teamBasicInformation.getName());
+        if(teamId!=null) {
+            TeamBasicInformation teamBasicInformation = teamService.getByTeamId(teamId);
+            if (teamBasicInformation != null) {
+                personalBaseInfo.setTeamName(teamBasicInformation.getName());
+            }
         }
         userService.updatePersonInfo(personalBaseInfo);
         return "redirect:/user/personal";

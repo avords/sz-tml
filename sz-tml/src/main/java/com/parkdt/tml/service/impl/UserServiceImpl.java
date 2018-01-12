@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PersonalLoginInfo getPersonalLoginInfoById(Long id) {
-        return null;
+        return personalLoginInfoMapper.selectByPrimaryKey(id);
     }
 
     @Override
