@@ -29,4 +29,9 @@ public class LinksController {
     public String Resources(Model model, HttpServletRequest req) {
         return "资源中心";
     }
+
+    @RequestMapping("about")
+    public String about(Model model, HttpServletRequest req) {
+        return "关于立可";
+    }
 }
