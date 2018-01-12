@@ -1,7 +1,9 @@
 package com.parkdt.tml.mapper;
 
 import com.parkdt.tml.domain.OffiContent;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface OffiContentMapper {
     int deleteByPrimaryKey(Long id);
 
