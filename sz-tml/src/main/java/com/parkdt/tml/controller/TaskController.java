@@ -17,16 +17,16 @@ public class TaskController {
 
     @RequestMapping("publish")
     public String publish(Model model, HttpServletRequest req) {
-        return "任务发布";
+        return "taskPublishList";
     }
 
     @RequestMapping("enter")
     public String enter(Model model, HttpServletRequest req) {
-        return "任务报名";
+        return "taskEnter";
     }
 
     @RequestMapping("detail")
     public String taskDetail(Model model, HttpServletRequest req) {
-        return "任务报名详情页";
+        return "taskEnterDetail";
     }
 }

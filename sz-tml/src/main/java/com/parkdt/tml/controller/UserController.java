@@ -57,6 +57,6 @@ public class UserController {
     }
     @RequestMapping("info")
     public String infoBind(Model model, HttpServletRequest req) {
-        return "信息绑定";
+        return "infoBind";
     }
 }
