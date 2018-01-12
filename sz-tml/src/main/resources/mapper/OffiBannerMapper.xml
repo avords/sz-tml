@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parkdt.tml.mapper.OffiBannerMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.OffiBanner" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="part_id" property="partId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="is_enabled" property="isEnabled" jdbcType="SMALLINT" />
+    <result column="is_del" property="isDel" jdbcType="SMALLINT" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="action_url" property="actionUrl" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="BIGINT" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_id" property="updateId" jdbcType="BIGINT" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time_tamp" property="updateTimeTamp" jdbcType="BIGINT" />
+    <result column="the_chain" property="theChain" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="small_title" property="smallTitle" jdbcType="VARCHAR" />
+    <result column="link_type" property="linkType" jdbcType="SMALLINT" />
+    <result column="link_id" property="linkId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.parkdt.tml.domain.OffiBanner" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, part_id, type, sort, is_enabled, is_del, url, video_url, action_url, create_id, 
+    create_name, create_time, update_id, update_name, update_time, update_time_tamp, 
+    the_chain, title, small_title, link_type, link_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_offi_banner
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_offi_banner
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.parkdt.tml.domain.OffiBanner" >
+    insert into t_offi_banner (id, name, part_id, 
+      type, sort, is_enabled, 
+      is_del, url, video_url, 
+      action_url, create_id, create_name, 
+      create_time, update_id, update_name, 
+      update_time, update_time_tamp, the_chain, 
+      title, small_title, link_type, 
+      link_id, content)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{partId,jdbcType=BIGINT}, 
+      #{type,jdbcType=SMALLINT}, #{sort,jdbcType=INTEGER}, #{isEnabled,jdbcType=SMALLINT}, 
+      #{isDel,jdbcType=SMALLINT}, #{url,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR}, 
+      #{actionUrl,jdbcType=VARCHAR}, #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateTimeTamp,jdbcType=BIGINT}, #{theChain,jdbcType=BIGINT}, 
+      #{title,jdbcType=VARCHAR}, #{smallTitle,jdbcType=VARCHAR}, #{linkType,jdbcType=SMALLINT}, 
+      #{linkId,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.OffiBanner" >
+    insert into t_offi_banner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="partId != null" >
+        part_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="isEnabled != null" >
+        is_enabled,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="videoUrl != null" >
+        video_url,
+      </if>
+      <if test="actionUrl != null" >
+        action_url,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateTimeTamp != null" >
+        update_time_tamp,
+      </if>
+      <if test="theChain != null" >
+        the_chain,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="smallTitle != null" >
+        small_title,
+      </if>
+      <if test="linkType != null" >
+        link_type,
+      </if>
+      <if test="linkId != null" >
+        link_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="partId != null" >
+        #{partId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isEnabled != null" >
+        #{isEnabled,jdbcType=SMALLINT},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=SMALLINT},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="actionUrl != null" >
+        #{actionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTimeTamp != null" >
+        #{updateTimeTamp,jdbcType=BIGINT},
+      </if>
+      <if test="theChain != null" >
+        #{theChain,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="smallTitle != null" >
+        #{smallTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="linkType != null" >
+        #{linkType,jdbcType=SMALLINT},
+      </if>
+      <if test="linkId != null" >
+        #{linkId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.OffiBanner" >
+    update t_offi_banner
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="partId != null" >
+        part_id = #{partId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isEnabled != null" >
+        is_enabled = #{isEnabled,jdbcType=SMALLINT},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=SMALLINT},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="actionUrl != null" >
+        action_url = #{actionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTimeTamp != null" >
+        update_time_tamp = #{updateTimeTamp,jdbcType=BIGINT},
+      </if>
+      <if test="theChain != null" >
+        the_chain = #{theChain,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="smallTitle != null" >
+        small_title = #{smallTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="linkType != null" >
+        link_type = #{linkType,jdbcType=SMALLINT},
+      </if>
+      <if test="linkId != null" >
+        link_id = #{linkId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.parkdt.tml.domain.OffiBanner" >
+    update t_offi_banner
+    set name = #{name,jdbcType=VARCHAR},
+      part_id = #{partId,jdbcType=BIGINT},
+      type = #{type,jdbcType=SMALLINT},
+      sort = #{sort,jdbcType=INTEGER},
+      is_enabled = #{isEnabled,jdbcType=SMALLINT},
+      is_del = #{isDel,jdbcType=SMALLINT},
+      url = #{url,jdbcType=VARCHAR},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      action_url = #{actionUrl,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=BIGINT},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_time_tamp = #{updateTimeTamp,jdbcType=BIGINT},
+      the_chain = #{theChain,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      small_title = #{smallTitle,jdbcType=VARCHAR},
+      link_type = #{linkType,jdbcType=SMALLINT},
+      link_id = #{linkId,jdbcType=BIGINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.OffiBanner" >
+    update t_offi_banner
+    set name = #{name,jdbcType=VARCHAR},
+      part_id = #{partId,jdbcType=BIGINT},
+      type = #{type,jdbcType=SMALLINT},
+      sort = #{sort,jdbcType=INTEGER},
+      is_enabled = #{isEnabled,jdbcType=SMALLINT},
+      is_del = #{isDel,jdbcType=SMALLINT},
+      url = #{url,jdbcType=VARCHAR},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      action_url = #{actionUrl,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=BIGINT},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_time_tamp = #{updateTimeTamp,jdbcType=BIGINT},
+      the_chain = #{theChain,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      small_title = #{smallTitle,jdbcType=VARCHAR},
+      link_type = #{linkType,jdbcType=SMALLINT},
+      link_id = #{linkId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
