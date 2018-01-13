@@ -19,10 +19,16 @@
             </div>
             <form action="" class="data_form">
                 <select>
-                    <option value="">领域</option>
+                    <option value=""></option>
+                    <#list areasExpertiseList as item>
+                        <option value="${item.id}">${item.typeName}</option>
+                    </#list>
                 </select>
                 <select>
-                    <option value="">类型</option>
+                    <option value=""></option>
+                    <#list goodTypeList as item>
+                        <option value="${item.id}">${item.typeName}</option>
+                    </#list>
                 </select>
                 <select>
                     <option value="">导入项目方</option>

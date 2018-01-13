@@ -161,4 +161,10 @@
       is_major = #{isMajor,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getAllSysAreasExpertise" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_sys_areas_expertise
+    where is_del = 0
+  </select>
 </mapper>

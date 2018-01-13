@@ -174,4 +174,10 @@
       major_classification_id = #{majorClassificationId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getAllSysGoodType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_sys_good_type
+    where is_del = 0
+  </select>
 </mapper>

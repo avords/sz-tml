@@ -3,6 +3,8 @@ package com.parkdt.tml.mapper;
 import com.parkdt.tml.domain.SysGoodType;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface SysGoodTypeMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +18,7 @@ public interface SysGoodTypeMapper {
     int updateByPrimaryKeySelective(SysGoodType record);
 
     int updateByPrimaryKey(SysGoodType record);
+
+    List<SysGoodType> getAllSysGoodType();
+
 }

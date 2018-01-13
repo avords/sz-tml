@@ -2,9 +2,9 @@ package com.parkdt.tml.controller;
 
 import com.parkdt.tml.domain.OffiContent;
 import com.parkdt.tml.domain.OffiDesign;
-import com.parkdt.tml.service.BannerService;
-import com.parkdt.tml.service.ContentService;
-import com.parkdt.tml.service.DesignService;
+import com.parkdt.tml.domain.SysAreasExpertise;
+import com.parkdt.tml.domain.SysGoodType;
+import com.parkdt.tml.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +26,12 @@ public class LinksController {
     private ContentService contentService;
     @Autowired
     private BannerService bannerService;
-
     @Autowired
     private DesignService designService;
+    @Autowired
+    private SysGoodTypeService sysGoodTypeService;
+    @Autowired
+    private SysAreasExpertiseService sysAreasExpertiseService;
 
     @RequestMapping("index")
     public String index(Model model, HttpServletRequest req) {
@@ -52,6 +55,12 @@ public class LinksController {
 
     @RequestMapping("Resources")
     public String Resources(Model model, HttpServletRequest req) {
+
+        List<SysAreasExpertise> areasExpertiseList = sysAreasExpertiseService.getAllSysAreasExpertise();
+        List<SysGoodType> goodTypeList = sysGoodTypeService.getAllSysGoodType();
+        model.addAttribute("areasExpertiseList", areasExpertiseList);
+        model.addAttribute("goodTypeList", goodTypeList);
+
         return "resCenter";
     }
 
