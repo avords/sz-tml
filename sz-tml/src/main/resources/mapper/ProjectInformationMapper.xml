@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parkdt.tml.mapper.ProjectInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.ProjectInformation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="field_id" property="fieldId" jdbcType="BIGINT" />
+    <result column="design_type_id" property="designTypeId" jdbcType="BIGINT" />
+    <result column="construction_unit" property="constructionUnit" jdbcType="VARCHAR" />
+    <result column="contact_person" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="claim_id" property="claimId" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="project_construction_site" property="projectConstructionSite" jdbcType="BIGINT" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="BIGINT" />
+    <result column="detailed_address" property="detailedAddress" jdbcType="VARCHAR" />
+    <result column="construction_area" property="constructionArea" jdbcType="DOUBLE" />
+    <result column="planning_area" property="planningArea" jdbcType="DOUBLE" />
+    <result column="project_status" property="projectStatus" jdbcType="SMALLINT" />
+    <result column="personnel_requirements" property="personnelRequirements" jdbcType="VARCHAR" />
+    <result column="plan_start_time" property="planStartTime" jdbcType="TIMESTAMP" />
+    <result column="plan_end_time" property="planEndTime" jdbcType="TIMESTAMP" />
+    <result column="cycle_id" property="cycleId" jdbcType="INTEGER" />
+    <result column="put_amount" property="putAmount" jdbcType="DECIMAL" />
+    <result column="acquisition_type_id" property="acquisitionTypeId" jdbcType="BIGINT" />
+    <result column="source_id" property="sourceId" jdbcType="BIGINT" />
+    <result column="results_required_ids" property="resultsRequiredIds" jdbcType="VARCHAR" />
+    <result column="related_information" property="relatedInformation" jdbcType="VARCHAR" />
+    <result column="project_base_id" property="projectBaseId" jdbcType="BIGINT" />
+    <result column="suspend_count" property="suspendCount" jdbcType="INTEGER" />
+    <result column="cycle_value" property="cycleValue" jdbcType="INTEGER" />
+    <result column="cycle_unit" property="cycleUnit" jdbcType="SMALLINT" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, field_id, design_type_id, construction_unit, contact_person, claim_id, phone, 
+    project_construction_site, province_id, city_id, province_name, city_name, area, 
+    detailed_address, construction_area, planning_area, project_status, personnel_requirements, 
+    plan_start_time, plan_end_time, cycle_id, put_amount, acquisition_type_id, source_id, 
+    results_required_ids, related_information, project_base_id, suspend_count, cycle_value, 
+    cycle_unit, introduction
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_information
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_project_information
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.parkdt.tml.domain.ProjectInformation" >
+    insert into t_project_information (id, field_id, design_type_id, 
+      construction_unit, contact_person, claim_id, 
+      phone, project_construction_site, province_id, 
+      city_id, province_name, city_name, 
+      area, detailed_address, construction_area, 
+      planning_area, project_status, personnel_requirements, 
+      plan_start_time, plan_end_time, cycle_id, 
+      put_amount, acquisition_type_id, source_id, 
+      results_required_ids, related_information, 
+      project_base_id, suspend_count, cycle_value, 
+      cycle_unit, introduction)
+    values (#{id,jdbcType=BIGINT}, #{fieldId,jdbcType=BIGINT}, #{designTypeId,jdbcType=BIGINT}, 
+      #{constructionUnit,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, #{claimId,jdbcType=INTEGER}, 
+      #{phone,jdbcType=VARCHAR}, #{projectConstructionSite,jdbcType=BIGINT}, #{provinceId,jdbcType=BIGINT}, 
+      #{cityId,jdbcType=BIGINT}, #{provinceName,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, 
+      #{area,jdbcType=BIGINT}, #{detailedAddress,jdbcType=VARCHAR}, #{constructionArea,jdbcType=DOUBLE}, 
+      #{planningArea,jdbcType=DOUBLE}, #{projectStatus,jdbcType=SMALLINT}, #{personnelRequirements,jdbcType=VARCHAR}, 
+      #{planStartTime,jdbcType=TIMESTAMP}, #{planEndTime,jdbcType=TIMESTAMP}, #{cycleId,jdbcType=INTEGER}, 
+      #{putAmount,jdbcType=DECIMAL}, #{acquisitionTypeId,jdbcType=BIGINT}, #{sourceId,jdbcType=BIGINT}, 
+      #{resultsRequiredIds,jdbcType=VARCHAR}, #{relatedInformation,jdbcType=VARCHAR}, 
+      #{projectBaseId,jdbcType=BIGINT}, #{suspendCount,jdbcType=INTEGER}, #{cycleValue,jdbcType=INTEGER}, 
+      #{cycleUnit,jdbcType=SMALLINT}, #{introduction,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.ProjectInformation" >
+    insert into t_project_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fieldId != null" >
+        field_id,
+      </if>
+      <if test="designTypeId != null" >
+        design_type_id,
+      </if>
+      <if test="constructionUnit != null" >
+        construction_unit,
+      </if>
+      <if test="contactPerson != null" >
+        contact_person,
+      </if>
+      <if test="claimId != null" >
+        claim_id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="projectConstructionSite != null" >
+        project_construction_site,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="detailedAddress != null" >
+        detailed_address,
+      </if>
+      <if test="constructionArea != null" >
+        construction_area,
+      </if>
+      <if test="planningArea != null" >
+        planning_area,
+      </if>
+      <if test="projectStatus != null" >
+        project_status,
+      </if>
+      <if test="personnelRequirements != null" >
+        personnel_requirements,
+      </if>
+      <if test="planStartTime != null" >
+        plan_start_time,
+      </if>
+      <if test="planEndTime != null" >
+        plan_end_time,
+      </if>
+      <if test="cycleId != null" >
+        cycle_id,
+      </if>
+      <if test="putAmount != null" >
+        put_amount,
+      </if>
+      <if test="acquisitionTypeId != null" >
+        acquisition_type_id,
+      </if>
+      <if test="sourceId != null" >
+        source_id,
+      </if>
+      <if test="resultsRequiredIds != null" >
+        results_required_ids,
+      </if>
+      <if test="relatedInformation != null" >
+        related_information,
+      </if>
+      <if test="projectBaseId != null" >
+        project_base_id,
+      </if>
+      <if test="suspendCount != null" >
+        suspend_count,
+      </if>
+      <if test="cycleValue != null" >
+        cycle_value,
+      </if>
+      <if test="cycleUnit != null" >
+        cycle_unit,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fieldId != null" >
+        #{fieldId,jdbcType=BIGINT},
+      </if>
+      <if test="designTypeId != null" >
+        #{designTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="constructionUnit != null" >
+        #{constructionUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="claimId != null" >
+        #{claimId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="projectConstructionSite != null" >
+        #{projectConstructionSite,jdbcType=BIGINT},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=BIGINT},
+      </if>
+      <if test="detailedAddress != null" >
+        #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="constructionArea != null" >
+        #{constructionArea,jdbcType=DOUBLE},
+      </if>
+      <if test="planningArea != null" >
+        #{planningArea,jdbcType=DOUBLE},
+      </if>
+      <if test="projectStatus != null" >
+        #{projectStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="personnelRequirements != null" >
+        #{personnelRequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="planStartTime != null" >
+        #{planStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEndTime != null" >
+        #{planEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cycleId != null" >
+        #{cycleId,jdbcType=INTEGER},
+      </if>
+      <if test="putAmount != null" >
+        #{putAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="acquisitionTypeId != null" >
+        #{acquisitionTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=BIGINT},
+      </if>
+      <if test="resultsRequiredIds != null" >
+        #{resultsRequiredIds,jdbcType=VARCHAR},
+      </if>
+      <if test="relatedInformation != null" >
+        #{relatedInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="projectBaseId != null" >
+        #{projectBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="suspendCount != null" >
+        #{suspendCount,jdbcType=INTEGER},
+      </if>
+      <if test="cycleValue != null" >
+        #{cycleValue,jdbcType=INTEGER},
+      </if>
+      <if test="cycleUnit != null" >
+        #{cycleUnit,jdbcType=SMALLINT},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.ProjectInformation" >
+    update t_project_information
+    <set >
+      <if test="fieldId != null" >
+        field_id = #{fieldId,jdbcType=BIGINT},
+      </if>
+      <if test="designTypeId != null" >
+        design_type_id = #{designTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="constructionUnit != null" >
+        construction_unit = #{constructionUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        contact_person = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="claimId != null" >
+        claim_id = #{claimId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="projectConstructionSite != null" >
+        project_construction_site = #{projectConstructionSite,jdbcType=BIGINT},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=BIGINT},
+      </if>
+      <if test="detailedAddress != null" >
+        detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="constructionArea != null" >
+        construction_area = #{constructionArea,jdbcType=DOUBLE},
+      </if>
+      <if test="planningArea != null" >
+        planning_area = #{planningArea,jdbcType=DOUBLE},
+      </if>
+      <if test="projectStatus != null" >
+        project_status = #{projectStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="personnelRequirements != null" >
+        personnel_requirements = #{personnelRequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="planStartTime != null" >
+        plan_start_time = #{planStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEndTime != null" >
+        plan_end_time = #{planEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cycleId != null" >
+        cycle_id = #{cycleId,jdbcType=INTEGER},
+      </if>
+      <if test="putAmount != null" >
+        put_amount = #{putAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="acquisitionTypeId != null" >
+        acquisition_type_id = #{acquisitionTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceId != null" >
+        source_id = #{sourceId,jdbcType=BIGINT},
+      </if>
+      <if test="resultsRequiredIds != null" >
+        results_required_ids = #{resultsRequiredIds,jdbcType=VARCHAR},
+      </if>
+      <if test="relatedInformation != null" >
+        related_information = #{relatedInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="projectBaseId != null" >
+        project_base_id = #{projectBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="suspendCount != null" >
+        suspend_count = #{suspendCount,jdbcType=INTEGER},
+      </if>
+      <if test="cycleValue != null" >
+        cycle_value = #{cycleValue,jdbcType=INTEGER},
+      </if>
+      <if test="cycleUnit != null" >
+        cycle_unit = #{cycleUnit,jdbcType=SMALLINT},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.ProjectInformation" >
+    update t_project_information
+    set field_id = #{fieldId,jdbcType=BIGINT},
+      design_type_id = #{designTypeId,jdbcType=BIGINT},
+      construction_unit = #{constructionUnit,jdbcType=VARCHAR},
+      contact_person = #{contactPerson,jdbcType=VARCHAR},
+      claim_id = #{claimId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      project_construction_site = #{projectConstructionSite,jdbcType=BIGINT},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      city_id = #{cityId,jdbcType=BIGINT},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      area = #{area,jdbcType=BIGINT},
+      detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      construction_area = #{constructionArea,jdbcType=DOUBLE},
+      planning_area = #{planningArea,jdbcType=DOUBLE},
+      project_status = #{projectStatus,jdbcType=SMALLINT},
+      personnel_requirements = #{personnelRequirements,jdbcType=VARCHAR},
+      plan_start_time = #{planStartTime,jdbcType=TIMESTAMP},
+      plan_end_time = #{planEndTime,jdbcType=TIMESTAMP},
+      cycle_id = #{cycleId,jdbcType=INTEGER},
+      put_amount = #{putAmount,jdbcType=DECIMAL},
+      acquisition_type_id = #{acquisitionTypeId,jdbcType=BIGINT},
+      source_id = #{sourceId,jdbcType=BIGINT},
+      results_required_ids = #{resultsRequiredIds,jdbcType=VARCHAR},
+      related_information = #{relatedInformation,jdbcType=VARCHAR},
+      project_base_id = #{projectBaseId,jdbcType=BIGINT},
+      suspend_count = #{suspendCount,jdbcType=INTEGER},
+      cycle_value = #{cycleValue,jdbcType=INTEGER},
+      cycle_unit = #{cycleUnit,jdbcType=SMALLINT},
+      introduction = #{introduction,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

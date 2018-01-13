@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parkdt.tml.mapper.ProjectDeliveryMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.ProjectDelivery" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="project_id" property="projectId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="pv" property="pv" jdbcType="INTEGER" />
+    <result column="claime_num" property="claimeNum" jdbcType="INTEGER" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="SMALLINT" />
+    <result column="job_type" property="jobType" jdbcType="SMALLINT" />
+    <result column="is_delivery" property="isDelivery" jdbcType="SMALLINT" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="object_id" property="objectId" jdbcType="BIGINT" />
+    <result column="is_show" property="isShow" jdbcType="SMALLINT" />
+    <result column="is_view" property="isView" jdbcType="SMALLINT" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="output_value" property="outputValue" jdbcType="DECIMAL" />
+    <result column="project_status" property="projectStatus" jdbcType="SMALLINT" />
+    <result column="plan_start_time" property="planStartTime" jdbcType="TIMESTAMP" />
+    <result column="plan_end_time" property="planEndTime" jdbcType="TIMESTAMP" />
+    <result column="actual_start_time" property="actualStartTime" jdbcType="TIMESTAMP" />
+    <result column="actual_end_time" property="actualEndTime" jdbcType="TIMESTAMP" />
+    <result column="module_ids" property="moduleIds" jdbcType="VARCHAR" />
+    <result column="winning_bid" property="winningBid" jdbcType="BIGINT" />
+    <result column="is_redo" property="isRedo" jdbcType="SMALLINT" />
+    <result column="cycle_id" property="cycleId" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="cycle_value" property="cycleValue" jdbcType="INTEGER" />
+    <result column="cycle_unit" property="cycleUnit" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, project_id, type, create_time, update_time, status, pv, claime_num, end_time, 
+    is_del, job_type, is_delivery, image, object_id, is_show, is_view, project_name, 
+    output_value, project_status, plan_start_time, plan_end_time, actual_start_time, 
+    actual_end_time, module_ids, winning_bid, is_redo, cycle_id, description, cycle_value, 
+    cycle_unit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_delivery
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_project_delivery
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.parkdt.tml.domain.ProjectDelivery" >
+    insert into t_project_delivery (id, project_id, type, 
+      create_time, update_time, status, 
+      pv, claime_num, end_time, 
+      is_del, job_type, is_delivery, 
+      image, object_id, is_show, 
+      is_view, project_name, output_value, 
+      project_status, plan_start_time, plan_end_time, 
+      actual_start_time, actual_end_time, module_ids, 
+      winning_bid, is_redo, cycle_id, 
+      description, cycle_value, cycle_unit
+      )
+    values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{type,jdbcType=SMALLINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, 
+      #{pv,jdbcType=INTEGER}, #{claimeNum,jdbcType=INTEGER}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{isDel,jdbcType=SMALLINT}, #{jobType,jdbcType=SMALLINT}, #{isDelivery,jdbcType=SMALLINT}, 
+      #{image,jdbcType=VARCHAR}, #{objectId,jdbcType=BIGINT}, #{isShow,jdbcType=SMALLINT}, 
+      #{isView,jdbcType=SMALLINT}, #{projectName,jdbcType=VARCHAR}, #{outputValue,jdbcType=DECIMAL}, 
+      #{projectStatus,jdbcType=SMALLINT}, #{planStartTime,jdbcType=TIMESTAMP}, #{planEndTime,jdbcType=TIMESTAMP}, 
+      #{actualStartTime,jdbcType=TIMESTAMP}, #{actualEndTime,jdbcType=TIMESTAMP}, #{moduleIds,jdbcType=VARCHAR}, 
+      #{winningBid,jdbcType=BIGINT}, #{isRedo,jdbcType=SMALLINT}, #{cycleId,jdbcType=BIGINT}, 
+      #{description,jdbcType=VARCHAR}, #{cycleValue,jdbcType=INTEGER}, #{cycleUnit,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.ProjectDelivery" >
+    insert into t_project_delivery
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="pv != null" >
+        pv,
+      </if>
+      <if test="claimeNum != null" >
+        claime_num,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="jobType != null" >
+        job_type,
+      </if>
+      <if test="isDelivery != null" >
+        is_delivery,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="objectId != null" >
+        object_id,
+      </if>
+      <if test="isShow != null" >
+        is_show,
+      </if>
+      <if test="isView != null" >
+        is_view,
+      </if>
+      <if test="projectName != null" >
+        project_name,
+      </if>
+      <if test="outputValue != null" >
+        output_value,
+      </if>
+      <if test="projectStatus != null" >
+        project_status,
+      </if>
+      <if test="planStartTime != null" >
+        plan_start_time,
+      </if>
+      <if test="planEndTime != null" >
+        plan_end_time,
+      </if>
+      <if test="actualStartTime != null" >
+        actual_start_time,
+      </if>
+      <if test="actualEndTime != null" >
+        actual_end_time,
+      </if>
+      <if test="moduleIds != null" >
+        module_ids,
+      </if>
+      <if test="winningBid != null" >
+        winning_bid,
+      </if>
+      <if test="isRedo != null" >
+        is_redo,
+      </if>
+      <if test="cycleId != null" >
+        cycle_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="cycleValue != null" >
+        cycle_value,
+      </if>
+      <if test="cycleUnit != null" >
+        cycle_unit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="pv != null" >
+        #{pv,jdbcType=INTEGER},
+      </if>
+      <if test="claimeNum != null" >
+        #{claimeNum,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=SMALLINT},
+      </if>
+      <if test="jobType != null" >
+        #{jobType,jdbcType=SMALLINT},
+      </if>
+      <if test="isDelivery != null" >
+        #{isDelivery,jdbcType=SMALLINT},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="objectId != null" >
+        #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=SMALLINT},
+      </if>
+      <if test="isView != null" >
+        #{isView,jdbcType=SMALLINT},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="outputValue != null" >
+        #{outputValue,jdbcType=DECIMAL},
+      </if>
+      <if test="projectStatus != null" >
+        #{projectStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="planStartTime != null" >
+        #{planStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEndTime != null" >
+        #{planEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualStartTime != null" >
+        #{actualStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualEndTime != null" >
+        #{actualEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moduleIds != null" >
+        #{moduleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="winningBid != null" >
+        #{winningBid,jdbcType=BIGINT},
+      </if>
+      <if test="isRedo != null" >
+        #{isRedo,jdbcType=SMALLINT},
+      </if>
+      <if test="cycleId != null" >
+        #{cycleId,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleValue != null" >
+        #{cycleValue,jdbcType=INTEGER},
+      </if>
+      <if test="cycleUnit != null" >
+        #{cycleUnit,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.ProjectDelivery" >
+    update t_project_delivery
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="pv != null" >
+        pv = #{pv,jdbcType=INTEGER},
+      </if>
+      <if test="claimeNum != null" >
+        claime_num = #{claimeNum,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=SMALLINT},
+      </if>
+      <if test="jobType != null" >
+        job_type = #{jobType,jdbcType=SMALLINT},
+      </if>
+      <if test="isDelivery != null" >
+        is_delivery = #{isDelivery,jdbcType=SMALLINT},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="objectId != null" >
+        object_id = #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="isShow != null" >
+        is_show = #{isShow,jdbcType=SMALLINT},
+      </if>
+      <if test="isView != null" >
+        is_view = #{isView,jdbcType=SMALLINT},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="outputValue != null" >
+        output_value = #{outputValue,jdbcType=DECIMAL},
+      </if>
+      <if test="projectStatus != null" >
+        project_status = #{projectStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="planStartTime != null" >
+        plan_start_time = #{planStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEndTime != null" >
+        plan_end_time = #{planEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualStartTime != null" >
+        actual_start_time = #{actualStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualEndTime != null" >
+        actual_end_time = #{actualEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moduleIds != null" >
+        module_ids = #{moduleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="winningBid != null" >
+        winning_bid = #{winningBid,jdbcType=BIGINT},
+      </if>
+      <if test="isRedo != null" >
+        is_redo = #{isRedo,jdbcType=SMALLINT},
+      </if>
+      <if test="cycleId != null" >
+        cycle_id = #{cycleId,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleValue != null" >
+        cycle_value = #{cycleValue,jdbcType=INTEGER},
+      </if>
+      <if test="cycleUnit != null" >
+        cycle_unit = #{cycleUnit,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.ProjectDelivery" >
+    update t_project_delivery
+    set project_id = #{projectId,jdbcType=BIGINT},
+      type = #{type,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      pv = #{pv,jdbcType=INTEGER},
+      claime_num = #{claimeNum,jdbcType=INTEGER},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=SMALLINT},
+      job_type = #{jobType,jdbcType=SMALLINT},
+      is_delivery = #{isDelivery,jdbcType=SMALLINT},
+      image = #{image,jdbcType=VARCHAR},
+      object_id = #{objectId,jdbcType=BIGINT},
+      is_show = #{isShow,jdbcType=SMALLINT},
+      is_view = #{isView,jdbcType=SMALLINT},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      output_value = #{outputValue,jdbcType=DECIMAL},
+      project_status = #{projectStatus,jdbcType=SMALLINT},
+      plan_start_time = #{planStartTime,jdbcType=TIMESTAMP},
+      plan_end_time = #{planEndTime,jdbcType=TIMESTAMP},
+      actual_start_time = #{actualStartTime,jdbcType=TIMESTAMP},
+      actual_end_time = #{actualEndTime,jdbcType=TIMESTAMP},
+      module_ids = #{moduleIds,jdbcType=VARCHAR},
+      winning_bid = #{winningBid,jdbcType=BIGINT},
+      is_redo = #{isRedo,jdbcType=SMALLINT},
+      cycle_id = #{cycleId,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      cycle_value = #{cycleValue,jdbcType=INTEGER},
+      cycle_unit = #{cycleUnit,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

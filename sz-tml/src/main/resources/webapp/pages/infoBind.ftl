@@ -15,8 +15,8 @@
         <div class="container">
             <h1>用户信息绑定</h1>
             <form action="" class="data_form">
-                <input type="text" placeholder="手机号" />
-                <input type="password" placeholder="输入密码" />
+                <input type="text" placeholder="手机号" name="phone"/>
+                <input type="password" placeholder="输入密码" name="password"/>
                 <input type="password" placeholder="再次输入密码" />
                 <div class="row">
                     <input type="text" class="valid_input"  placeholder="验证码" />

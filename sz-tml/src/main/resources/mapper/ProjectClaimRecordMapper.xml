@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parkdt.tml.mapper.ProjectClaimRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.ProjectClaimRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="project_delivery_id" property="projectDeliveryId" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="output_value" property="outputValue" jdbcType="DECIMAL" />
+    <result column="work_plan" property="workPlan" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_id" property="updateId" jdbcType="BIGINT" />
+    <result column="reject_reason" property="rejectReason" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+    <result column="is_view" property="isView" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, project_delivery_id, member_id, output_value, work_plan, start_time, end_time, 
+    create_time, status, update_time, update_id, reject_reason, type, is_view
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_claim_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_project_claim_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.parkdt.tml.domain.ProjectClaimRecord" >
+    insert into t_project_claim_record (id, project_delivery_id, member_id, 
+      output_value, work_plan, start_time, 
+      end_time, create_time, status, 
+      update_time, update_id, reject_reason, 
+      type, is_view)
+    values (#{id,jdbcType=BIGINT}, #{projectDeliveryId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, 
+      #{outputValue,jdbcType=DECIMAL}, #{workPlan,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, #{rejectReason,jdbcType=VARCHAR}, 
+      #{type,jdbcType=SMALLINT}, #{isView,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.ProjectClaimRecord" >
+    insert into t_project_claim_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectDeliveryId != null" >
+        project_delivery_id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="outputValue != null" >
+        output_value,
+      </if>
+      <if test="workPlan != null" >
+        work_plan,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="rejectReason != null" >
+        reject_reason,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="isView != null" >
+        is_view,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="projectDeliveryId != null" >
+        #{projectDeliveryId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="outputValue != null" >
+        #{outputValue,jdbcType=DECIMAL},
+      </if>
+      <if test="workPlan != null" >
+        #{workPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="rejectReason != null" >
+        #{rejectReason,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="isView != null" >
+        #{isView,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.ProjectClaimRecord" >
+    update t_project_claim_record
+    <set >
+      <if test="projectDeliveryId != null" >
+        project_delivery_id = #{projectDeliveryId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="outputValue != null" >
+        output_value = #{outputValue,jdbcType=DECIMAL},
+      </if>
+      <if test="workPlan != null" >
+        work_plan = #{workPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="rejectReason != null" >
+        reject_reason = #{rejectReason,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="isView != null" >
+        is_view = #{isView,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.ProjectClaimRecord" >
+    update t_project_claim_record
+    set project_delivery_id = #{projectDeliveryId,jdbcType=BIGINT},
+      member_id = #{memberId,jdbcType=BIGINT},
+      output_value = #{outputValue,jdbcType=DECIMAL},
+      work_plan = #{workPlan,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=BIGINT},
+      reject_reason = #{rejectReason,jdbcType=VARCHAR},
+      type = #{type,jdbcType=SMALLINT},
+      is_view = #{isView,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

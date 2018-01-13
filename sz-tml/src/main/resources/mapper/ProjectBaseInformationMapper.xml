@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parkdt.tml.mapper.ProjectBaseInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.ProjectBaseInformation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="project_num" property="projectNum" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="manager_id" property="managerId" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="project_status" property="projectStatus" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="update_id" property="updateId" jdbcType="BIGINT" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="final_certification_time" property="finalCertificationTime" jdbcType="TIMESTAMP" />
+    <result column="is_automatic_release" property="isAutomaticRelease" jdbcType="SMALLINT" />
+    <result column="is_top" property="isTop" jdbcType="SMALLINT" />
+    <result column="invite_pm_ids" property="invitePmIds" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+    <result column="recommend" property="recommend" jdbcType="SMALLINT" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, project_num, company_id, manager_id, member_id, project_name, details, project_status, 
+    create_time, status, update_id, update_name, final_certification_time, is_automatic_release, 
+    is_top, invite_pm_ids, type, recommend, start_time, end_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_base_information
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_project_base_information
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.parkdt.tml.domain.ProjectBaseInformation" >
+    insert into t_project_base_information (id, project_num, company_id, 
+      manager_id, member_id, project_name, 
+      details, project_status, create_time, 
+      status, update_id, update_name, 
+      final_certification_time, is_automatic_release, 
+      is_top, invite_pm_ids, type, 
+      recommend, start_time, end_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{projectNum,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, 
+      #{managerId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{projectName,jdbcType=VARCHAR}, 
+      #{details,jdbcType=VARCHAR}, #{projectStatus,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=SMALLINT}, #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, 
+      #{finalCertificationTime,jdbcType=TIMESTAMP}, #{isAutomaticRelease,jdbcType=SMALLINT}, 
+      #{isTop,jdbcType=SMALLINT}, #{invitePmIds,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, 
+      #{recommend,jdbcType=SMALLINT}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.ProjectBaseInformation" >
+    insert into t_project_base_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectNum != null" >
+        project_num,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="projectName != null" >
+        project_name,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="projectStatus != null" >
+        project_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+      <if test="finalCertificationTime != null" >
+        final_certification_time,
+      </if>
+      <if test="isAutomaticRelease != null" >
+        is_automatic_release,
+      </if>
+      <if test="isTop != null" >
+        is_top,
+      </if>
+      <if test="invitePmIds != null" >
+        invite_pm_ids,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="projectNum != null" >
+        #{projectNum,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="managerId != null" >
+        #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="projectStatus != null" >
+        #{projectStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="finalCertificationTime != null" >
+        #{finalCertificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAutomaticRelease != null" >
+        #{isAutomaticRelease,jdbcType=SMALLINT},
+      </if>
+      <if test="isTop != null" >
+        #{isTop,jdbcType=SMALLINT},
+      </if>
+      <if test="invitePmIds != null" >
+        #{invitePmIds,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=SMALLINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.ProjectBaseInformation" >
+    update t_project_base_information
+    <set >
+      <if test="projectNum != null" >
+        project_num = #{projectNum,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="managerId != null" >
+        manager_id = #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="projectStatus != null" >
+        project_status = #{projectStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="finalCertificationTime != null" >
+        final_certification_time = #{finalCertificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAutomaticRelease != null" >
+        is_automatic_release = #{isAutomaticRelease,jdbcType=SMALLINT},
+      </if>
+      <if test="isTop != null" >
+        is_top = #{isTop,jdbcType=SMALLINT},
+      </if>
+      <if test="invitePmIds != null" >
+        invite_pm_ids = #{invitePmIds,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=SMALLINT},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.ProjectBaseInformation" >
+    update t_project_base_information
+    set project_num = #{projectNum,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      manager_id = #{managerId,jdbcType=BIGINT},
+      member_id = #{memberId,jdbcType=BIGINT},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR},
+      project_status = #{projectStatus,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      update_id = #{updateId,jdbcType=BIGINT},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      final_certification_time = #{finalCertificationTime,jdbcType=TIMESTAMP},
+      is_automatic_release = #{isAutomaticRelease,jdbcType=SMALLINT},
+      is_top = #{isTop,jdbcType=SMALLINT},
+      invite_pm_ids = #{invitePmIds,jdbcType=VARCHAR},
+      type = #{type,jdbcType=SMALLINT},
+      recommend = #{recommend,jdbcType=SMALLINT},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
