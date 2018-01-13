@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.parkdt.tml.mapper.OffiContentMapper" >
-  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.OffiContent" >
+<mapper namespace="com.parkdt.tml.mapper.OffiDesignMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.OffiDesign" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="part_id" property="partId" jdbcType="BIGINT" />
-    <result column="is_enabled" property="isEnabled" jdbcType="SMALLINT" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="is_recommend" property="isRecommend" jdbcType="SMALLINT" />
+    <result column="pv" property="pv" jdbcType="INTEGER" />
     <result column="is_del" property="isDel" jdbcType="SMALLINT" />
-    <result column="sorting" property="sorting" jdbcType="INTEGER" />
+    <result column="is_publish" property="isPublish" jdbcType="SMALLINT" />
     <result column="create_id" property="createId" jdbcType="BIGINT" />
     <result column="create_name" property="createName" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_id" property="updateId" jdbcType="BIGINT" />
     <result column="update_name" property="updateName" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="update_time_tamp" property="updateTimeTamp" jdbcType="BIGINT" />
+    <result column="update_time_temp" property="updateTimeTemp" jdbcType="BIGINT" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.parkdt.tml.domain.OffiContent" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.parkdt.tml.domain.OffiDesign" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, title, description, part_id, is_enabled, is_del, sorting, create_id, create_name, 
-    create_time, update_id, update_name, update_time, update_time_tamp
+    id, title, description, img, is_recommend, pv, is_del, is_publish, create_id, create_name, 
+    create_time, update_id, update_name, update_time, update_time_temp
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -32,29 +33,29 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from t_offi_content
+    from t_offi_design
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_offi_content
+    delete from t_offi_design
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.parkdt.tml.domain.OffiContent" >
-    insert into t_offi_content (id, title, description, 
-      part_id, is_enabled, is_del, 
-      sorting, create_id, create_name, 
-      create_time, update_id, update_name, 
-      update_time, update_time_tamp, content
-      )
+  <insert id="insert" parameterType="com.parkdt.tml.domain.OffiDesign" >
+    insert into t_offi_design (id, title, description, 
+      img, is_recommend, pv, 
+      is_del, is_publish, create_id, 
+      create_name, create_time, update_id, 
+      update_name, update_time, update_time_temp, 
+      content)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{partId,jdbcType=BIGINT}, #{isEnabled,jdbcType=SMALLINT}, #{isDel,jdbcType=SMALLINT}, 
-      #{sorting,jdbcType=INTEGER}, #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateTimeTamp,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR}
-      )
+      #{img,jdbcType=VARCHAR}, #{isRecommend,jdbcType=SMALLINT}, #{pv,jdbcType=INTEGER}, 
+      #{isDel,jdbcType=SMALLINT}, #{isPublish,jdbcType=SMALLINT}, #{createId,jdbcType=BIGINT}, 
+      #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, 
+      #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateTimeTemp,jdbcType=BIGINT}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.OffiContent" >
-    insert into t_offi_content
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.OffiDesign" >
+    insert into t_offi_design
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -65,17 +66,20 @@
       <if test="description != null" >
         description,
       </if>
-      <if test="partId != null" >
-        part_id,
+      <if test="img != null" >
+        img,
       </if>
-      <if test="isEnabled != null" >
-        is_enabled,
+      <if test="isRecommend != null" >
+        is_recommend,
+      </if>
+      <if test="pv != null" >
+        pv,
       </if>
       <if test="isDel != null" >
         is_del,
       </if>
-      <if test="sorting != null" >
-        sorting,
+      <if test="isPublish != null" >
+        is_publish,
       </if>
       <if test="createId != null" >
         create_id,
@@ -95,8 +99,8 @@
       <if test="updateTime != null" >
         update_time,
       </if>
-      <if test="updateTimeTamp != null" >
-        update_time_tamp,
+      <if test="updateTimeTemp != null" >
+        update_time_temp,
       </if>
       <if test="content != null" >
         content,
@@ -112,17 +116,20 @@
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="partId != null" >
-        #{partId,jdbcType=BIGINT},
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
       </if>
-      <if test="isEnabled != null" >
-        #{isEnabled,jdbcType=SMALLINT},
+      <if test="isRecommend != null" >
+        #{isRecommend,jdbcType=SMALLINT},
+      </if>
+      <if test="pv != null" >
+        #{pv,jdbcType=INTEGER},
       </if>
       <if test="isDel != null" >
         #{isDel,jdbcType=SMALLINT},
       </if>
-      <if test="sorting != null" >
-        #{sorting,jdbcType=INTEGER},
+      <if test="isPublish != null" >
+        #{isPublish,jdbcType=SMALLINT},
       </if>
       <if test="createId != null" >
         #{createId,jdbcType=BIGINT},
@@ -142,16 +149,16 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTimeTamp != null" >
-        #{updateTimeTamp,jdbcType=BIGINT},
+      <if test="updateTimeTemp != null" >
+        #{updateTimeTemp,jdbcType=BIGINT},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.OffiContent" >
-    update t_offi_content
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.OffiDesign" >
+    update t_offi_design
     <set >
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
@@ -159,17 +166,20 @@
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="partId != null" >
-        part_id = #{partId,jdbcType=BIGINT},
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
       </if>
-      <if test="isEnabled != null" >
-        is_enabled = #{isEnabled,jdbcType=SMALLINT},
+      <if test="isRecommend != null" >
+        is_recommend = #{isRecommend,jdbcType=SMALLINT},
+      </if>
+      <if test="pv != null" >
+        pv = #{pv,jdbcType=INTEGER},
       </if>
       <if test="isDel != null" >
         is_del = #{isDel,jdbcType=SMALLINT},
       </if>
-      <if test="sorting != null" >
-        sorting = #{sorting,jdbcType=INTEGER},
+      <if test="isPublish != null" >
+        is_publish = #{isPublish,jdbcType=SMALLINT},
       </if>
       <if test="createId != null" >
         create_id = #{createId,jdbcType=BIGINT},
@@ -189,8 +199,8 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTimeTamp != null" >
-        update_time_tamp = #{updateTimeTamp,jdbcType=BIGINT},
+      <if test="updateTimeTemp != null" >
+        update_time_temp = #{updateTimeTemp,jdbcType=BIGINT},
       </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
@@ -198,47 +208,51 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.parkdt.tml.domain.OffiContent" >
-    update t_offi_content
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.parkdt.tml.domain.OffiDesign" >
+    update t_offi_design
     set title = #{title,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      part_id = #{partId,jdbcType=BIGINT},
-      is_enabled = #{isEnabled,jdbcType=SMALLINT},
+      img = #{img,jdbcType=VARCHAR},
+      is_recommend = #{isRecommend,jdbcType=SMALLINT},
+      pv = #{pv,jdbcType=INTEGER},
       is_del = #{isDel,jdbcType=SMALLINT},
-      sorting = #{sorting,jdbcType=INTEGER},
+      is_publish = #{isPublish,jdbcType=SMALLINT},
       create_id = #{createId,jdbcType=BIGINT},
       create_name = #{createName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_id = #{updateId,jdbcType=BIGINT},
       update_name = #{updateName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_time_tamp = #{updateTimeTamp,jdbcType=BIGINT},
+      update_time_temp = #{updateTimeTemp,jdbcType=BIGINT},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.OffiContent" >
-    update t_offi_content
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.OffiDesign" >
+    update t_offi_design
     set title = #{title,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      part_id = #{partId,jdbcType=BIGINT},
-      is_enabled = #{isEnabled,jdbcType=SMALLINT},
+      img = #{img,jdbcType=VARCHAR},
+      is_recommend = #{isRecommend,jdbcType=SMALLINT},
+      pv = #{pv,jdbcType=INTEGER},
       is_del = #{isDel,jdbcType=SMALLINT},
-      sorting = #{sorting,jdbcType=INTEGER},
+      is_publish = #{isPublish,jdbcType=SMALLINT},
       create_id = #{createId,jdbcType=BIGINT},
       create_name = #{createName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_id = #{updateId,jdbcType=BIGINT},
       update_name = #{updateName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_time_tamp = #{updateTimeTamp,jdbcType=BIGINT}
+      update_time_temp = #{updateTimeTemp,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="getContentByPartId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+
+  <select id="getAllOffiDesign" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from t_offi_content
-    where part_id = #{part_id,jdbcType=BIGINT} and is_del = 0
+    from t_offi_design
+    where is_del = 0
   </select>
+
 </mapper>

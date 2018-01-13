@@ -45,7 +45,7 @@
                              targetPackage="com.parkdt.tml.mapper" targetProject="src/main/java">
             <property  name="enableSubPackages"  value="true"/>
         </javaClientGenerator>
-
+        
         <table schema="general" tableName="t_project_claim_record" domainObjectName="ProjectClaimRecord"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
