@@ -46,7 +46,7 @@
             <property  name="enableSubPackages"  value="true"/>
         </javaClientGenerator>
 
-        <table schema="general" tableName="t_offi_banner" domainObjectName="OffiBanner"
+        <table schema="general" tableName="t_offi_design" domainObjectName="OffiDesign"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
             <property name="useActualColumnNames" value="false"/>
