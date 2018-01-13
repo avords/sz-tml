@@ -245,4 +245,14 @@
       update_time_temp = #{updateTimeTemp,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="getAllOffiDesign" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_offi_design
+    where is_del = 0
+  </select>
+
 </mapper>
