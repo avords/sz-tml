@@ -46,7 +46,7 @@
             <property  name="enableSubPackages"  value="true"/>
         </javaClientGenerator>
         
-        <table schema="general" tableName="t_project_claim_record" domainObjectName="ProjectClaimRecord"
+        <table schema="general" tableName="t_sys_good_type" domainObjectName="SysGoodType"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
             <property name="useActualColumnNames" value="false"/>
