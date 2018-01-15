@@ -33,6 +33,7 @@
     <result column="cycle_value" property="cycleValue" jdbcType="INTEGER" />
     <result column="cycle_unit" property="cycleUnit" jdbcType="SMALLINT" />
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <association property="projectBaseInformation" column="project_base_id" select="getProjectBaseInformation"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, field_id, design_type_id, construction_unit, contact_person, claim_id, phone, 
@@ -41,6 +42,101 @@
     plan_start_time, plan_end_time, cycle_id, put_amount, acquisition_type_id, source_id, 
     results_required_ids, related_information, project_base_id, suspend_count, cycle_value, 
     cycle_unit, introduction
+  </sql>
+  <sql id="Base_Column_Query_List" >
+    <if test="id != null" >
+      AND id=#{id}
+    </if>
+    <if test="fieldId != null" >
+      AND field_id=#{fieldId}
+    </if>
+    <if test="designTypeId != null" >
+      AND design_type_id=#{designTypeId}
+    </if>
+    <if test="constructionUnit != null" >
+      AND construction_unit=#{constructionUnit}
+    </if>
+    <if test="contactPerson != null" >
+      AND contact_person=#{contactPerson}
+    </if>
+    <if test="claimId != null" >
+      AND claim_id={claimId}
+    </if>
+    <if test="phone != null" >
+      AND phone=#{phone}
+    </if>
+    <if test="projectConstructionSite != null" >
+      AND project_construction_site=#{projectConstructionSite}
+    </if>
+    <if test="provinceId != null" >
+      AND province_id=#{provinceId}
+    </if>
+    <if test="cityId != null" >
+      AND city_id=#{cityId}
+    </if>
+    <if test="provinceName != null" >
+      AND province_name=#{provinceName}
+    </if>
+    <if test="cityName != null" >
+      AND city_name=#{cityName}
+    </if>
+    <if test="area != null" >
+      AND area=#{area}
+    </if>
+    <if test="detailedAddress != null" >
+      AND detailed_address#{detailedAddress}
+    </if>
+    <if test="constructionArea != null" >
+      AND construction_area=#{constructionArea}
+    </if>
+    <if test="planningArea != null" >
+      AND planning_area=#{planningArea}
+    </if>
+    <if test="projectStatus != null" >
+      AND project_status=#{projectStatus}
+    </if>
+    <if test="personnelRequirements != null" >
+      AND personnel_requirements=#{personnelRequirements}
+    </if>
+    <if test="planStartTime != null" >
+      AND plan_start_time=#{planStartTime}
+    </if>
+    <if test="planEndTime != null" >
+      AND plan_end_time=#{planEndTime}
+    </if>
+    <if test="cycleId != null" >
+      AND cycle_id=#{cycleId}
+    </if>
+    <if test="putAmount != null" >
+      AND put_amount=#{putAmount}
+    </if>
+    <if test="acquisitionTypeId != null" >
+      AND acquisition_type_id=#{acquisitionTypeId}
+    </if>
+    <if test="sourceId != null" >
+      AND source_id=#{sourceId}
+    </if>
+    <if test="resultsRequiredIds != null" >
+      AND results_required_ids=#{resultsRequiredIds}
+    </if>
+    <if test="relatedInformation != null" >
+      AND related_information=#{relatedInformation}
+    </if>
+    <if test="projectBaseId != null" >
+      AND project_base_id=#{projectBaseId}
+    </if>
+    <if test="suspendCount != null" >
+      AND suspend_count=#{suspendCount}
+    </if>
+    <if test="cycleValue != null" >
+      AND cycle_value=#{cycleValue}
+    </if>
+    <if test="cycleUnit != null" >
+      AND cycle_unit=#{cycleUnit}
+    </if>
+    <if test="introduction != null" >
+      AND introduction=#{introduction}
+    </if>
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -399,4 +495,16 @@
       introduction = #{introduction,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="getAllProject" resultMap="BaseResultMap">
+    SELECT * FROM t_project_information
+  </select>
+  <select id="getProjectBaseInformation" parameterType="java.lang.Long" resultType="com.parkdt.tml.domain.ProjectBaseInformation">
+    SELECT * FROM t_project_base_information WHERE id = #{projectBaseId}
+  </select>
+
+  <select id="getProjectByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT * FROM t_project_information WHERE 1=1
+    <include refid="Base_Column_Query_List"/>
+  </select>
 </mapper>

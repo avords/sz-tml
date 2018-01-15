@@ -35,25 +35,17 @@
                 <td style="width: 4em;">认领人</td>
             </tr>
         </thead>
+        <#list projectInformations as item>
         <tr>
             <td colspan="4" class="mt"></td>
         </tr>
         <tr>
-            <td class="center">XX项目</td>
+            <td class="center">${item.projectBaseInformation.projectName}</td>
             <td>医疗</td>
-            <td>XX市</td>
+            <td>${item.cityName}</td>
             <td>认领人</td>
         </tr>
-        <tr>
-                <td colspan="4" class="mt"></td>
-            </tr>
-            <tr>
-                <td class="center">XX项目</td>
-                <td>医疗</td>
-                <td>XX市</td>
-                <td>认领人</td>
-            </tr>
-
+        </#list>
     </table>
 </body>
 

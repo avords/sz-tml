@@ -66,7 +66,8 @@ public class ProjectInformation implements Serializable {
     private Short cycleUnit;
 
     private String introduction;
-
+    
+    private ProjectBaseInformation projectBaseInformation;
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -315,5 +316,13 @@ public class ProjectInformation implements Serializable {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction == null ? null : introduction.trim();
+    }
+
+    public ProjectBaseInformation getProjectBaseInformation() {
+        return projectBaseInformation;
+    }
+
+    public void setProjectBaseInformation(ProjectBaseInformation projectBaseInformation) {
+        this.projectBaseInformation = projectBaseInformation;
     }
 }

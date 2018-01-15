@@ -2,6 +2,9 @@ package com.parkdt.tml.mapper;
 
 import com.parkdt.tml.domain.ProjectInformation;
 
+import java.util.List;
+import java.util.Map;
+
 public interface ProjectInformationMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +17,8 @@ public interface ProjectInformationMapper {
     int updateByPrimaryKeySelective(ProjectInformation record);
 
     int updateByPrimaryKey(ProjectInformation record);
+
+    List<ProjectInformation> getAllProject();
+
+    List<ProjectInformation> getProjectByParam(Map<String, Object> params);
 }
