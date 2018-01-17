@@ -1,10 +1,11 @@
 package com.parkdt.tml.mapper;
 
 import com.parkdt.tml.domain.ProjectInformation;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
-
+@Mapper
 public interface ProjectInformationMapper {
     int deleteByPrimaryKey(Long id);
 

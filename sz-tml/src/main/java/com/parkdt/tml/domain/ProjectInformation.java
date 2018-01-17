@@ -68,6 +68,9 @@ public class ProjectInformation implements Serializable {
     private String introduction;
     
     private ProjectBaseInformation projectBaseInformation;
+    
+    private SysTypeInfo sysTypeInfo;
+    
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -324,5 +327,13 @@ public class ProjectInformation implements Serializable {
 
     public void setProjectBaseInformation(ProjectBaseInformation projectBaseInformation) {
         this.projectBaseInformation = projectBaseInformation;
+    }
+
+    public SysTypeInfo getSysTypeInfo() {
+        return sysTypeInfo;
+    }
+
+    public void setSysTypeInfo(SysTypeInfo sysTypeInfo) {
+        this.sysTypeInfo = sysTypeInfo;
     }
 }

@@ -34,6 +34,43 @@
     <result column="cycle_unit" property="cycleUnit" jdbcType="SMALLINT" />
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <association property="projectBaseInformation" column="project_base_id" select="getProjectBaseInformation"/>
+    <association property="sysTypeInfo" column="acquisition_type_id" select="getSysTypeInfo"/>
+  </resultMap>
+  <resultMap id="projectBaseInfoResultMap" type="com.parkdt.tml.domain.ProjectBaseInformation" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="project_num" property="projectNum" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="manager_id" property="managerId" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="project_status" property="projectStatus" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="update_id" property="updateId" jdbcType="BIGINT" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="final_certification_time" property="finalCertificationTime" jdbcType="TIMESTAMP" />
+    <result column="is_automatic_release" property="isAutomaticRelease" jdbcType="SMALLINT" />
+    <result column="is_top" property="isTop" jdbcType="SMALLINT" />
+    <result column="invite_pm_ids" property="invitePmIds" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+    <result column="recommend" property="recommend" jdbcType="SMALLINT" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="SysTypeInfoResultMap" type="com.parkdt.tml.domain.SysTypeInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="is_enabled" property="isEnabled" jdbcType="SMALLINT" />
+    <result column="sorting" property="sorting" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_id" property="updateId" jdbcType="BIGINT" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="is_choose_team" property="isChooseTeam" jdbcType="SMALLINT" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, field_id, design_type_id, construction_unit, contact_person, claim_id, phone, 
@@ -499,10 +536,12 @@
   <select id="getAllProject" resultMap="BaseResultMap">
     SELECT * FROM t_project_information
   </select>
-  <select id="getProjectBaseInformation" parameterType="java.lang.Long" resultType="com.parkdt.tml.domain.ProjectBaseInformation">
+  <select id="getProjectBaseInformation" parameterType="java.lang.Long" resultMap="projectBaseInfoResultMap">
     SELECT * FROM t_project_base_information WHERE id = #{projectBaseId}
   </select>
-
+  <select id="getSysTypeInfo" parameterType="java.lang.Long" resultMap="SysTypeInfoResultMap">
+    SELECT * FROM t_sys_type_info WHERE id=#{id}
+  </select>
   <select id="getProjectByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT * FROM t_project_information WHERE 1=1
     <include refid="Base_Column_Query_List"/>
