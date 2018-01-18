@@ -46,7 +46,7 @@
             <property  name="enableSubPackages"  value="true"/>
         </javaClientGenerator>
         
-        <table schema="general" tableName="t_sys_type_info" domainObjectName="SysTypeInfo"
+        <table schema="general" tableName="t_project_information_temp" domainObjectName="ProjectInformationTemp"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
             <property name="useActualColumnNames" value="false"/>
