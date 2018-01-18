@@ -7,4 +7,11 @@
 http://manager.teamlinks.cn/manager/login.do 后台管理
 admin 123456
 
+
+
+
+线上测试环境数据库
 数据库名 : likekeji
+112.74.40.244
+root
+lkkjMYSQL20171108
