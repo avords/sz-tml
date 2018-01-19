@@ -20,4 +20,9 @@ public class SysGoodTypeServiceImpl implements SysGoodTypeService {
     public List<SysGoodType> getAllSysGoodType() {
         return sysGoodTypeMapper.getAllSysGoodType();
     }
+
+    @Override
+    public SysGoodType getById(Long id) {
+        return sysGoodTypeMapper.selectByPrimaryKey(id);
+    }
 }

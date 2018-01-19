@@ -1,7 +1,6 @@
 package com.parkdt.tml.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class ProjectClaimRecord implements Serializable {
@@ -11,7 +10,7 @@ public class ProjectClaimRecord implements Serializable {
 
     private Long memberId;
 
-    private BigDecimal outputValue;
+    private Double outputValue;
 
     private String workPlan;
 
@@ -59,11 +58,11 @@ public class ProjectClaimRecord implements Serializable {
         this.memberId = memberId;
     }
 
-    public BigDecimal getOutputValue() {
+    public Double getOutputValue() {
         return outputValue;
     }
 
-    public void setOutputValue(BigDecimal outputValue) {
+    public void setOutputValue(Double outputValue) {
         this.outputValue = outputValue;
     }
 

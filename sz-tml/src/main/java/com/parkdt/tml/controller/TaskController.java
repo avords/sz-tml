@@ -1,5 +1,7 @@
 package com.parkdt.tml.controller;
 
+import com.parkdt.tml.domain.ProjectClaimRecord;
+import com.parkdt.tml.domain.ProjectDelivery;
 import com.parkdt.tml.domain.ProjectInformation;
 import com.parkdt.tml.domain.SysAreasExpertise;
 import com.parkdt.tml.domain.SysGoodType;
@@ -10,8 +12,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +34,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/task")
-public class TaskController {
+public class TaskController extends BaseController{
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class);
     @Autowired
     private ProjectService projectService;
@@ -36,6 +42,12 @@ public class TaskController {
     private SysGoodTypeService sysGoodTypeService;
     @Autowired
     private SysAreasExpertiseService sysAreasExpertiseService;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
+    
     @RequestMapping("publish")
     public String publish(Model model, HttpServletRequest req) {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -97,11 +109,26 @@ public class TaskController {
         return "taskEnter";
     }
 
-    @RequestMapping("detail")
-    public String taskDetail(Model model, HttpServletRequest req) {
+    @RequestMapping("detail/{projectDeliveryId}")
+    public String taskDetail(Model model, HttpServletRequest req, @PathVariable Long projectDeliveryId) {
+        ProjectDelivery projectDelivery = projectService.getProjectDelivery(projectDeliveryId);
+        model.addAttribute("projectDelivery",projectDelivery);
         return "taskEnterDetail";
     }
-    
+    @RequestMapping("saveClaime")
+    public String saveClaime(ProjectClaimRecord projectClaimRecord,Model model, HttpServletRequest req) {
+        //判断此人是否认领
+        Long memberId=getMemberId();
+        projectClaimRecord.setMemberId(memberId);
+        projectClaimRecord.setCreateTime(new Date());
+        projectClaimRecord.setStatus((short) 0);
+        boolean isClaimed = projectService.isClaimed(projectClaimRecord.getProjectDeliveryId(),memberId);
+        //保存认领记录
+        if(!isClaimed){
+            projectService.saveProjectClaimeRecord(projectClaimRecord);   
+        }
+        return "redirect:/task/detail/"+projectClaimRecord.getProjectDeliveryId();
+    }
     private <T> T getRelType(String str,Class<T> c) throws Exception {
         if(str==null||str.trim().equals("")){
             return null;

@@ -34,7 +34,6 @@
     <result column="cycle_unit" property="cycleUnit" jdbcType="SMALLINT" />
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <association property="projectBaseInformation" column="project_base_id" select="getProjectBaseInformation"/>
-    <association property="sysTypeInfo" column="acquisition_type_id" select="getSysTypeInfo"/>
   </resultMap>
   <resultMap id="projectBaseInfoResultMap" type="com.parkdt.tml.domain.ProjectBaseInformation" >
     <result column="id" property="id" jdbcType="BIGINT" />
@@ -57,20 +56,6 @@
     <result column="recommend" property="recommend" jdbcType="SMALLINT" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <resultMap id="SysTypeInfoResultMap" type="com.parkdt.tml.domain.SysTypeInfo" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
-    <result column="type_id" property="typeId" jdbcType="BIGINT" />
-    <result column="is_enabled" property="isEnabled" jdbcType="SMALLINT" />
-    <result column="sorting" property="sorting" jdbcType="INTEGER" />
-    <result column="is_del" property="isDel" jdbcType="SMALLINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="update_id" property="updateId" jdbcType="BIGINT" />
-    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
-    <result column="is_choose_team" property="isChooseTeam" jdbcType="SMALLINT" />
-    <result column="color" property="color" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, field_id, design_type_id, construction_unit, contact_person, claim_id, phone, 
@@ -538,9 +523,6 @@
   </select>
   <select id="getProjectBaseInformation" parameterType="java.lang.Long" resultMap="projectBaseInfoResultMap">
     SELECT * FROM t_project_base_information WHERE id = #{projectBaseId}
-  </select>
-  <select id="getSysTypeInfo" parameterType="java.lang.Long" resultMap="SysTypeInfoResultMap">
-    SELECT * FROM t_sys_type_info WHERE id=#{id}
   </select>
   <select id="getProjectByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT * FROM t_project_information WHERE 1=1

@@ -93,7 +93,7 @@
                     </p>
                 </div>
                 <div class="op">
-                    <input type="button" value="认领" class="claim" />
+                    <input type="button" value="认领" class="claim" onclick="window.location.href='/task/detail/${item.id}'"/>
                     <input type="button" value="分享" class="share" />
                 </div>
             </div>

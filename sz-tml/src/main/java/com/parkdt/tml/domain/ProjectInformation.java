@@ -72,7 +72,7 @@ public class ProjectInformation implements Serializable {
     
     private List<ProjectAnnex> projectAnnexes;
     
-    private SysTypeInfo sysTypeInfo;
+    private SysGoodType sysGoodType;
     
     private static final long serialVersionUID = 1L;
 
@@ -332,19 +332,19 @@ public class ProjectInformation implements Serializable {
         this.projectBaseInformation = projectBaseInformation;
     }
 
-    public SysTypeInfo getSysTypeInfo() {
-        return sysTypeInfo;
-    }
-
-    public void setSysTypeInfo(SysTypeInfo sysTypeInfo) {
-        this.sysTypeInfo = sysTypeInfo;
-    }
-
     public List<ProjectAnnex> getProjectAnnexes() {
         return projectAnnexes;
     }
 
     public void setProjectAnnexes(List<ProjectAnnex> projectAnnexes) {
         this.projectAnnexes = projectAnnexes;
+    }
+
+    public SysGoodType getSysGoodType() {
+        return sysGoodType;
+    }
+
+    public void setSysGoodType(SysGoodType sysGoodType) {
+        this.sysGoodType = sysGoodType;
     }
 }

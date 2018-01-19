@@ -3,6 +3,8 @@ package com.parkdt.tml.mapper;
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Map;
+
 @Mapper
 public interface ProjectClaimRecordMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +18,6 @@ public interface ProjectClaimRecordMapper {
     int updateByPrimaryKeySelective(ProjectClaimRecord record);
 
     int updateByPrimaryKey(ProjectClaimRecord record);
+
+    Long getCountByParam(Map map);
 }

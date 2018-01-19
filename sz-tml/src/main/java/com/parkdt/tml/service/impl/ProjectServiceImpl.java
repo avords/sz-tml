@@ -1,14 +1,18 @@
 package com.parkdt.tml.service.impl;
 
 import com.parkdt.tml.domain.ProjectAnnex;
+import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
 import com.parkdt.tml.domain.ProjectInformation;
 import com.parkdt.tml.domain.ProjectModule;
+import com.parkdt.tml.domain.SysGoodType;
 import com.parkdt.tml.mapper.ProjectAnnexMapper;
+import com.parkdt.tml.mapper.ProjectClaimRecordMapper;
 import com.parkdt.tml.mapper.ProjectDeliveryMapper;
 import com.parkdt.tml.mapper.ProjectInformationMapper;
 import com.parkdt.tml.mapper.ProjectModuleMapper;
 import com.parkdt.tml.service.ProjectService;
+import com.parkdt.tml.service.SysGoodTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +35,10 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectModuleMapper projectModuleMapper;
     @Autowired
     private ProjectAnnexMapper projectAnnexMapper;
+    @Autowired
+    private SysGoodTypeService sysGoodTypeService;
+    @Autowired
+    private ProjectClaimRecordMapper projectClaimRecordMapper;
     @Override
     public List<ProjectInformation> getAllProject() {
         return projectInformationMapper.getAllProject();
@@ -75,7 +83,24 @@ public class ProjectServiceImpl implements ProjectService {
             List<ProjectAnnex> projectAnnexes = projectAnnexMapper.selectByParams(params);
             projectInformation.setProjectAnnexes(projectAnnexes);
             projectDelivery.setProjectInformation(projectInformation);
+            //得到项目类型
+            SysGoodType sysGoodType = sysGoodTypeService.getById(projectInformation.getDesignTypeId());
+            projectInformation.setSysGoodType(sysGoodType);
         }
         return projectDelivery;
+    }
+
+    @Override
+    public boolean isClaimed(Long projectDeliveryId, Long memberId) {
+        Map map = new HashMap();
+        map.put("projectDeliveryId",projectDeliveryId);
+        map.put("memberId",memberId);
+        Long count = projectClaimRecordMapper.getCountByParam(map);
+        return count>0?true:false;
+    }
+
+    @Override
+    public void saveProjectClaimeRecord(ProjectClaimRecord projectClaimRecord) {
+        projectClaimRecordMapper.insertSelective(projectClaimRecord);
     }
 }

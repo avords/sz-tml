@@ -21,6 +21,14 @@
     id, project_delivery_id, member_id, output_value, work_plan, start_time, end_time, 
     create_time, status, update_time, update_id, reject_reason, type, is_view
   </sql>
+  <sql id="Base_Column_Query_List" >
+    <if test="projectDeliveryId != null" >
+      AND project_delivery_id=#{projectDeliveryId}
+    </if>
+    <if test="memberId != null" >
+      AND member_id=#{memberId}
+    </if>
+  </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -196,4 +204,10 @@
       is_view = #{isView,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="getCountByParam" resultType="java.lang.Long" parameterType="java.util.Map">
+    SELECT COUNT(*) FROM t_project_claim_record
+    WHERE 1=1
+    <include refid="Base_Column_Query_List"/>
+  </select>
 </mapper>

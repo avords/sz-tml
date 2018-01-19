@@ -1,5 +1,6 @@
 package com.parkdt.tml.service;
 
+import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
 import com.parkdt.tml.domain.ProjectInformation;
 
@@ -19,4 +20,8 @@ public interface ProjectService {
     List<Map> queryProjectDelivery(Map params);
     
     ProjectDelivery getProjectDelivery(Long projectDeliveryId);
+
+    boolean isClaimed(Long projectDeliveryId, Long memberId);
+
+    void saveProjectClaimeRecord(ProjectClaimRecord projectClaimRecord);
 }

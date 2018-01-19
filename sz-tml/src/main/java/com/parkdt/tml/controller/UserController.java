@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserController extends BaseController{
     @Autowired
     private UserService userService;
     @Autowired
@@ -37,7 +37,7 @@ public class UserController {
     
     @RequestMapping("personal")
     public String personal(Model model, HttpServletRequest req) {
-        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(76L);
+        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(getMemberId());
         model.addAttribute("personalBaseInfo",personalBaseInfo);
         List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
         model.addAttribute("teamBasicInformations",teamBasicInformations);
