@@ -389,35 +389,41 @@
   </update>
   
   <select id="queryProjectDelivery" parameterType="java.util.Map" resultType="java.util.Map">
-    select * from t_project_delivery d 
+    select DISTINCT d.id,b.project_name,d.output_value,d.pv,DATE_FORMAT(b.create_time,'%Y-%m-%d') create_time,claime_num,DATE_FORMAT(d.plan_end_time,'%Y-%m-%d') plan_end_time,l.nick_name from t_project_delivery d 
     <choose>
       <when test="isOne==true">
         INNER JOIN t_project_base_information b on(d.type=0 AND d.object_id=b.id)
       </when>
       <otherwise>
-        INNER JOIN t_project_module m on(d.type=1 AND d.object_id=b.id)
+        INNER JOIN t_project_module m on(d.type=1 AND d.object_id=m.id)
         INNER JOIN t_project_base_information b on(m.project_id=b.id)
       </otherwise>
     </choose>
     LEFT JOIN t_project_information i on(d.object_id=i.id)
+    LEFT JOIN t_personal_login_info l on(b.member_id=l.id)
     WHERE 1=1
+    AND d.is_del=0
     <if test="fieldId!=null">
       AND i.field_id=#{fieldId}
     </if>
     <if test="designTypeId!=null">
       AND i.design_type_id=#{designTypeId}
     </if>
-    <if test="startOutputValue">
-      AND i.output_value>=#{startOutputValue}
+    <if test="startOutputValue!=null">
+      AND d.output_value>=#{startOutputValue}
     </if>
-    <if test="endOutputValue">
-      AND i.output_value &lt;=#{endOutputValue}
+    <if test="endOutputValue!=null">
+      AND d.output_value &lt;=#{endOutputValue}
     </if>
-    <if test="startDate">
-      AND b.create_date>=#{startDate}
+    <if test="startDate!=null">
+      AND b.create_time>=#{startDate}
     </if>
-    <if test="endDate">
-      AND i.create_date &lt;=#{endDate}
+    <if test="endDate!=null">
+      AND b.create_time &lt;=#{endDate}
     </if>
+    <if test="memberName!=null">
+      AND l.nick_name=#{memberName}
+    </if>
+    ORDER BY b.create_time DESC 
   </select>
 </mapper>
