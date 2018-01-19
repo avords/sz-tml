@@ -103,4 +103,14 @@ public class ProjectServiceImpl implements ProjectService {
     public void saveProjectClaimeRecord(ProjectClaimRecord projectClaimRecord) {
         projectClaimRecordMapper.insertSelective(projectClaimRecord);
     }
+
+    @Override
+    public List<Map> queryProjectByMemberId(Long memberId) {
+        return projectInformationMapper.queryProjectByMemberId(memberId);
+    }
+
+    @Override
+    public List<Map> queryProjectClaimByMemberId(Long memberId) {
+        return projectClaimRecordMapper.queryProjectClaimByMemberId(memberId);
+    }
 }

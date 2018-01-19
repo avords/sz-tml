@@ -50,4 +50,14 @@ public class Constant {
             return 0;
         }
     }
+
+
+    public static enum Project_status{
+        //项目状态（2采编中2、4认领中、5进行中6、已完成、7已取消、8已暂停）
+    }
+
+    public static enum Claim_status{
+        //状态(0待审核1已审核2审核失败,3已取消)
+    }
+
 }

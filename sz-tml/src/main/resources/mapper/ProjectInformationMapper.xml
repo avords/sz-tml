@@ -531,4 +531,15 @@
   <select id="queryBySql" parameterType="java.util.Map" resultType="java.util.Map">
     ${sql}
   </select>
+
+  <select id="queryProjectByMemberId" parameterType="java.lang.Long" resultType="java.util.Map">
+
+      SELECT pbi.id, pbi.project_name, pbi.project_status,pd.image FROM t_project_base_information pbi
+      LEFT JOIN t_project_delivery pd ON(pd.object_id = pbi.id)
+      WHERE 1=1 AND pbi.is_del = 0 AND pbi.member_id = #{memberId} ORDER BY pbi.id desc;
+
+  </select>
+
+
+
 </mapper>

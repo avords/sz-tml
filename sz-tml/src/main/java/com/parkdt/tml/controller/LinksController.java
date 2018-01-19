@@ -33,11 +33,6 @@ public class LinksController {
     @Autowired
     private SysAreasExpertiseService sysAreasExpertiseService;
 
-    @RequestMapping("index")
-    public String index(Model model, HttpServletRequest req) {
-        return "index";
-    }
-
     @RequestMapping("platform")
     public String platform(Model model, HttpServletRequest req) {
         //功能

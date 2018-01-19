@@ -3,6 +3,7 @@ package com.parkdt.tml.mapper;
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -20,4 +21,7 @@ public interface ProjectClaimRecordMapper {
     int updateByPrimaryKey(ProjectClaimRecord record);
 
     Long getCountByParam(Map map);
+
+    List<Map> queryProjectClaimByMemberId(Long memberId);
+
 }

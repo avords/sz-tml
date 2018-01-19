@@ -24,4 +24,8 @@ public interface ProjectService {
     boolean isClaimed(Long projectDeliveryId, Long memberId);
 
     void saveProjectClaimeRecord(ProjectClaimRecord projectClaimRecord);
+
+    List<Map> queryProjectByMemberId(Long memberId);
+
+    List<Map> queryProjectClaimByMemberId(Long memberId);
 }
