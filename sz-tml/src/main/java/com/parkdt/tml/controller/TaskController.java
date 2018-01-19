@@ -32,6 +32,13 @@ public class TaskController {
 
     @RequestMapping("enter")
     public String enter(Model model, HttpServletRequest req) {
+        Object obj = projectService.queryBySql("select * from t_project_information",null);
+        Map params = new HashMap();
+        params.put("id",35);
+        Object obj1 = projectService.queryBySql("select * from t_project_information where id=#{id}",params);
+        Object obj3 = projectService.queryBySql("select PHONE from t_project_information where id=#{id}",params);
+        //一级项目sql
+        String sql = "select * from t_project_delivery d left join t_project_base_information b on(d.object_id=b.id)";
         return "taskEnter";
     }
 

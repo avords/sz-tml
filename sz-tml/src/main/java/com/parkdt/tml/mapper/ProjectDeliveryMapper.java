@@ -3,6 +3,9 @@ package com.parkdt.tml.mapper;
 import com.parkdt.tml.domain.ProjectDelivery;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface ProjectDeliveryMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +19,6 @@ public interface ProjectDeliveryMapper {
     int updateByPrimaryKeySelective(ProjectDelivery record);
 
     int updateByPrimaryKey(ProjectDelivery record);
+
+    List<Map> queryProjectDelivery(Map params);
 }

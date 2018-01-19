@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parkdt.tml.mapper.ProjectModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.ProjectModule" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="design_type_id" property="designTypeId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="output_value" property="outputValue" jdbcType="DOUBLE" />
+    <result column="cycle_id" property="cycleId" jdbcType="BIGINT" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="designer_id" property="designerId" jdbcType="BIGINT" />
+    <result column="auditor_id" property="auditorId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="stage_id" property="stageId" jdbcType="BIGINT" />
+    <result column="stage_subkey_id" property="stageSubkeyId" jdbcType="BIGINT" />
+    <result column="project_id" property="projectId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="summarize_status" property="summarizeStatus" jdbcType="SMALLINT" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+    <result column="suspend_count" property="suspendCount" jdbcType="INTEGER" />
+    <result column="is_priority" property="isPriority" jdbcType="SMALLINT" />
+    <result column="is_del" property="isDel" jdbcType="SMALLINT" />
+    <result column="cycle_value" property="cycleValue" jdbcType="INTEGER" />
+    <result column="cycle_unit" property="cycleUnit" jdbcType="SMALLINT" />
+    <result column="auditor_confirm" property="auditorConfirm" jdbcType="SMALLINT" />
+    <result column="manager_confirm" property="managerConfirm" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, design_type_id, name, output_value, cycle_id, start_time, end_time, description, 
+    designer_id, auditor_id, create_time, update_time, stage_id, stage_subkey_id, project_id, 
+    status, summarize_status, type, suspend_count, is_priority, is_del, cycle_value, 
+    cycle_unit, auditor_confirm, manager_confirm
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_module
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_project_module
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.parkdt.tml.domain.ProjectModule" >
+    insert into t_project_module (id, design_type_id, name, 
+      output_value, cycle_id, start_time, 
+      end_time, description, designer_id, 
+      auditor_id, create_time, update_time, 
+      stage_id, stage_subkey_id, project_id, 
+      status, summarize_status, type, 
+      suspend_count, is_priority, is_del, 
+      cycle_value, cycle_unit, auditor_confirm, 
+      manager_confirm)
+    values (#{id,jdbcType=BIGINT}, #{designTypeId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{outputValue,jdbcType=DOUBLE}, #{cycleId,jdbcType=BIGINT}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, #{designerId,jdbcType=BIGINT}, 
+      #{auditorId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{stageId,jdbcType=BIGINT}, #{stageSubkeyId,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, 
+      #{status,jdbcType=SMALLINT}, #{summarizeStatus,jdbcType=SMALLINT}, #{type,jdbcType=SMALLINT}, 
+      #{suspendCount,jdbcType=INTEGER}, #{isPriority,jdbcType=SMALLINT}, #{isDel,jdbcType=SMALLINT}, 
+      #{cycleValue,jdbcType=INTEGER}, #{cycleUnit,jdbcType=SMALLINT}, #{auditorConfirm,jdbcType=SMALLINT}, 
+      #{managerConfirm,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.ProjectModule" >
+    insert into t_project_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="designTypeId != null" >
+        design_type_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="outputValue != null" >
+        output_value,
+      </if>
+      <if test="cycleId != null" >
+        cycle_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="designerId != null" >
+        designer_id,
+      </if>
+      <if test="auditorId != null" >
+        auditor_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="stageId != null" >
+        stage_id,
+      </if>
+      <if test="stageSubkeyId != null" >
+        stage_subkey_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="summarizeStatus != null" >
+        summarize_status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="suspendCount != null" >
+        suspend_count,
+      </if>
+      <if test="isPriority != null" >
+        is_priority,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="cycleValue != null" >
+        cycle_value,
+      </if>
+      <if test="cycleUnit != null" >
+        cycle_unit,
+      </if>
+      <if test="auditorConfirm != null" >
+        auditor_confirm,
+      </if>
+      <if test="managerConfirm != null" >
+        manager_confirm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="designTypeId != null" >
+        #{designTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="outputValue != null" >
+        #{outputValue,jdbcType=DOUBLE},
+      </if>
+      <if test="cycleId != null" >
+        #{cycleId,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="designerId != null" >
+        #{designerId,jdbcType=BIGINT},
+      </if>
+      <if test="auditorId != null" >
+        #{auditorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stageId != null" >
+        #{stageId,jdbcType=BIGINT},
+      </if>
+      <if test="stageSubkeyId != null" >
+        #{stageSubkeyId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="summarizeStatus != null" >
+        #{summarizeStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="suspendCount != null" >
+        #{suspendCount,jdbcType=INTEGER},
+      </if>
+      <if test="isPriority != null" >
+        #{isPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=SMALLINT},
+      </if>
+      <if test="cycleValue != null" >
+        #{cycleValue,jdbcType=INTEGER},
+      </if>
+      <if test="cycleUnit != null" >
+        #{cycleUnit,jdbcType=SMALLINT},
+      </if>
+      <if test="auditorConfirm != null" >
+        #{auditorConfirm,jdbcType=SMALLINT},
+      </if>
+      <if test="managerConfirm != null" >
+        #{managerConfirm,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.ProjectModule" >
+    update t_project_module
+    <set >
+      <if test="designTypeId != null" >
+        design_type_id = #{designTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="outputValue != null" >
+        output_value = #{outputValue,jdbcType=DOUBLE},
+      </if>
+      <if test="cycleId != null" >
+        cycle_id = #{cycleId,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="designerId != null" >
+        designer_id = #{designerId,jdbcType=BIGINT},
+      </if>
+      <if test="auditorId != null" >
+        auditor_id = #{auditorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stageId != null" >
+        stage_id = #{stageId,jdbcType=BIGINT},
+      </if>
+      <if test="stageSubkeyId != null" >
+        stage_subkey_id = #{stageSubkeyId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="summarizeStatus != null" >
+        summarize_status = #{summarizeStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="suspendCount != null" >
+        suspend_count = #{suspendCount,jdbcType=INTEGER},
+      </if>
+      <if test="isPriority != null" >
+        is_priority = #{isPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=SMALLINT},
+      </if>
+      <if test="cycleValue != null" >
+        cycle_value = #{cycleValue,jdbcType=INTEGER},
+      </if>
+      <if test="cycleUnit != null" >
+        cycle_unit = #{cycleUnit,jdbcType=SMALLINT},
+      </if>
+      <if test="auditorConfirm != null" >
+        auditor_confirm = #{auditorConfirm,jdbcType=SMALLINT},
+      </if>
+      <if test="managerConfirm != null" >
+        manager_confirm = #{managerConfirm,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.ProjectModule" >
+    update t_project_module
+    set design_type_id = #{designTypeId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      output_value = #{outputValue,jdbcType=DOUBLE},
+      cycle_id = #{cycleId,jdbcType=BIGINT},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      designer_id = #{designerId,jdbcType=BIGINT},
+      auditor_id = #{auditorId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      stage_id = #{stageId,jdbcType=BIGINT},
+      stage_subkey_id = #{stageSubkeyId,jdbcType=BIGINT},
+      project_id = #{projectId,jdbcType=BIGINT},
+      status = #{status,jdbcType=SMALLINT},
+      summarize_status = #{summarizeStatus,jdbcType=SMALLINT},
+      type = #{type,jdbcType=SMALLINT},
+      suspend_count = #{suspendCount,jdbcType=INTEGER},
+      is_priority = #{isPriority,jdbcType=SMALLINT},
+      is_del = #{isDel,jdbcType=SMALLINT},
+      cycle_value = #{cycleValue,jdbcType=INTEGER},
+      cycle_unit = #{cycleUnit,jdbcType=SMALLINT},
+      auditor_confirm = #{auditorConfirm,jdbcType=SMALLINT},
+      manager_confirm = #{managerConfirm,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

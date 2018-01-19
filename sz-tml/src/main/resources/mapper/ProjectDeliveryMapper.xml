@@ -387,4 +387,37 @@
       cycle_unit = #{cycleUnit,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="queryProjectDelivery" parameterType="java.util.Map" resultType="java.util.Map">
+    select * from t_project_delivery d 
+    <choose>
+      <when test="isOne==true">
+        INNER JOIN t_project_base_information b on(d.type=0 AND d.object_id=b.id)
+      </when>
+      <otherwise>
+        INNER JOIN t_project_module m on(d.type=1 AND d.object_id=b.id)
+        INNER JOIN t_project_base_information b on(m.project_id=b.id)
+      </otherwise>
+    </choose>
+    LEFT JOIN t_project_information i on(d.object_id=i.id)
+    WHERE 1=1
+    <if test="fieldId!=null">
+      AND i.field_id=#{fieldId}
+    </if>
+    <if test="designTypeId!=null">
+      AND i.design_type_id=#{designTypeId}
+    </if>
+    <if test="startOutputValue">
+      AND i.output_value>=#{startOutputValue}
+    </if>
+    <if test="endOutputValue">
+      AND i.output_value &lt;=#{endOutputValue}
+    </if>
+    <if test="startDate">
+      AND b.create_date>=#{startDate}
+    </if>
+    <if test="endDate">
+      AND i.create_date &lt;=#{endDate}
+    </if>
+  </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.parkdt.tml.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class ProjectInformation implements Serializable {
     private Long id;
@@ -68,6 +69,8 @@ public class ProjectInformation implements Serializable {
     private String introduction;
     
     private ProjectBaseInformation projectBaseInformation;
+    
+    private List<ProjectAnnex> projectAnnexes;
     
     private SysTypeInfo sysTypeInfo;
     
@@ -335,5 +338,13 @@ public class ProjectInformation implements Serializable {
 
     public void setSysTypeInfo(SysTypeInfo sysTypeInfo) {
         this.sysTypeInfo = sysTypeInfo;
+    }
+
+    public List<ProjectAnnex> getProjectAnnexes() {
+        return projectAnnexes;
+    }
+
+    public void setProjectAnnexes(List<ProjectAnnex> projectAnnexes) {
+        this.projectAnnexes = projectAnnexes;
     }
 }

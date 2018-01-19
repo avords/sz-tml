@@ -546,4 +546,7 @@
     SELECT * FROM t_project_information WHERE 1=1
     <include refid="Base_Column_Query_List"/>
   </select>
+  <select id="queryBySql" parameterType="java.util.Map" resultType="java.util.Map">
+    ${sql}
+  </select>
 </mapper>

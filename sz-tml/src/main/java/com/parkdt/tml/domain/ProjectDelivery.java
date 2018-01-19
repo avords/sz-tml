@@ -64,6 +64,8 @@ public class ProjectDelivery implements Serializable {
     private Integer cycleValue;
 
     private Short cycleUnit;
+    
+    private ProjectInformation projectInformation;
 
     private static final long serialVersionUID = 1L;
 
@@ -305,5 +307,13 @@ public class ProjectDelivery implements Serializable {
 
     public void setCycleUnit(Short cycleUnit) {
         this.cycleUnit = cycleUnit;
+    }
+
+    public ProjectInformation getProjectInformation() {
+        return projectInformation;
+    }
+
+    public void setProjectInformation(ProjectInformation projectInformation) {
+        this.projectInformation = projectInformation;
     }
 }
