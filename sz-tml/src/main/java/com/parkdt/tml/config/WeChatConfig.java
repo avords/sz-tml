@@ -17,6 +17,7 @@ public class WeChatConfig extends PropertyPlaceholderConfigurer {
     private static final String appid = "appid";
     private static final String appSecret = "appSecret";
     private static final String webUrl = "webUrl";
+    private static final String token = "token";
 
     @Override
     protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess, Properties props)
@@ -54,5 +55,10 @@ public class WeChatConfig extends PropertyPlaceholderConfigurer {
     public static String getWebUrl() {
         return (String) get(webUrl);
     }
+
+    public static String getToken() {
+        return (String) map.get(token);
+    }
+
 
 }

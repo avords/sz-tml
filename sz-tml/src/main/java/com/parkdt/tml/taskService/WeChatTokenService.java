@@ -15,7 +15,9 @@ public class WeChatTokenService {
 
     @Scheduled(fixedRate = 7000000)
     public void refreshAccessToken() {
+
         StringBuffer url = new StringBuffer("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential");
+
         url.append("&appid=" + WeChatConfig.getAppid());
         url.append("&secret=" + WeChatConfig.getAppSecret());
 

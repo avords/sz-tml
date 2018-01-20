@@ -27,25 +27,25 @@ public class MyMenu {
         JSONObject taskPublish = new JSONObject();
         taskPublish.put("type", "view");
         taskPublish.put("name", "任务发布");
-        taskPublish.put("url", WeChatConfig.getWebUrl());
+        taskPublish.put("url", WeChatConfig.getWebUrl() + "auth/taskPublish");
         taskCenterSubMenuArray.add(taskPublish);
 
         JSONObject taskTake = new JSONObject();
         taskTake.put("type", "view");
         taskTake.put("name", "任务报名");
-        taskTake.put("url", WeChatConfig.getWebUrl());
+        taskTake.put("url", WeChatConfig.getWebUrl() + "auth/taskEnter");
         taskCenterSubMenuArray.add(taskTake);
 
         JSONObject myTake = new JSONObject();
         myTake.put("type", "view");
         myTake.put("name", "我参与的");
-        myTake.put("url", WeChatConfig.getWebUrl());
+        myTake.put("url", WeChatConfig.getWebUrl() + "auth/myTake");
         taskCenterSubMenuArray.add(myTake);
 
         JSONObject myPublish = new JSONObject();
         myPublish.put("type", "view");
         myPublish.put("name", "我发布的");
-        myPublish.put("url", WeChatConfig.getWebUrl());
+        myPublish.put("url", WeChatConfig.getWebUrl() + "auth/myPublish");
         taskCenterSubMenuArray.add(myPublish);
 
         taskCenter.put("sub_button", taskCenterSubMenuArray);
@@ -59,13 +59,13 @@ public class MyMenu {
         JSONObject infoBind = new JSONObject();
         infoBind.put("type", "view");
         infoBind.put("name", "信息绑定");
-        infoBind.put("url", WeChatConfig.getWebUrl());
+        infoBind.put("url", WeChatConfig.getWebUrl() + "auth/personal");
         personalSubMenuArray.add(infoBind);
 
         JSONObject personalInfo = new JSONObject();
         personalInfo.put("type", "view");
         personalInfo.put("name", "个人信息");
-        personalInfo.put("url", WeChatConfig.getWebUrl());
+        personalInfo.put("url", WeChatConfig.getWebUrl() + "auth/info");
         personalSubMenuArray.add(personalInfo);
 
         personal.put("sub_button", personalSubMenuArray);
@@ -79,19 +79,19 @@ public class MyMenu {
         JSONObject recourse = new JSONObject();
         recourse.put("type", "view");
         recourse.put("name", "资源中心");
-        recourse.put("url", WeChatConfig.getWebUrl());
+        recourse.put("url", WeChatConfig.getWebUrl() + "links/Resources");
         likeSubMenuArray.add(recourse);
 
         JSONObject platform = new JSONObject();
         platform.put("type", "view");
         platform.put("name", "立可平台");
-        platform.put("url", WeChatConfig.getWebUrl());
+        platform.put("url", WeChatConfig.getWebUrl() + "links/platform");
         likeSubMenuArray.add(platform);
 
         JSONObject about = new JSONObject();
         about.put("type", "view");
         about.put("name", "关于立可");
-        about.put("url", WeChatConfig.getWebUrl());
+        about.put("url", WeChatConfig.getWebUrl() + "links/about");
         likeSubMenuArray.add(about);
 
         like.put("sub_button", likeSubMenuArray);

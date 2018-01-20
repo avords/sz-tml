@@ -35,4 +35,11 @@ public interface UserService {
      * @return
      */
     PersonalBaseInfo getPersonalBaseInfoByMemberId(Long memberId);
+
+    /**
+     * 通过用户openid得到个人登录信息
+     * @param openid
+     * @return
+     */
+    PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechat_id);
 }

@@ -16,4 +16,6 @@ public interface PersonalLoginInfoMapper {
     int updateByPrimaryKeySelective(PersonalLoginInfo record);
 
     int updateByPrimaryKey(PersonalLoginInfo record);
+
+    PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechat_id);
 }
