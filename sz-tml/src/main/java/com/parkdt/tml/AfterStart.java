@@ -18,7 +18,7 @@ public class AfterStart implements ApplicationRunner,Ordered {
     @Override
     public void run(ApplicationArguments var1) throws Exception{
         MyMenu.createMenu();
-        //MyMenu.queryMenu();
+        MyMenu.queryMenu();
     }
 
 }
