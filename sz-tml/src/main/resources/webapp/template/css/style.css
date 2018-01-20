@@ -191,7 +191,7 @@ h1 {
   padding: .5em .8em;
   margin-bottom: 10px;
   box-sizing: border-box;
-  font-size: 1em;
+  font-size: .8em;
   color: #616162;
   font-weight: 500;
 }
@@ -206,7 +206,7 @@ h1 {
   border-radius: 4px;
   background: #2fa9d7;
   color: #fff;
-  font-size: 1em;
+  font-size: .8em;
   margin-top: .5em;
 }
 
@@ -399,7 +399,7 @@ table.data_list {
 }
 
 .article p.title {
-  font-size: 1em;
+  font-size: .9em;
   color: #2fa9d7;
   line-height: 2em;
 }
@@ -428,7 +428,7 @@ table.data_list {
   padding: .2em .6em;
   margin-bottom: 10px;
   box-sizing: border-box;
-  font-size: 1em;
+  font-size: .8em;
   color: #616162;
   font-weight: 500;
 }
@@ -437,7 +437,7 @@ table.data_list {
   border: none;
   background-color: transparent;
   outline: none;
-  font-size: 1em;
+  font-size: .9em;
   color: #616162;
 }
 
@@ -454,7 +454,7 @@ table.data_list {
   border: 1px solid #bbbbbb;
   background: #2fa9d7;
   width: 49%;
-  font-size: .9em;
+  font-size: .8em;
   color: #fff;
   height: 2em;
   line-height: 2em;
