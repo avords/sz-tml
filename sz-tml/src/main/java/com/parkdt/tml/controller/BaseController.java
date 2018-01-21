@@ -24,6 +24,19 @@ public class BaseController {
 
     public Long getMemberId() {
 
+        String openId = getOpenId();
+
+        if (StringKit.isNotEmpty(openId)) {
+            PersonalLoginInfo user = userService.getPersonalLoginInfoByOpenId(openId);
+            return user == null ? 0L : user.getId();
+        }
+
+        //测试
+        return 76L;
+    }
+
+    public String getOpenId() {
+
         HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String code = req.getParameter("code");
 
@@ -31,14 +44,9 @@ public class BaseController {
 
             String openId = weChatService.getOpenId(code);
 
-            if (StringKit.isNotEmpty(openId)) {
-                PersonalLoginInfo user = userService.getPersonalLoginInfoByOpenId(openId);
-                return user == null ? 0L : user.getId();
-            }
+            return openId;
         }
 
-        //测试
-        return 76L;
+        return null;
     }
-
 }
