@@ -25,6 +25,4 @@ public interface ProjectInformationMapper {
     
     List<Map> queryBySql(Map<String, Object> params);
 
-    List<Map> queryProjectByMemberId(Long memberId);
-
 }

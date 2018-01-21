@@ -10,13 +10,13 @@
 <body>
 <div class="wrapper">
     <div class="container articlelist">
-        <#list projectPublishs as item>
+        <#list projectDeliverys as item>
             <ul class="article_list">
                 <li>
                     <a href="#">
-                        <img src="${item.image}" alt="">
+                        <img src="${item.projectDeliveryVo.image}" alt="">
                         <div></div>
-                        <span>${item.project_status}__${item.project_name}</span>
+                        <span>${item.projectStatusStr}&nbsp;${item.projectName}</span>
                     </a>
                 </li>
             </ul>

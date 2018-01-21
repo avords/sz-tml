@@ -6,11 +6,7 @@ import com.parkdt.tml.domain.ProjectDelivery;
 import com.parkdt.tml.domain.ProjectInformation;
 import com.parkdt.tml.domain.ProjectModule;
 import com.parkdt.tml.domain.SysGoodType;
-import com.parkdt.tml.mapper.ProjectAnnexMapper;
-import com.parkdt.tml.mapper.ProjectClaimRecordMapper;
-import com.parkdt.tml.mapper.ProjectDeliveryMapper;
-import com.parkdt.tml.mapper.ProjectInformationMapper;
-import com.parkdt.tml.mapper.ProjectModuleMapper;
+import com.parkdt.tml.mapper.*;
 import com.parkdt.tml.service.ProjectService;
 import com.parkdt.tml.service.SysGoodTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +23,9 @@ import java.util.Map;
 @Service("projectService")
 @Transactional(value = "txManager1", rollbackFor = Exception.class)
 public class ProjectServiceImpl implements ProjectService {
+
+    @Autowired
+    private ProjectBaseInformationMapper projectBaseInformationMapper;
     @Autowired
     private ProjectInformationMapper projectInformationMapper;
     @Autowired
@@ -39,6 +38,7 @@ public class ProjectServiceImpl implements ProjectService {
     private SysGoodTypeService sysGoodTypeService;
     @Autowired
     private ProjectClaimRecordMapper projectClaimRecordMapper;
+
     @Override
     public List<ProjectInformation> getAllProject() {
         return projectInformationMapper.getAllProject();
@@ -51,10 +51,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Map> queryBySql(String sql, Map params) {
-        if(params==null){
-            params = new HashMap<String,Object>();
+        if (params == null) {
+            params = new HashMap<String, Object>();
         }
-        params.put("sql",sql);
+        params.put("sql", sql);
         return projectInformationMapper.queryBySql(params);
     }
 
@@ -69,14 +69,14 @@ public class ProjectServiceImpl implements ProjectService {
         Short type = projectDelivery.getType();
         Long objectId = projectDelivery.getObjectId();
         ProjectInformation projectInformation = null;
-        if(type==0){//一级项目
+        if (type == 0) {//一级项目
             projectInformation = projectInformationMapper.selectByPrimaryKey(objectId);
-        }else if(type==1){//二级项目
+        } else if (type == 1) {//二级项目
             ProjectModule projectModule = projectModuleMapper.selectByPrimaryKey(objectId);
             Long projectId = projectModule.getProjectId();
             projectInformation = projectInformationMapper.selectByPrimaryKey(projectId);
         }
-        if(projectInformation!=null) {
+        if (projectInformation != null) {
             //得到项目附件
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("projectId", projectInformation.getId());
@@ -93,10 +93,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public boolean isClaimed(Long projectDeliveryId, Long memberId) {
         Map map = new HashMap();
-        map.put("projectDeliveryId",projectDeliveryId);
-        map.put("memberId",memberId);
+        map.put("projectDeliveryId", projectDeliveryId);
+        map.put("memberId", memberId);
         Long count = projectClaimRecordMapper.getCountByParam(map);
-        return count>0?true:false;
+        return count > 0 ? true : false;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Map> queryProjectByMemberId(Long memberId) {
-        return projectInformationMapper.queryProjectByMemberId(memberId);
+        return projectBaseInformationMapper.queryProjectByMemberId(memberId);
     }
 
     @Override
