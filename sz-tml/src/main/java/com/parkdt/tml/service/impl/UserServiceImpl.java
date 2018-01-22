@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2018/1/11.
  */
@@ -21,8 +25,15 @@ public class UserServiceImpl implements UserService {
     private PersonalLoginInfoMapper personalLoginInfoMapper;
 
     @Override
-    public boolean login(PersonalLoginInfo personalLoginInfo) {
-        return false;
+    public PersonalLoginInfo login(PersonalLoginInfo personalLoginInfo) {
+        Map params = new HashMap();
+        params.put("phone",personalLoginInfo.getPhone());
+        params.put("password",personalLoginInfo.getPassword());
+        List<PersonalLoginInfo> personalLoginInfoList = personalLoginInfoMapper.queryByParams(params);
+        if(personalLoginInfoList!=null&&personalLoginInfoList.size()>0){
+            return personalLoginInfoList.get(0);
+        }
+        return null;
     }
 
     @Override
@@ -47,5 +58,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechat_id) {
         return null;
+    }
+
+    @Override
+    public int getCountByPhone(String phone) {
+        Map params = new HashMap();
+        params.put("phone",phone);
+        Integer count = personalLoginInfoMapper.getCountByParams(params);
+        return count;
+    }
+
+    @Override
+    public PersonalLoginInfo saveSelective(PersonalLoginInfo personalLoginInfo) {
+        personalLoginInfoMapper.insertSelective(personalLoginInfo);
+        return personalLoginInfo;
+    }
+
+    @Override
+    public int updateWeiXinByMemberId(Long id, String openId) {
+        PersonalLoginInfo personalLoginInfo = new PersonalLoginInfo();
+        personalLoginInfo.setId(id);
+        personalLoginInfo.setWechatId(openId);
+        return personalLoginInfoMapper.updateByPrimaryKeySelective(personalLoginInfo);
     }
 }

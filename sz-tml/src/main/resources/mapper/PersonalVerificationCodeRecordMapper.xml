@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parkdt.tml.mapper.PersonalVerificationCodeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.parkdt.tml.domain.PersonalVerificationCodeRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="failure_time" property="failureTime" jdbcType="TIMESTAMP" />
+    <result column="use_flag" property="useFlag" jdbcType="SMALLINT" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, phone, member_id, code, create_time, failure_time, use_flag, type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_personal_verification_code_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_personal_verification_code_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.parkdt.tml.domain.PersonalVerificationCodeRecord" >
+    insert into t_personal_verification_code_record (id, phone, member_id, 
+      code, create_time, failure_time, 
+      use_flag, type)
+    values (#{id,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{memberId,jdbcType=BIGINT}, 
+      #{code,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{failureTime,jdbcType=TIMESTAMP}, 
+      #{useFlag,jdbcType=SMALLINT}, #{type,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.PersonalVerificationCodeRecord" >
+    insert into t_personal_verification_code_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="failureTime != null" >
+        failure_time,
+      </if>
+      <if test="useFlag != null" >
+        use_flag,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failureTime != null" >
+        #{failureTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useFlag != null" >
+        #{useFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parkdt.tml.domain.PersonalVerificationCodeRecord" >
+    update t_personal_verification_code_record
+    <set >
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failureTime != null" >
+        failure_time = #{failureTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useFlag != null" >
+        use_flag = #{useFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parkdt.tml.domain.PersonalVerificationCodeRecord" >
+    update t_personal_verification_code_record
+    set phone = #{phone,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=BIGINT},
+      code = #{code,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      failure_time = #{failureTime,jdbcType=TIMESTAMP},
+      use_flag = #{useFlag,jdbcType=SMALLINT},
+      type = #{type,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="queryValidateCodeByPhone" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT c.* FROM t_personal_verification_code_record c 
+    WHERE c.phone=#{phone}
+    AND c.failure_time>sysdate()
+    AND c.use_flag = 0
+    AND c.type=#{type}
+    ORDER BY c.create_time DESC 
+    limit 1
+  </select>
+</mapper>

@@ -9,4 +9,7 @@ public class StringKit {
 		return !isEmpty(s);
 	}
 
+	public static void main(String[] args) {
+		System.out.println('\u53F0');
+	}
 }

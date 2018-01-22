@@ -6,6 +6,11 @@
     <title>个人资料</title>
     <link href="/css/style.css" rel="stylesheet" />
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+
+    <script type="text/javascript" src="/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate_zh.js"></script>
+    <script type="text/javascript" src="/js/jquery.metadata.js"></script>
+    <script type="text/javascript" src="/js/additional-methods.js"></script>
 </head>
 
 <body>
