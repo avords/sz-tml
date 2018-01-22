@@ -13,7 +13,7 @@ public interface UserService {
      * @param personalLoginInfo
      * @return
      */
-    boolean login(PersonalLoginInfo personalLoginInfo);
+    PersonalLoginInfo login(PersonalLoginInfo personalLoginInfo);
 
     /**
      * 更新个人信息
@@ -42,4 +42,10 @@ public interface UserService {
      * @return
      */
     PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechat_id);
+
+    int getCountByPhone(String phone);
+    
+    PersonalLoginInfo saveSelective(PersonalLoginInfo personalLoginInfo);
+
+    int updateWeiXinByMemberId(Long id, String openId);
 }
