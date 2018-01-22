@@ -23,7 +23,7 @@
             <form action="/user/register" class="data_form" method="post">
                 <input class="required phone" type="text" placeholder="手机号" name="phone"/>
                 <input class="required {account_pass:[6,8]}" type="password" placeholder="输入密码" name="password"/>
-                <input class="{pwd_is_equal:['password']}" type="password" placeholder="再次输入密码" />
+                <input class="{pwd_is_equal:['password']}" type="password" placeholder="再次输入密码" id="pwd"/>
                 <div class="row">
                     <input type="text" class="required valid_input"  placeholder="验证码" name="smsCode"/>
                     <input type="button" class="valid_btn" value="获取验证码">
@@ -37,6 +37,21 @@
         $('.data_form').valid();
         $('.valid_btn').click(function () {
             //验证两次密码是否相等
+            var phone = $('input[name="phone"]').val();
+            var pwd = $('input[name="password"]').val();
+            var pwd1 = $('#pwd').val();
+            if(phone==''){
+                alert('请输入手机号');
+                return false;
+            }
+            if(pwd==''){
+                alert('请输入密码');
+                return false;
+            }
+            if(pwd!=pwd1){
+                alert('两次输入的密码不一致');
+                return false;
+            }
             //发送验证码
             var phone = $('input[name="phone"]').val();
             $.ajax({

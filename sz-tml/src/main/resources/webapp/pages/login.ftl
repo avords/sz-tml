@@ -37,6 +37,16 @@
         $('.data_form').valid();
         $('.valid_btn').click(function () {
             //验证两次密码是否相等
+            var phone = $('input[name="phone"]').val();
+            var pwd = $('input[name="password"]').val();
+            if(phone==''){
+                alert('请输入手机号');
+                return false;
+            }
+            if(pwd==''){
+                alert('请输入密码');
+                return false;
+            }
             //发送验证码
             var phone = $('input[name="phone"]').val();
             $.ajax({
