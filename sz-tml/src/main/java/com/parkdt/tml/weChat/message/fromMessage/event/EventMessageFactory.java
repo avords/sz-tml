@@ -20,29 +20,33 @@ public class EventMessageFactory {
 
         if (event.equals(MessageType.EVENT_TYPE_SUBSCRIBE)) {
 
-            eventMessage = new SubscribeEvent(param);
+            //eventMessage = new SubscribeEvent(param);
+
+            return "欢迎您关注teamlinks立可平台";
         } else if (event.equals(MessageType.EVENT_TYPE_UNSUBSCRIBE)) {
 
-            eventMessage = new UnsubscribeEvent(param);
+            //eventMessage = new UnsubscribeEvent(param);
         } else if (event.equals(MessageType.EVENT_TYPE_LOCATION)) {
 
-            eventMessage = new LocationEvent(param);
+            //eventMessage = new LocationEvent(param);
         } else if (event.equals(MessageType.EVENT_TYPE_CLICK)) {
 
-            eventMessage = new ClickEvent(param);
+            //eventMessage = new ClickEvent(param);
         } else if (event.equals(MessageType.EVENT_TYPE_VIEW)) {
 
-            eventMessage = new ViewEvent(param);
+            //eventMessage = new ViewEvent(param);
         } else if (event.equals(MessageType.EVENT_TYPE_TEMPLATESENDJOBFINISH)) {
 
-            eventMessage = new TemplateSendJobFinish(param);
+            //eventMessage = new TemplateSendJobFinish(param);
         }
 
         System.out.println("opendId = " + param.get("FromUserName"));
 
         eventMessage.setFromUserName(param.get("FromUserName"));
         eventMessage.setToUserName(param.get("ToUserName"));
-        return eventMessage.build();
+        //return eventMessage.build();
+
+        return "";
     }
 
 }
