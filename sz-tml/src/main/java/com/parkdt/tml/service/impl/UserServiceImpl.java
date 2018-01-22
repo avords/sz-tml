@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService {
     public PersonalBaseInfo getPersonalBaseInfoByMemberId(Long memberId) {
         return personalBaseInfoMapper.getByMemberId(memberId);
     }
+
+    @Override
+    public PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechat_id) {
+        return null;
+    }
 }

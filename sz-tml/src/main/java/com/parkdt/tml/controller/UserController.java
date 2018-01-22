@@ -37,6 +37,9 @@ public class UserController extends BaseController{
     
     @RequestMapping("personal")
     public String personal(Model model, HttpServletRequest req) {
+
+        Long memberId = getMemberId();
+
         PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(getMemberId());
         model.addAttribute("personalBaseInfo",personalBaseInfo);
         List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
@@ -45,6 +48,9 @@ public class UserController extends BaseController{
     }
     @RequestMapping("savePersonal")
     public String savePersonal(PersonalBaseInfo personalBaseInfo) {
+
+        Long memberId = getMemberId();
+
         Long teamId = personalBaseInfo.getTeamId();
         if(teamId!=null) {
             TeamBasicInformation teamBasicInformation = teamService.getByTeamId(teamId);
@@ -57,6 +63,9 @@ public class UserController extends BaseController{
     }
     @RequestMapping("info")
     public String infoBind(Model model, HttpServletRequest req) {
+
+        Long memberId = getMemberId();
+
         return "infoBind";
     }
 }

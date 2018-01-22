@@ -50,6 +50,9 @@ public class TaskController extends BaseController{
     
     @RequestMapping("publish")
     public String publish(Model model, HttpServletRequest req) {
+
+        Long memberId = getMemberId();
+
         Map<String, Object> params = new HashMap<String, Object>();
         List<ProjectInformation> projectInformations = projectService.getProjectByParam(params);
         model.addAttribute("projectInformations",projectInformations);
@@ -58,6 +61,9 @@ public class TaskController extends BaseController{
 
     @RequestMapping("enter")
     public String enter(Model model, HttpServletRequest req) {
+
+        Long memberId = getMemberId();
+
         //得到所有领域
         List<SysAreasExpertise> sysAreasExpertises = sysAreasExpertiseService.getAllSysAreasExpertise();
         //得到所有类型
@@ -111,12 +117,16 @@ public class TaskController extends BaseController{
 
     @RequestMapping("detail/{projectDeliveryId}")
     public String taskDetail(Model model, HttpServletRequest req, @PathVariable Long projectDeliveryId) {
+
+        Long memberId = getMemberId();
+
         ProjectDelivery projectDelivery = projectService.getProjectDelivery(projectDeliveryId);
         model.addAttribute("projectDelivery",projectDelivery);
         return "taskEnterDetail";
     }
     @RequestMapping("saveClaime")
     public String saveClaime(ProjectClaimRecord projectClaimRecord,Model model, HttpServletRequest req) {
+
         //判断此人是否认领
         Long memberId=getMemberId();
         projectClaimRecord.setMemberId(memberId);

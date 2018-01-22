@@ -174,4 +174,11 @@
       certification_login_flag = #{certificationLoginFlag,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="getPersonalLoginInfoByOpenId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_personal_login_info
+    where wechat_id = #{wechat_id,jdbcType=VARCHAR}
+  </select>
 </mapper>

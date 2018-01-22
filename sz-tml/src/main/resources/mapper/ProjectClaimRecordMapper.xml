@@ -210,4 +210,13 @@
     WHERE 1=1
     <include refid="Base_Column_Query_List"/>
   </select>
+
+  <select id="queryProjectClaimByMemberId" parameterType="java.lang.Long" resultType="java.util.Map">
+
+    select pct.id,pct.member_id,pct.status,pd.image,pbi.project_name,pbi.project_status from t_project_claim_record pct
+    left join t_project_delivery pd on (pct.project_delivery_id = pd.id)
+    left join t_project_base_information pbi on (pd.project_id = pbi.id)
+    where pct.member_id = #{memberId} order by pct.id desc;;
+
+  </select>
 </mapper>

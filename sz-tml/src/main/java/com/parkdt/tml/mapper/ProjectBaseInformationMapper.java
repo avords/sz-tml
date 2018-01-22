@@ -3,6 +3,9 @@ package com.parkdt.tml.mapper;
 import com.parkdt.tml.domain.ProjectBaseInformation;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface ProjectBaseInformationMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +19,6 @@ public interface ProjectBaseInformationMapper {
     int updateByPrimaryKeySelective(ProjectBaseInformation record);
 
     int updateByPrimaryKey(ProjectBaseInformation record);
+
+    List<Map> queryProjectByMemberId(Long memberId);
 }
