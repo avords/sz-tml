@@ -41,7 +41,7 @@
         </tr>
         <tr>
             <td class="center">${item.projectBaseInformation.projectName}</td>
-            <td>${item.sysTypeInfo.typeName}</td>
+            <td>${item.sysGoodType.typeName}</td>
             <td>${item.cityName}</td>
             <td>认领人</td>
         </tr>
