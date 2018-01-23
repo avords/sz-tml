@@ -35,7 +35,7 @@
     </div>
 <script>
     $(function () {
-        $('.data_form').valid();
+        //$('.data_form').valid();
 
         $('.valid_btn').click(function () {
             //验证两次密码是否相等
