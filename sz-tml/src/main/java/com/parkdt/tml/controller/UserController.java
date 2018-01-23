@@ -149,6 +149,7 @@ public class UserController extends BaseController {
         String openId = getOpenId();
         PersonalLoginInfo userInfo = userService.getPersonalLoginInfoByOpenId(openId);
 
+        logger.info("login:" + openId);
         if (null != userInfo) {
 
             PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(userInfo.getId());
