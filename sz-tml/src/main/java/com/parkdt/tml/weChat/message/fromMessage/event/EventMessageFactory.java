@@ -19,22 +19,16 @@ public class EventMessageFactory {
         System.out.println("event = " + event);
 
         if (event.equals(MessageType.EVENT_TYPE_SUBSCRIBE)) {
-
             eventMessage = new SubscribeEvent(param);
         } else if (event.equals(MessageType.EVENT_TYPE_UNSUBSCRIBE)) {
-
             eventMessage = new UnsubscribeEvent(param);
         } else if (event.equals(MessageType.EVENT_TYPE_LOCATION)) {
-
             eventMessage = new LocationEvent(param);
         } else if (event.equals(MessageType.EVENT_TYPE_CLICK)) {
-
             eventMessage = new ClickEvent(param);
         } else if (event.equals(MessageType.EVENT_TYPE_VIEW)) {
-
             eventMessage = new ViewEvent(param);
         } else if (event.equals(MessageType.EVENT_TYPE_TEMPLATESENDJOBFINISH)) {
-
             eventMessage = new TemplateSendJobFinish(param);
         }
 

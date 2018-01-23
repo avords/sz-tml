@@ -9,6 +9,13 @@ html {
   font-size: 100px;
 }
 
+input[type=button],
+input[type=submit],
+button {
+  -webkit-appearance: none;
+  outline: none
+}
+
 @media screen and (min-width: 375px) {
   html {
     font-size: 117.1875px;
@@ -77,6 +84,7 @@ h1 {
 }
 
 .nav li a {
+  user-select: none;
   color: #fff;
 }
 
@@ -184,7 +192,8 @@ h1 {
 
 .data_form input[type=text],
 .data_form input[type=password],
-.data_form select {
+.data_form select,
+.data_form textarea {
   width: 100%;
   border: 1px solid #bbb;
   border-radius: 4px;
@@ -216,6 +225,14 @@ h1 {
   background: #5b5c60;
 }
 
+.data_form input[type=button].save,
+.data_form input[type=submit].save,
+.data_form button.save {
+  border: 1px solid #bbb;
+  color: #616162;
+  background: #fff;
+}
+
 .data_form .row input {
   display: inline-block;
   width: 46%;
@@ -242,7 +259,7 @@ h1 {
 }
 
 .data_list li>b {
-  font-size: .8em;
+  font-size: 14px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -256,7 +273,7 @@ h1 {
 
 .data_list li .des .info {
   margin-top: .2em;
-  font-size: .2em;
+  font-size: 12px;
   color: #808082;
   flex-grow: 1;
 }
@@ -280,7 +297,7 @@ h1 {
 .data_list li .des .op input[type=button] {
   width: 100%;
   border-radius: 6px;
-  font-size: .6em;
+  font-size: 12px;
   border: none;
   color: #fff;
   margin-top: .2em;
@@ -425,7 +442,7 @@ table.data_list {
   width: 100%;
   border: 1px solid #bbb;
   border-radius: 4px;
-  padding: .2em .6em;
+  padding: 0 .6em;
   margin-bottom: 10px;
   box-sizing: border-box;
   font-size: .8em;
@@ -437,7 +454,8 @@ table.data_list {
   border: none;
   background-color: transparent;
   outline: none;
-  font-size: .9em;
+  font-size: 1em;
+  margin-bottom: 0;
   color: #616162;
 }
 
@@ -457,10 +475,17 @@ table.data_list {
   font-size: .8em;
   color: #fff;
   height: 2em;
-  line-height: 2em;
+  line-height: 1em;
   vertical-align: middle;
   text-align: center;
   display: inline-block;
+}
+
+.data_form .invite input[type=button].border {
+  border-color: #2fa9d7;
+  color: #2fa9d7;
+  background: #fff;
+  width: 100%;
 }
 
 .article .invite input.alt {
@@ -499,4 +524,32 @@ table.data_list {
   padding: .5em 0;
   float: right;
   width: 30%;
+}
+
+.demands {
+  width: 100%;
+}
+
+.demands label {
+  background: #eaeaea;
+  border: 1px solid #bbbbbb;
+  float: left;
+  width: 30%;
+  margin-left: 2%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: .9em;
+  padding: 5px 0;
+  border-radius: 5px;
+  color: #616162;
+}
+
+.demands label.active {
+  background: #2fa9d7;
+  border-color: #2fa9d7;
+  color: #fff;
+}
+
+.demands label input {
+  display: none;
 }
