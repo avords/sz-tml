@@ -3,7 +3,7 @@
 
 <head>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <title>信息绑定</title>
+    <title>用户注册</title>
     <link href="/css/style.css" rel="stylesheet" />
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 
