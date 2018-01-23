@@ -21,8 +21,9 @@
         <div class="container">
             <h1>用户信息绑定</h1>
             <form action="/user/login" class="data_form" method="post">
-                <input class="required phone" type="text" placeholder="手机号" name="phone"/>
-                <input class="required {account_pass:[6,8]}" type="password" placeholder="输入密码" name="password"/>
+                <input type="hidden" name="id" value="${personalBaseInfo.wechatId}"/>
+                <input class="required phone" type="text" placeholder="手机号" name="phone" value="${personalBaseInfo.phone}"/>
+                <input class="required {account_pass:[6,8]}" type="password" placeholder="输入密码" name="password" value="${personalBaseInfo.password}"/>
                 <div class="row">
                     <input type="text" class="required valid_input"  placeholder="验证码" name="smsCode"/>
                     <input type="button" class="valid_btn" value="获取验证码">

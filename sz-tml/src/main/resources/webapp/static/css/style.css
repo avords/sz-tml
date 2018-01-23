@@ -32,7 +32,7 @@ body {
   font-family: 微软雅黑, Arial;
   color: #929292;
   font-size: 0.16rem;
-  background: #f3f3f3;
+  background: #FFFFFF;
   overflow-x: hidden;
   max-width: 480px;
   margin: 0 auto;
@@ -98,6 +98,7 @@ h1 {
 
 .about,
 .platform {
+  font-size: 0.12rem;
   text-align: center;
   margin: 20px auto 20px;
   padding-bottom: 10px;
@@ -111,7 +112,7 @@ h1 {
 
 .about h2,
 .platform h2 {
-  font-size: 0.22rem;
+  font-size: 0.16rem;
   font-weight: normal;
   color: #393a3f;
   padding: 15px 0px;

@@ -6,15 +6,8 @@ import com.parkdt.tml.service.UserService;
 import com.parkdt.tml.weChat.WeChatService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -22,9 +15,9 @@ import java.io.IOException;
 /**
  * Created by Administrator on 2018/1/22.
  */
-@Order(1)
-//重点
-@WebFilter(filterName = "loginFilter", urlPatterns = {"/user/*","/biz/*","/links/*","/task/*"})
+//@Order(1)
+////重点
+//@WebFilter(filterName = "loginFilter", urlPatterns = {"/user/*","/biz/*","/links/*","/task/*"})
 public class LoginFilter implements Filter {
     
     @Autowired

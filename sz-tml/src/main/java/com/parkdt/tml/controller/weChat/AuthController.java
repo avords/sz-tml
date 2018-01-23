@@ -77,4 +77,15 @@ public class AuthController {
         System.out.println("publish : " + url);
         return "redirect:" + url;
     }
+
+    @RequestMapping("login")
+    public String login() {
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + WeChatConfig.getAppid() + "&redirect_uri=";
+        String redirect_uri = WeChatConfig.getWebUrl() + "user/login";
+        url += redirect_uri;
+        url += "&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect";
+        System.out.println();
+        System.out.println("publish : " + url);
+        return "redirect:" + url;
+    }
 }

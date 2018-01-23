@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechat_id) {
-        return null;
+    public PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechatId) {
+        return personalLoginInfoMapper.getPersonalLoginInfoByOpenId(wechatId);
     }
 
     @Override
