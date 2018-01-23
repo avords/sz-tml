@@ -2,11 +2,12 @@ package com.parkdt.tml.controller;
 
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
-import com.parkdt.tml.domain.ProjectInformation;
 import com.parkdt.tml.domain.SysAreasExpertise;
+import com.parkdt.tml.domain.SysCity;
 import com.parkdt.tml.domain.SysGoodType;
 import com.parkdt.tml.service.ProjectService;
 import com.parkdt.tml.service.SysAreasExpertiseService;
+import com.parkdt.tml.service.SysCityService;
 import com.parkdt.tml.service.SysGoodTypeService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -19,9 +20,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +45,8 @@ public class TaskController extends BaseController{
     private SysGoodTypeService sysGoodTypeService;
     @Autowired
     private SysAreasExpertiseService sysAreasExpertiseService;
+    @Autowired
+    private SysCityService sysCityService;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -50,20 +55,60 @@ public class TaskController extends BaseController{
     
     @RequestMapping("publish")
     public String publish(Model model, HttpServletRequest req) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("memberId",getMemberId());
+        //得到所有类型
+        List<SysGoodType> sysGoodTypes = sysGoodTypeService.getAllSysGoodType();
+        List<SysCity> provinces = sysCityService.getAllProvince();
+        List<SysCity> citys = new ArrayList<>();
+        model.addAttribute("sysGoodTypes",sysGoodTypes);
+        model.addAttribute("provinces",provinces);
+        model.addAttribute("citys",citys);
+        List<Map> projectInformations = new ArrayList<>();
+        try {
+            Long designTypeId = getRelType(req.getParameter("designTypeId"),Long.class);
+            Long provinceId = getRelType(req.getParameter("provinceId"),Long.class);
+            Long cityId = getRelType(req.getParameter("cityId"),Long.class);
+            if(provinceId!=null){
+                citys = sysCityService.getAllCityByProvinceId(provinceId);
+                model.addAttribute("citys",citys);
+            }
+            String projectName = req.getParameter("projectName");
+            if(designTypeId!=null){
+                params.put("designTypeId",designTypeId);
+            }
+            if(StringUtils.isNotBlank(projectName)){
+                params.put("projectName",projectName);
+            }
+            if(provinceId!=null){
+                params.put("provinceId",provinceId);
+            }
+            if(provinceId!=null){
+                params.put("cityId",cityId);
+            }
+            
+            projectInformations = projectService.queryProjectList(params);
+            
+            model.addAttribute("designTypeId", StringUtils.isNotBlank(req.getParameter("designTypeId"))?Long.valueOf(req.getParameter("designTypeId")):null);
+            model.addAttribute("projectName",req.getParameter("projectName"));
+            model.addAttribute("provinceId",provinceId);
+            model.addAttribute("cityId",cityId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        Long memberId = getMemberId();
-
-        Map<String, Object> params = new HashMap<String, Object>();
-        List<ProjectInformation> projectInformations = projectService.getProjectByParam(params);
         model.addAttribute("projectInformations",projectInformations);
         return "taskPublishList";
+    }
+    @RequestMapping("createPublish")
+    public String createPublish(Model model, HttpServletRequest req) {
+
+        Long memberId = getMemberId();
+        return "createPublish";
     }
 
     @RequestMapping("enter")
     public String enter(Model model, HttpServletRequest req) {
-
-        Long memberId = getMemberId();
-
         //得到所有领域
         List<SysAreasExpertise> sysAreasExpertises = sysAreasExpertiseService.getAllSysAreasExpertise();
         //得到所有类型
@@ -139,6 +184,16 @@ public class TaskController extends BaseController{
         }
         return "redirect:/task/detail/"+projectClaimRecord.getProjectDeliveryId();
     }
+    @RequestMapping("getCitys")
+    @ResponseBody
+    public List<SysCity> getCitys(ProjectClaimRecord projectClaimRecord,Model model, HttpServletRequest req) {
+        String provinceIdStr = req.getParameter("provinceId");
+        if(StringUtils.isBlank(provinceIdStr)){
+            return new ArrayList<>();
+        }
+        return sysCityService.getAllCityByProvinceId(Long.valueOf(provinceIdStr));
+    }
+    
     private <T> T getRelType(String str,Class<T> c) throws Exception {
         if(str==null||str.trim().equals("")){
             return null;

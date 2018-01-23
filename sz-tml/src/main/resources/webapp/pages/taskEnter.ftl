@@ -46,9 +46,7 @@
                             </#if>
                         </#list>
                     </select>
-                    <div class="row">
-                        <input type="text" placeholder="导入项目方" name="memberName" value="${memberName}"/>
-                    </div>
+                    <input type="text" placeholder="导入项目方" name="memberName" value="${memberName}"/>
                     <div class="row">
                         <input type="text" placeholder="项目产值" name="startOutputValue" value="${startOutputValue}"/>
                         <span class="sp">~</span>

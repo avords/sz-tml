@@ -46,7 +46,7 @@
             <property  name="enableSubPackages"  value="true"/>
         </javaClientGenerator>
         
-        <table schema="general" tableName="t_personal_verification_code_record" domainObjectName="PersonalVerificationCodeRecord"
+        <table schema="general" tableName="t_sys_city" domainObjectName="sysCity"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
             <property name="useActualColumnNames" value="false"/>

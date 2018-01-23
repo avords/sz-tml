@@ -24,5 +24,7 @@ public interface ProjectInformationMapper {
     List<ProjectInformation> getProjectByParam(Map<String, Object> params);
     
     List<Map> queryBySql(Map<String, Object> params);
+    
+    List<Map> queryProjectList(Map<String, Object> params);
 
 }

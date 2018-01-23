@@ -113,4 +113,9 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Map> queryProjectClaimByMemberId(Long memberId) {
         return projectClaimRecordMapper.queryProjectClaimByMemberId(memberId);
     }
+
+    @Override
+    public List<Map> queryProjectList(Map params) {
+        return projectInformationMapper.queryProjectList(params);
+    }
 }

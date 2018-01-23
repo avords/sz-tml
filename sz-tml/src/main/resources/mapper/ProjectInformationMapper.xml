@@ -550,5 +550,53 @@
     ${sql}
   </select>
 
+  <select id="queryProjectList" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT
+    c.id,
+    c.project_name,
+    a.detailed_address,
+    a.put_amount,
+    c.project_status,
+    CASE WHEN e.id is not NULL THEN 1 ELSE 0 END AS is_top,
+    b.type_name,
+    a.province_name,
+    a.city_name,
+    pd.claime_num
+    FROM
+    t_project_information AS a
+    LEFT JOIN t_project_base_information AS c ON (a.project_base_id = c.id)
+    LEFT JOIN t_sys_good_type AS b ON (a.design_type_id = b.id)
+    LEFT JOIN t_project_importer_info AS d ON c.member_id = d.member_id
+    LEFT JOIN t_project_top AS e ON a.project_base_id = e.project_id AND e.type = 2 and e.member_id=#{memberId}  and e.is_del=0
 
+    left join t_project_delivery pd on pd.project_id = a.project_base_id and pd.type=0
+    where 1=1 and c.is_del = 0
+    AND d.member_id=#{memberId}
+    <if test="status != null and status != -1">
+      and a.project_status = #{status}
+    </if>
+    <if test="projectName != null">
+      and c.project_name like CONCAT('%',#{projectName},'%')
+    </if>
+    <if test="provinceId != null and provinceId != -1">
+      and a.province_id=#{provinceId}
+    </if>
+    <if test="cityId != null and cityId != -1">
+      and a.city_id =#{cityId}
+    </if>
+    <if test="acquisitionTypeId != null and acquisitionTypeId != -1">
+      and a.acquisition_type_id=#{acquisitionTypeId}
+    </if>
+    <if test="sourceId != null and sourceId != -1">
+      and a.source_id=#{sourceId}
+    </if>
+    <if test="projectStatus != null and projectStatus != -1">
+      and c.project_status=#{projectStatus}
+    </if>
+
+    <if test="designTypeId != -1 and designTypeId != null">
+      and b.id=#{designTypeId}
+    </if>
+    order by c.id desc
+  </select>
 </mapper>

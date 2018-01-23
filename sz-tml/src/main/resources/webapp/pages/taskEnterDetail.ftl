@@ -63,7 +63,7 @@
                 </div>
                 <p class="title">工作计划</p>
                 <div class="plane">
-                    <textarea cols="30" rows="10" placeholder="请输入报名说明..." name="workPlan"></textarea>
+                    <textarea cols="30" rows="5" placeholder="请输入报名说明..." name="workPlan"></textarea>
                 </div>
                 <div class="row">
                     <input type="submit" value="认领"/>
