@@ -51,8 +51,8 @@ public interface UserService {
     int updatePersonalLoginInfo(PersonalLoginInfo personalLoginInfo);
 
     int getCountByPhone(String phone);
-    
-    PersonalLoginInfo saveSelective(PersonalLoginInfo personalLoginInfo);
+
+    int saveSelective(PersonalLoginInfo personalLoginInfo);
 
     int updateWeiXinByMemberId(Long id, String openId);
 }

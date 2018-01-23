@@ -79,10 +79,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PersonalLoginInfo saveSelective(PersonalLoginInfo personalLoginInfo) {
-        int id = personalLoginInfoMapper.insertSelective(personalLoginInfo);
-        personalLoginInfo.setId((long) id);
-        return personalLoginInfo;
+    public int saveSelective(PersonalLoginInfo personalLoginInfo) {
+        int result = personalLoginInfoMapper.insertSelective(personalLoginInfo);
+        return result;
     }
 
     @Override

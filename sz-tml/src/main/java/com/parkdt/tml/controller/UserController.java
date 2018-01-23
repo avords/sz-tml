@@ -118,26 +118,30 @@ public class UserController extends BaseController {
                     personalLoginInfo.setWechatId(personalLoginInfo.getWechatId());
                     personalLoginInfo.setPhone(personalLoginInfo.getPhone());
                     personalLoginInfo.setRegistrationTime(new Date());
-                    personalLoginInfo = userService.saveSelective(personalLoginInfo);
+                    if (userService.saveSelective(personalLoginInfo) > 0) {
+                        personalLoginInfo = userService.getPersonalLoginInfoByOpenId(personalLoginInfo.getWechatId());
+                        if (personalLoginInfo.getId() != 0) {
+                            PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(personalLoginInfo.getId());
+                            if (personalBaseInfo == null) {
+                                personalBaseInfo = new PersonalBaseInfo();
+                                personalBaseInfo.setBirthday(new Date());
+                                personalBaseInfo.setMemberId(personalLoginInfo.getId());
+                            }
+                            model.addAttribute("personalBaseInfo", personalBaseInfo);
+                            List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
+                            model.addAttribute("teamBasicInformations", teamBasicInformations);
 
-                    if (personalLoginInfo.getId() != 0) {
-                        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(personalLoginInfo.getId());
-                        if (personalBaseInfo == null) {
-                            personalBaseInfo = new PersonalBaseInfo();
-                            personalBaseInfo.setBirthday(new Date());
-                            personalBaseInfo.setMemberId(personalLoginInfo.getId());
+                            //注册成功
+                            return "personal";
                         }
-                        model.addAttribute("personalBaseInfo", personalBaseInfo);
-                        List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
-                        model.addAttribute("teamBasicInformations", teamBasicInformations);
-
-                        //注册成功
-                        return "personal";
                     }
                 }
 
             }
-        } catch (Exception e) {
+        } catch (
+                Exception e)
+
+        {
             logger.error(e.getMessage());
         }
         return "register";
