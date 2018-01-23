@@ -95,7 +95,7 @@ public class UserController extends BaseController{
                 personalLoginInfo.setWechatId(getOpenId());
                 personalLoginInfo = userService.saveSelective(personalLoginInfo);
                 //注册成功
-                return "redirect:";
+                return "redirect:/biz/publish";
             }
 
         } catch (Exception e) {
@@ -124,7 +124,7 @@ public class UserController extends BaseController{
                 if(personalLoginInfo1!=null){
                     //更新微信id
                     userService.updateWeiXinByMemberId(personalLoginInfo1.getId(),getOpenId());
-                    return "redirect:";
+                    return "redirect:/biz/publish";
                 }
             }
 
