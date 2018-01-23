@@ -5,7 +5,6 @@ import com.parkdt.tml.service.ProjectService;
 import com.parkdt.tml.vo.ProjectBaseInformationVo;
 import com.parkdt.tml.vo.ProjectClaimRecordVo;
 import com.parkdt.tml.vo.ProjectDeliveryVo;
-import com.parkdt.tml.weChat.WeChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +34,7 @@ public class BizController extends BaseController {
 
         List<ProjectBaseInformationVo> projectDeliverys = new ArrayList<>();
         //我发布的
-        List<Map> deliveryMap = projectService.queryProjectByMemberId(75L);
+        List<Map> deliveryMap = projectService.queryProjectByMemberId(memberId);
 
         for (Map<String, Object> m : deliveryMap) {
 
@@ -68,7 +67,7 @@ public class BizController extends BaseController {
         Long memberId = getMemberId();
 
         //我参与的
-        List<Map> ClaimMap = projectService.queryProjectClaimByMemberId(80L);
+        List<Map> ClaimMap = projectService.queryProjectClaimByMemberId(memberId);
 
         List<ProjectClaimRecordVo> claimRecordVos = new ArrayList<>();
 
