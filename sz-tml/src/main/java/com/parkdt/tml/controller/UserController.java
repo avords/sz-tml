@@ -75,7 +75,7 @@ public class UserController extends BaseController {
             }
         }
         userService.updatePersonInfo(personalBaseInfo);
-        return "redirect:/user/personal";
+        return "redirect:/user/login";
     }
 
     @RequestMapping("register")
