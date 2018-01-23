@@ -10,7 +10,7 @@
 
 <body>
 <header>
-    <img class="banner" src="/images/banner1.jpg" />
+    <img class="banner" src="/images/banner2.jpg" />
 </header>
 <div class="wrapper">
     <div class="container">
