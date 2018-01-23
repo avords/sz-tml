@@ -51,18 +51,6 @@ public class UserController extends BaseController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
     }
 
-//    @RequestMapping("personal")
-//    public String personal(Model model, HttpServletRequest req) {
-//
-//        Long memberId = getMemberId();
-//
-//        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(getMemberId());
-//        model.addAttribute("personalBaseInfo", personalBaseInfo);
-//        List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
-//        model.addAttribute("teamBasicInformations", teamBasicInformations);
-//        return "personal";
-//    }
-
     @RequestMapping("savePersonal")
     public String savePersonal(Model model, HttpServletRequest req, PersonalBaseInfo personalBaseInfo) {
 
@@ -75,7 +63,8 @@ public class UserController extends BaseController {
             }
         }
         userService.updatePersonInfo(personalBaseInfo);
-        return "redirect:/user/login";
+
+        return "redirect:/auth/taskEnter";
     }
 
     @RequestMapping("register")
@@ -131,7 +120,6 @@ public class UserController extends BaseController {
                             List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
                             model.addAttribute("teamBasicInformations", teamBasicInformations);
 
-                            //注册成功
                             return "personal";
                         }
                     }
@@ -171,34 +159,6 @@ public class UserController extends BaseController {
             model.addAttribute("personalLoginInfo", personalLoginInfo1);
             return "register";
         }
-
-//        if (personalLoginInfo == null || StringUtils.isBlank(personalLoginInfo.getPhone())) {
-//            return "login";
-//        }
-//        try {
-//            //判断手机号是否存在
-//            int count = userService.getCountByPhone(personalLoginInfo.getPhone());
-//            if (count == 0) {
-//                return "redirect:/user/register";
-//            }
-//            //判断验证码是否正确
-//            String smsCode = req.getParameter("smsCode");
-//            PersonalVerificationCodeRecord personalVerificationCodeRecord = personalVerificationCodeRecordService.queryValidateCodeByPhoneAndType(personalLoginInfo.getPhone(), (short) 1);
-//            if (personalVerificationCodeRecord != null && personalVerificationCodeRecord.getCode().equals(smsCode)) {
-//                String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
-//                personalLoginInfo.setPassword(password);
-//                PersonalLoginInfo personalLoginInfo1 = userService.login(personalLoginInfo);
-//                if (personalLoginInfo1 != null) {
-//                    //更新微信id
-//                    userService.updateWeiXinByMemberId(personalLoginInfo1.getId(), getOpenId());
-//                    return "redirect:/biz/publish";
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//            logger.error(e.getMessage());
-//        }
-//        return "login";
     }
 
     @RequestMapping("sendSms")
