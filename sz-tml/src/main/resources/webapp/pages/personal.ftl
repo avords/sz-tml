@@ -24,7 +24,7 @@
         <div class="container">
             <form action="/user/savePersonal" class="data_form" id="form" method="post">
                 <input type="hidden" name="id" value="${personalBaseInfo.id}"/>
-                <input type="text" name="memberId" value="${personalBaseInfo.memberId}"/>
+                <input type="hidden" name="memberId" value="${personalBaseInfo.memberId}"/>
                 <input type="text" placeholder="请输入姓名" name="name" value="${personalBaseInfo.name}"/>
                 <input type="text" placeholder="请输入联系电话" name="phone" value="${personalBaseInfo.phone}"/>
                 <input type="date"  placeholder="请输入生日" name="birthday" value="${personalBaseInfo.birthday?string("yyyy-MM-dd")}"/>
