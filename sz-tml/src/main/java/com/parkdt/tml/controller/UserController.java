@@ -103,6 +103,7 @@ public class UserController extends BaseController {
                         PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(personalLoginInfo.getId());
                         if (personalBaseInfo == null) {
                             personalBaseInfo = new PersonalBaseInfo();
+                            personalBaseInfo.setBirthday(new Date());
                             personalBaseInfo.setMemberId(personalLoginInfo.getId());
                         }
                         model.addAttribute("personalBaseInfo", personalBaseInfo);
@@ -123,6 +124,7 @@ public class UserController extends BaseController {
                         PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(personalLoginInfo.getId());
                         if (personalBaseInfo == null) {
                             personalBaseInfo = new PersonalBaseInfo();
+                            personalBaseInfo.setBirthday(new Date());
                             personalBaseInfo.setMemberId(personalLoginInfo.getId());
                         }
                         model.addAttribute("personalBaseInfo", personalBaseInfo);
@@ -152,6 +154,7 @@ public class UserController extends BaseController {
             PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(userInfo.getId());
             if (personalBaseInfo == null) {
                 personalBaseInfo = new PersonalBaseInfo();
+                personalBaseInfo.setBirthday(new Date());
                 personalBaseInfo.setMemberId(userInfo.getId());
             }
             model.addAttribute("personalBaseInfo", personalBaseInfo);
@@ -165,7 +168,6 @@ public class UserController extends BaseController {
             model.addAttribute("personalLoginInfo", personalLoginInfo1);
             return "register";
         }
-
 
 //        if (personalLoginInfo == null || StringUtils.isBlank(personalLoginInfo.getPhone())) {
 //            return "login";

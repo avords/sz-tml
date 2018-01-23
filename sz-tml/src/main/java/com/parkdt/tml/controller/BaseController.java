@@ -45,6 +45,6 @@ public class BaseController {
             return openId;
         }
 
-        return "omd-50nJHn9FqFG2XFHnbQF8bGn8";
+        return "oB-j81E92M266jbfTxk3dHiadwj8";
     }
 }
