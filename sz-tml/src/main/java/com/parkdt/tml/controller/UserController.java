@@ -137,11 +137,9 @@ public class UserController extends BaseController {
                     }
                 }
 
+                return "redirect:/auth/login";
             }
-        } catch (
-                Exception e)
-
-        {
+        } catch (Exception e) {
             logger.error(e.getMessage());
         }
         return "register";
