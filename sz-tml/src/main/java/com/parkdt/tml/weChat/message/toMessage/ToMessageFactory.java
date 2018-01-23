@@ -20,11 +20,13 @@ public class ToMessageFactory {
         ToTextMessage textMessage = new ToTextMessage();
 
         StringBuffer res = new StringBuffer();
-        res.append("1.可以登录单店铺，多店铺，圈子。登录成功后会自动推送订单；");
+        //res.append("1.可以登录单店铺，多店铺，圈子。登录成功后会自动推送订单；");
 //		res.append("/r/n");
 //		res.append("登录成功后，回复对应数字可以确认订单");
 //		res.append("/r/n");
-        res.append("2.可以点击消息进入收单台，确认订单。");
+        //res.append("2.可以点击消息进入收单台，确认订单。");
+
+        res.append("感谢您关注“teamlinks立可平台”，参与资源中心签到活动点此进入 点此进入加超链接，地址http://wei.yesaaa.cn/app/index.php?i=334&c=entry&rid=903&do=app_qd&m=meepo_xianchang");
         textMessage.setContent(res.toString());
 
         return textMessage(fromMessage, textMessage);
