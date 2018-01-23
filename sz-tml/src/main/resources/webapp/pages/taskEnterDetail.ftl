@@ -79,6 +79,30 @@
             $(this).removeClass('alt');
             $('input[name="type"]').val($(this).attr('data-val'));
         });
+        //倒计时
+        function countdown(date) {
+            var a = new Date(Date.parse(date.replace(/-/g,"/"))).getTime();
+            var b = new Date().getTime();
+            if(a<b){
+                 $('.countdown').html('截止时间：已截止');
+                 return;
+            }else{
+                var time = parseInt((a-b)/1000);
+                autoTask = setInterval(function(){
+                    time--;
+                    if(time>0){
+                        var days = parseInt(time / (60 * 60 * 24));
+                        var hours = parseInt((time % (60 * 60 * 24)) / (60 * 60));
+                        var minutes = parseInt((time % (60 * 60)) /60);
+                        var seconds = (time % 60);
+                        $('.countdown').html('截止时间：'+days+' 天 '+hours+' 小时 '+minutes+' 分 '+seconds+' 秒');
+                    }else{
+                        $('.countdown').html('截止时间：已截止');
+                    }
+                },1000);
+            }
+        }
+        countdown('${projectDelivery.planEndTime?string("yyyy-MM-dd")}');
     });
 </script>
 </body>
