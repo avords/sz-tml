@@ -2,9 +2,8 @@ package com.parkdt.tml.weChat;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.parkdt.tml.controller.TaskController;
-import com.parkdt.tml.taskService.WeChatTokenService;
 import com.parkdt.tml.config.WeChatConfig;
+import com.parkdt.tml.taskService.WeChatTokenService;
 import com.parkdt.tml.utils.HttpPostClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +78,7 @@ public class MyMenu {
         JSONObject recourse = new JSONObject();
         recourse.put("type", "view");
         recourse.put("name", "资源中心");
-        recourse.put("url", WeChatConfig.getWebUrl() + "links/Resources");
+        recourse.put("url", WeChatConfig.getWebUrl() + "auth/taskEnter");
         likeSubMenuArray.add(recourse);
 
         JSONObject platform = new JSONObject();

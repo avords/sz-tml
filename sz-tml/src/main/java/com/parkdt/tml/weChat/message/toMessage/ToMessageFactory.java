@@ -26,7 +26,9 @@ public class ToMessageFactory {
 //		res.append("/r/n");
         //res.append("2.可以点击消息进入收单台，确认订单。");
 
-        res.append("感谢关注\"teamlinks立可平台\",参与资源中心签到活动<a href=\"http://wei.yesaaa.cn/app/index.php?i=334&c=entry&rid=903&do=app_qd&m=meepo_xianchang\">点此进入</a>");
+        res.append("感谢关注\"teamlinks立可平台\",参与资源中心签到活动");
+        res.append("\r\n");
+        res.append("<a href=\"http://wei.yesaaa.cn/app/index.php?i=334&c=entry&rid=903&do=app_qd&m=meepo_xianchang\">点此进入</a>");
         textMessage.setContent(res.toString());
 
         return textMessage(fromMessage, textMessage);
