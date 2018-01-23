@@ -1,8 +1,10 @@
 package com.parkdt.tml.filter;
 
+import com.parkdt.tml.config.WeChatConfig;
 import com.parkdt.tml.domain.PersonalLoginInfo;
 import com.parkdt.tml.service.UserService;
 import com.parkdt.tml.weChat.WeChatService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 
@@ -47,6 +49,15 @@ public class LoginFilter implements Filter {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             String uri = request.getRequestURI();
+            String code = request.getParameter("code");
+            if(StringUtils.isBlank(code)){
+                String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + WeChatConfig.getAppid() + "&redirect_uri=";
+                String redirect_uri = WeChatConfig.getWebUrl() + request.getRequestURI();
+                url += redirect_uri;
+                url += "&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect";
+                response.sendRedirect(url);
+                return;
+            }
             if(!isExcludes(uri)) {//如果不排除
                 String openId = weChatService.getOpenId(request.getParameter("code"));
                 PersonalLoginInfo personalLoginInfo = userService.getPersonalLoginInfoByOpenId(openId);
