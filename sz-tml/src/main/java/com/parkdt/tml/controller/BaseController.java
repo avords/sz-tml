@@ -9,7 +9,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by Administrator on 2018/1/19.
@@ -30,9 +29,8 @@ public class BaseController {
             PersonalLoginInfo user = userService.getPersonalLoginInfoByOpenId(openId);
             return user == null ? 0L : user.getId();
         }
-
         //测试
-        return 76L;
+        return 0L;
     }
 
     public String getOpenId() {
