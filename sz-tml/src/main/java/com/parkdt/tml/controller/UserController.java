@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -49,24 +51,23 @@ public class UserController extends BaseController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
     }
 
-    @RequestMapping("personal")
-    public String personal(Model model, HttpServletRequest req) {
-
-        Long memberId = getMemberId();
-
-        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(getMemberId());
-        model.addAttribute("personalBaseInfo", personalBaseInfo);
-        List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
-        model.addAttribute("teamBasicInformations", teamBasicInformations);
-        return "personal";
-    }
+//    @RequestMapping("personal")
+//    public String personal(Model model, HttpServletRequest req) {
+//
+//        Long memberId = getMemberId();
+//
+//        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(getMemberId());
+//        model.addAttribute("personalBaseInfo", personalBaseInfo);
+//        List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
+//        model.addAttribute("teamBasicInformations", teamBasicInformations);
+//        return "personal";
+//    }
 
     @RequestMapping("savePersonal")
-    public String savePersonal(PersonalBaseInfo personalBaseInfo) {
-
-        Long memberId = getMemberId();
+    public String savePersonal(Model model, HttpServletRequest req, PersonalBaseInfo personalBaseInfo) {
 
         Long teamId = personalBaseInfo.getTeamId();
+
         if (teamId != null) {
             TeamBasicInformation teamBasicInformation = teamService.getByTeamId(teamId);
             if (teamBasicInformation != null) {
@@ -83,23 +84,57 @@ public class UserController extends BaseController {
             return "register";
         }
         try {
-            //判断手机号是否存在
-            int count = userService.getCountByPhone(personalLoginInfo.getPhone());
-            if (count > 0) {
-                return "redirect:/user/login";
-            }
             //判断验证码是否正确
             String smsCode = req.getParameter("smsCode");
             PersonalVerificationCodeRecord personalVerificationCodeRecord = personalVerificationCodeRecordService.queryValidateCodeByPhoneAndType(personalLoginInfo.getPhone(), (short) 2);
             if (personalVerificationCodeRecord != null && personalVerificationCodeRecord.getCode().equals(smsCode)) {
-                String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
-                personalLoginInfo.setPassword(password);
-                personalLoginInfo.setWechatId(getOpenId());
-                personalLoginInfo = userService.saveSelective(personalLoginInfo);
-                //注册成功
-                return "redirect:/biz/publish";
-            }
 
+                //判断手机号是否存在
+                List<PersonalLoginInfo> infoExists = userService.getPersonalLoginInfoByPhone(personalLoginInfo.getPhone());
+
+                if (!CollectionUtils.isEmpty(infoExists)) {
+
+                    personalLoginInfo = infoExists.get(0);
+
+                    int result = userService.updatePersonalLoginInfo(personalLoginInfo);
+
+                    if (result > 0) {
+
+                        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(personalLoginInfo.getId());
+                        if (personalBaseInfo == null) {
+                            personalBaseInfo = new PersonalBaseInfo();
+                            personalBaseInfo.setMemberId(personalLoginInfo.getId());
+                        }
+                        model.addAttribute("personalBaseInfo", personalBaseInfo);
+                        List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
+                        model.addAttribute("teamBasicInformations", teamBasicInformations);
+
+                        return "personal";
+                    }
+                } else {
+                    String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
+                    personalLoginInfo.setPassword(password);
+                    personalLoginInfo.setWechatId(personalLoginInfo.getWechatId());
+                    personalLoginInfo.setPhone(personalLoginInfo.getPhone());
+                    personalLoginInfo.setRegistrationTime(new Date());
+                    personalLoginInfo = userService.saveSelective(personalLoginInfo);
+
+                    if (personalLoginInfo.getId() != 0) {
+                        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(personalLoginInfo.getId());
+                        if (personalBaseInfo == null) {
+                            personalBaseInfo = new PersonalBaseInfo();
+                            personalBaseInfo.setMemberId(personalLoginInfo.getId());
+                        }
+                        model.addAttribute("personalBaseInfo", personalBaseInfo);
+                        List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
+                        model.addAttribute("teamBasicInformations", teamBasicInformations);
+
+                        //注册成功
+                        return "personal";
+                    }
+                }
+
+            }
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
@@ -115,6 +150,10 @@ public class UserController extends BaseController {
         if (null != userInfo) {
 
             PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(userInfo.getId());
+            if (personalBaseInfo == null) {
+                personalBaseInfo = new PersonalBaseInfo();
+                personalBaseInfo.setMemberId(userInfo.getId());
+            }
             model.addAttribute("personalBaseInfo", personalBaseInfo);
             List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
             model.addAttribute("teamBasicInformations", teamBasicInformations);
@@ -124,7 +163,7 @@ public class UserController extends BaseController {
             PersonalLoginInfo personalLoginInfo1 = new PersonalLoginInfo();
             personalLoginInfo1.setWechatId(openId);
             model.addAttribute("personalLoginInfo", personalLoginInfo1);
-            return "login";
+            return "register";
         }
 
 

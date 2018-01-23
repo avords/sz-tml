@@ -27,10 +27,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public PersonalLoginInfo login(PersonalLoginInfo personalLoginInfo) {
         Map params = new HashMap();
-        params.put("phone",personalLoginInfo.getPhone());
-        params.put("password",personalLoginInfo.getPassword());
+        params.put("phone", personalLoginInfo.getPhone());
+        params.put("password", personalLoginInfo.getPassword());
         List<PersonalLoginInfo> personalLoginInfoList = personalLoginInfoMapper.queryByParams(params);
-        if(personalLoginInfoList!=null&&personalLoginInfoList.size()>0){
+        if (personalLoginInfoList != null && personalLoginInfoList.size() > 0) {
             return personalLoginInfoList.get(0);
         }
         return null;
@@ -38,9 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updatePersonInfo(PersonalBaseInfo personalBaseInfo) {
-        if(personalBaseInfo.getId()==null){
+        if (personalBaseInfo.getId() == null) {
             personalBaseInfoMapper.insertSelective(personalBaseInfo);
-        }else {
+        } else {
             personalBaseInfoMapper.updateByPrimaryKeySelective(personalBaseInfo);
         }
     }
@@ -61,16 +61,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<PersonalLoginInfo> getPersonalLoginInfoByPhone(String phone) {
+        return personalLoginInfoMapper.getPersonalLoginInfoByPhone(phone);
+    }
+
+    @Override
+    public int updatePersonalLoginInfo(PersonalLoginInfo personalLoginInfo) {
+        return personalLoginInfoMapper.updateByPrimaryKeySelective(personalLoginInfo);
+    }
+
+    @Override
     public int getCountByPhone(String phone) {
         Map params = new HashMap();
-        params.put("phone",phone);
+        params.put("phone", phone);
         Integer count = personalLoginInfoMapper.getCountByParams(params);
         return count;
     }
 
     @Override
     public PersonalLoginInfo saveSelective(PersonalLoginInfo personalLoginInfo) {
-        personalLoginInfoMapper.insertSelective(personalLoginInfo);
+        int id = personalLoginInfoMapper.insertSelective(personalLoginInfo);
+        personalLoginInfo.setId((long) id);
         return personalLoginInfo;
     }
 

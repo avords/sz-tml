@@ -58,13 +58,13 @@ public class MyMenu {
         JSONObject infoBind = new JSONObject();
         infoBind.put("type", "view");
         infoBind.put("name", "信息绑定");
-        infoBind.put("url", WeChatConfig.getWebUrl() + "auth/personal");
+        infoBind.put("url", WeChatConfig.getWebUrl() + "auth/login");
         personalSubMenuArray.add(infoBind);
 
         JSONObject personalInfo = new JSONObject();
         personalInfo.put("type", "view");
         personalInfo.put("name", "个人信息");
-        personalInfo.put("url", WeChatConfig.getWebUrl() + "auth/info");
+        personalInfo.put("url", WeChatConfig.getWebUrl() + "auth/login");
         personalSubMenuArray.add(personalInfo);
 
         personal.put("sub_button", personalSubMenuArray);

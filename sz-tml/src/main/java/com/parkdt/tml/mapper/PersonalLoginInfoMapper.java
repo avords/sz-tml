@@ -22,6 +22,8 @@ public interface PersonalLoginInfoMapper {
 
     PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechat_id);
 
+    List<PersonalLoginInfo> getPersonalLoginInfoByPhone(String phone);
+
     Integer getCountByParams(Map params);
 
     List<PersonalLoginInfo> queryByParams(Map params);

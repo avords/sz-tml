@@ -4,6 +4,8 @@ import com.parkdt.tml.domain.PersonalBaseInfo;
 import com.parkdt.tml.domain.PersonalLoginInfo;
 import com.parkdt.tml.domain.TeamMember;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/1/11.
  */
@@ -42,6 +44,11 @@ public interface UserService {
      * @return
      */
     PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechat_id);
+
+    List<PersonalLoginInfo> getPersonalLoginInfoByPhone(String phone);
+
+
+    int updatePersonalLoginInfo(PersonalLoginInfo personalLoginInfo);
 
     int getCountByPhone(String phone);
     

@@ -21,6 +21,7 @@
         <div class="container">
             <h1>用户注册</h1>
             <form action="/user/register" class="data_form" method="post">
+                <input type="hidden" name="wechatId" value="${personalLoginInfo.wechatId}"/>
                 <input class="required phone" type="text" placeholder="手机号" name="phone"/>
                 <input class="required {account_pass:[6,8]}" type="password" placeholder="输入密码" name="password"/>
                 <input class="{pwd_is_equal:['password']}" type="password" placeholder="再次输入密码" id="pwd"/>
@@ -35,6 +36,7 @@
 <script>
     $(function () {
         $('.data_form').valid();
+
         $('.valid_btn').click(function () {
             //验证两次密码是否相等
             var phone = $('input[name="phone"]').val();
@@ -74,6 +76,8 @@
             autoTask : null,
             downTime : true
         };
+
+
         function sendSMSTask(){
             if(_zUserInfo.times==60 && _zUserInfo.downTime){
                 _zUserInfo.downTime = false;
