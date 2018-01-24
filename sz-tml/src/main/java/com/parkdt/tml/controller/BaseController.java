@@ -10,6 +10,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Administrator on 2018/1/19.
@@ -37,13 +38,16 @@ public class BaseController {
     public String getOpenId() {
 
         HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        String code = req.getParameter("code");
-
-        if (StringUtils.isBlank(code)) {
-            code = (String) req.getSession().getAttribute("code");
+        HttpSession session = req.getSession();
+        String openId = (String) session.getAttribute("openId");
+        if(StringUtils.isNotBlank(openId)){
+            return openId;
         }
-        String openId = weChatService.getOpenId(code);
-
+        String code = req.getParameter("code");
+        if(StringUtils.isNotBlank(code)){
+            openId = weChatService.getOpenId(code);
+            session.setAttribute("openId",openId);
+        }
         return openId;
     }
 }

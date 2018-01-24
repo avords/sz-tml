@@ -1,6 +1,8 @@
 package com.parkdt.tml.filter;
 
+import com.parkdt.tml.weChat.WeChatService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 
 import javax.servlet.Filter;
@@ -12,7 +14,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -22,7 +23,8 @@ import java.io.IOException;
 //重点
 @WebFilter(filterName = "loginFilter", urlPatterns = {"/*"})
 public class SecurityFilter implements Filter {
-    
+    @Autowired
+    private WeChatService weChatService;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -33,12 +35,10 @@ public class SecurityFilter implements Filter {
             throws IOException, ServletException {
         if ((servletRequest instanceof HttpServletRequest) && (servletResponse instanceof HttpServletResponse)) {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
-            HttpServletResponse response = (HttpServletResponse) servletResponse;
             String code = request.getParameter("code");
-            HttpSession session = request.getSession();
-            String sessionCode = (String) session.getAttribute("code");
-            if(StringUtils.isBlank(sessionCode)){
-                session.setAttribute("code",code);
+            if(StringUtils.isNotBlank(code)){
+                String opentId = weChatService.getOpenId(code);
+                request.getSession().setAttribute("openId",opentId);
             }
             filterChain.doFilter(servletRequest, servletResponse);
         }
