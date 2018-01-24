@@ -111,7 +111,7 @@ public class UserController extends BaseController {
                     int result = userService.updatePersonalLoginInfo(personalLoginInfo);
 
                     if (result > 0) {
-                        return "redirect:/auth/taskEnter";
+                        return "redirect:/auth/personal";
                     }
                 } else {
                     String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
@@ -123,7 +123,7 @@ public class UserController extends BaseController {
 
                         personalLoginInfo = userService.getPersonalLoginInfoByOpenId(personalLoginInfo.getWechatId());
                         if (personalLoginInfo.getId() != 0) {
-                            return "redirect:/auth/taskEnter";
+                            return "redirect:/auth/personal";
                         }
                     }
                 }
