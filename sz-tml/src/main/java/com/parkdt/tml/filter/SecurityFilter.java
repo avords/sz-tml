@@ -19,7 +19,7 @@ import java.io.IOException;
 /**
  * Created by Administrator on 2018/1/22.
  */
-@Order(2)
+@Order(1)
 //重点
 @WebFilter(filterName = "loginFilter", urlPatterns = {"/*"})
 public class SecurityFilter implements Filter {
