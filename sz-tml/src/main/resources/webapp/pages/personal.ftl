@@ -42,7 +42,7 @@
                 </select>
                 <input type="text" placeholder="请输入所在公司" name="company" value="${personalBaseInfo.company}"/>
                 <input type="text" placeholder="请输入个人描述" name="personalDescription" value="${personalBaseInfo.personalDescription}"/>
-                <input type="button" value="完善个人信息" id="subButton"onclick="$('#form').submit();">
+                <input type="button" value="完善个人信息" id="subButton">
             </form>
         </div>
     </div>
