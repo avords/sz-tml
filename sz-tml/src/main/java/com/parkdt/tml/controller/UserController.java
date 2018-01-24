@@ -116,7 +116,7 @@ public class UserController extends BaseController {
                 } else {
                     String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
                     personalLoginInfo.setPassword(password);
-                    personalLoginInfo.setWechatId(getOpenId());
+                    personalLoginInfo.setWechatId(personalLoginInfo.getWechatId());
                     personalLoginInfo.setRegistrationTime(new Date());
                     personalLoginInfo.setRoleId(2);
                     if (userService.saveSelective(personalLoginInfo) > 0) {
