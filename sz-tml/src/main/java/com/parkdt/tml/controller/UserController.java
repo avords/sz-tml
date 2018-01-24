@@ -84,6 +84,11 @@ public class UserController extends BaseController {
                 personalBaseInfo.setTeamName(teamBasicInformation.getName());
             }
         }
+        personalBaseInfo.setAuthenticationType((short) 1);
+        PersonalLoginInfo personalLoginInfo = new PersonalLoginInfo();
+        personalLoginInfo.setId(personalBaseInfo.getMemberId());
+        personalLoginInfo.setNickName(personalBaseInfo.getName());
+        userService.updatePersonalLoginInfo(personalLoginInfo);
         int i = userService.updatePersonInfo(personalBaseInfo);
 
         return i==0?false:true;
