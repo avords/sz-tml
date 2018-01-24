@@ -75,7 +75,7 @@ public class LinksController {
         //得到所有类型
         List<SysGoodType> sysGoodTypes = sysGoodTypeService.getAllSysGoodType();
         //得到所有的项目导入方
-        List<Map> projectImports = projectService.queryBySql("select company_id,company_name from t_project_importer_info",null);
+        List<Map> projectImports = projectService.queryBySql("select distinct company_id,company_name from t_project_importer_info",null);
         try {
             Date startDate = getRelType(req.getParameter("startDate"), Date.class);
             Date endDate = getRelType(req.getParameter("endDate"), Date.class);

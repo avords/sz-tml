@@ -47,9 +47,9 @@
                         </#list>
                     </select>
                     <select name="companyId">
-                        <option value="">类型</option>
+                        <option value="">项目导入方</option>
                         <#list projectImports as item>
-                            <#if companyId==item.id>
+                            <#if companyId==item['company_id']>
                                 <option value="${item['company_id']}" selected="selected">${item['company_name']}</option>
                             <#else>
                                 <option value="${item['company_id']}">${item['company_name']}</option>
