@@ -50,7 +50,7 @@ public class LoginFilter implements Filter {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             String uri = request.getRequestURI();
             String code = request.getParameter("code");
-            if(StringUtils.isBlank(code)){
+            if(StringUtils.isBlank(code)&&request.getSession().getAttribute("code")==null){
                 String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + WeChatConfig.getAppid() + "&redirect_uri=";
                 String redirect_uri = WeChatConfig.getWebUrl() + request.getRequestURI();
                 url += redirect_uri;
