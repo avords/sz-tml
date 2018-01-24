@@ -1,5 +1,6 @@
 package com.parkdt.tml.controller;
 
+import com.parkdt.tml.domain.PersonalLoginInfo;
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
 import com.parkdt.tml.domain.SysAreasExpertise;
@@ -109,6 +110,10 @@ public class TaskController extends BaseController{
 
     @RequestMapping("enter")
     public String enter(Model model, HttpServletRequest req) {
+        PersonalLoginInfo user = (PersonalLoginInfo) req.getSession().getAttribute("user");
+        if(user==null||user.getRoleId()!=2){
+            return "redirect:/auth/myPublish";
+        }
         //得到所有领域
         List<SysAreasExpertise> sysAreasExpertises = sysAreasExpertiseService.getAllSysAreasExpertise();
         //得到所有类型

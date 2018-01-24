@@ -111,19 +111,19 @@ public class UserController extends BaseController {
                     int result = userService.updatePersonalLoginInfo(personalLoginInfo);
 
                     if (result > 0) {
-                        return "redirect:/auth/personal";
+                        return "redirect:/auth/taskEnter";
                     }
                 } else {
                     String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
                     personalLoginInfo.setPassword(password);
-                    personalLoginInfo.setWechatId(personalLoginInfo.getWechatId());
-                    personalLoginInfo.setPhone(personalLoginInfo.getPhone());
+                    personalLoginInfo.setWechatId(getOpenId());
                     personalLoginInfo.setRegistrationTime(new Date());
+                    personalLoginInfo.setRoleId(2);
                     if (userService.saveSelective(personalLoginInfo) > 0) {
 
                         personalLoginInfo = userService.getPersonalLoginInfoByOpenId(personalLoginInfo.getWechatId());
                         if (personalLoginInfo.getId() != 0) {
-                            return "redirect:/auth/personal";
+                            return "redirect:/auth/taskEnter";
                         }
                     }
                 }

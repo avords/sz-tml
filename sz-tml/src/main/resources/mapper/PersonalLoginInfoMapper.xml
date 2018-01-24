@@ -37,7 +37,7 @@
     delete from t_personal_login_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.parkdt.tml.domain.PersonalLoginInfo" >
+  <insert id="insert" parameterType="com.parkdt.tml.domain.PersonalLoginInfo" keyProperty="id" useGeneratedKeys="true">
     insert into t_personal_login_info (id, role_id, wechat_id, 
       email, phone, password, 
       header, login_time, registration_time, 
@@ -49,7 +49,7 @@
       #{isDisable,jdbcType=BIGINT}, #{nickName,jdbcType=VARCHAR}, #{certificationLoginFlag,jdbcType=SMALLINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.PersonalLoginInfo" >
+  <insert id="insertSelective" parameterType="com.parkdt.tml.domain.PersonalLoginInfo" keyProperty="id" useGeneratedKeys="true">
     insert into t_personal_login_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

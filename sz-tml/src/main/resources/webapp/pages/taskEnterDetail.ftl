@@ -47,8 +47,8 @@
                 </div>
                 <div class="row">
                     <div class="claim" style="width:62%;">
-                        工作周期
-                        <input type="date" placeholder="开始时间" style="width:100px;" name="startTime">
+                        <span style="width: 30%">工作周期</span>
+                        <input type="date" placeholder="开始时间" style="width: 70%" name="startTime">
                     </div>
                     <span class="sp">~</span>
                     <div class="claim" style="width:30%;float:right;">
