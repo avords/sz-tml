@@ -48,11 +48,11 @@
                 <div class="row">
                     <div class="claim" style="width:62%;">
                         工作周期
-                        <input type="date" placeholder="" style="width:100px;" name="startTime">
+                        <input type="date" placeholder="开始时间" style="width:100px;" name="startTime">
                     </div>
                     <span class="sp">~</span>
                     <div class="claim" style="width:30%;float:right;">
-                        <input type="date" placeholder="" style="width:100%;" name="endTime">
+                        <input type="date" placeholder="结束时间" style="width:100%;" name="endTime">
                     </div>
                 </div>
                 <p class="title">邀请设计师</p>
