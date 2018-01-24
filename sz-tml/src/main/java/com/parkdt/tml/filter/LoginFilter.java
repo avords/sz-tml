@@ -2,7 +2,6 @@ package com.parkdt.tml.filter;
 
 import com.parkdt.tml.domain.PersonalLoginInfo;
 import com.parkdt.tml.service.UserService;
-import com.parkdt.tml.weChat.WeChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 
@@ -24,9 +23,7 @@ import java.io.IOException;
 //重点
 @WebFilter(filterName = "loginFilter", urlPatterns = {"/user/*","/biz/*","/links/*","/task/*"})
 public class LoginFilter implements Filter {
-    
-    @Autowired
-    private WeChatService weChatService;
+
     @Autowired
     private UserService userService;
     /**
