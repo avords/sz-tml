@@ -4,6 +4,7 @@ import com.parkdt.tml.domain.PersonalLoginInfo;
 import com.parkdt.tml.service.UserService;
 import com.parkdt.tml.utils.StringKit;
 import com.parkdt.tml.weChat.WeChatService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -38,13 +39,11 @@ public class BaseController {
         HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String code = req.getParameter("code");
 
-        if (StringKit.isNotEmpty(code)) {
-
-            String openId = weChatService.getOpenId(code);
-
-            return openId;
+        if (StringUtils.isBlank(code)) {
+            code = (String) req.getSession().getAttribute("code");
         }
+        String openId = weChatService.getOpenId(code);
 
-        return "";
+        return openId;
     }
 }
