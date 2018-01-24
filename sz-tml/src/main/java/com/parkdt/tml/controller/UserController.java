@@ -58,7 +58,6 @@ public class UserController extends BaseController {
         if (0 == memberId) {
             return "redirect:/auth/login";
         }
-
         PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(memberId);
         if (personalBaseInfo == null) {
             personalBaseInfo = new PersonalBaseInfo();
@@ -74,7 +73,8 @@ public class UserController extends BaseController {
 
 
     @RequestMapping("savePersonal")
-    public String savePersonal(Model model, HttpServletRequest req, PersonalBaseInfo personalBaseInfo) {
+    @ResponseBody
+    public boolean savePersonal(Model model, HttpServletRequest req, PersonalBaseInfo personalBaseInfo) {
 
         Long teamId = personalBaseInfo.getTeamId();
 
@@ -84,9 +84,9 @@ public class UserController extends BaseController {
                 personalBaseInfo.setTeamName(teamBasicInformation.getName());
             }
         }
-        userService.updatePersonInfo(personalBaseInfo);
+        int i = userService.updatePersonInfo(personalBaseInfo);
 
-        return "redirect:/auth/taskEnter";
+        return i==0?false:true;
     }
 
     @RequestMapping("register")

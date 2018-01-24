@@ -23,7 +23,7 @@ public interface UserService {
      * @param personalBaseInfo
      * @param teamMember
      */
-    void updatePersonInfo(PersonalBaseInfo personalBaseInfo);
+    int updatePersonInfo(PersonalBaseInfo personalBaseInfo);
 
     /**
      * 通过用户id得到个人登录信息

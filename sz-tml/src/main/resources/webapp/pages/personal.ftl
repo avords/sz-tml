@@ -42,10 +42,32 @@
                 </select>
                 <input type="text" placeholder="请输入所在公司" name="company" value="${personalBaseInfo.company}"/>
                 <input type="text" placeholder="请输入个人描述" name="personalDescription" value="${personalBaseInfo.personalDescription}"/>
-                <input type="button" value="完善个人信息" onclick="$('#form').submit();">
+                <input type="button" value="完善个人信息" id="subButton"onclick="$('#form').submit();">
             </form>
         </div>
     </div>
+<script>
+    $(function () {
+        $('#subButton').click(function () {
+            $.ajax({
+                type:"POST",
+                dataType: "json",
+                url: "/user/savePersonal",
+                data: $('.data_form').serialize(),
+                success: function(response){
+                    if(response==true){
+                        alert('保存成功');
+                        /*window.location.href='http://weixin.teamlinks.cn/task/enter';*/
+                        window.location.href='/task/enter';
+                    } else{
+                        //发送验证码失败
+                        alert('保存失败，请重试')
+                    }
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

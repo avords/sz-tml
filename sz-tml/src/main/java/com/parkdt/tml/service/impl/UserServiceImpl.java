@@ -37,11 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePersonInfo(PersonalBaseInfo personalBaseInfo) {
+    public int updatePersonInfo(PersonalBaseInfo personalBaseInfo) {
         if (personalBaseInfo.getId() == null) {
-            personalBaseInfoMapper.insertSelective(personalBaseInfo);
+            return personalBaseInfoMapper.insertSelective(personalBaseInfo);
         } else {
-            personalBaseInfoMapper.updateByPrimaryKeySelective(personalBaseInfo);
+            return personalBaseInfoMapper.updateByPrimaryKeySelective(personalBaseInfo);
         }
     }
 
