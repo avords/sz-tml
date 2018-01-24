@@ -113,6 +113,8 @@ public class TaskController extends BaseController{
         List<SysAreasExpertise> sysAreasExpertises = sysAreasExpertiseService.getAllSysAreasExpertise();
         //得到所有类型
         List<SysGoodType> sysGoodTypes = sysGoodTypeService.getAllSysGoodType();
+        //得到所有的项目导入方
+        List<Map> projectImports = projectService.queryBySql("select company_id,company_name from t_project_importer_info",null);
         try {
             Date startDate = getRelType(req.getParameter("startDate"), Date.class);
             Date endDate = getRelType(req.getParameter("endDate"), Date.class);
@@ -129,10 +131,8 @@ public class TaskController extends BaseController{
             Long designTypeId = getRelType(req.getParameter("designTypeId"),Long.class);
             Double startOutputValue = getRelType(req.getParameter("startOutputValue"),Double.class);
             Double endOutputValue = getRelType(req.getParameter("endOutputValue"),Double.class);
-            String memberName = req.getParameter("memberName");
-            if(memberName==null||memberName.trim().equals("")){
-                memberName=null;
-            }
+            Long companyId = getRelType(req.getParameter("companyId"),Long.class);
+            
             Map params = new HashMap();
             params.put("startDate",startDate);
             params.put("endDate",endDate);
@@ -141,17 +141,18 @@ public class TaskController extends BaseController{
             params.put("designTypeId",designTypeId);
             params.put("startOutputValue",startOutputValue);
             params.put("endOutputValue",endOutputValue);
-            params.put("memberName",memberName);
+            params.put("companyId",companyId);
             List<Map> projectDeliverys = projectService.queryProjectDelivery(params);
             model.addAttribute("sysAreasExpertises",sysAreasExpertises);
             model.addAttribute("sysGoodTypes",sysGoodTypes);
             model.addAttribute("projectDeliverys",projectDeliverys);
+            model.addAttribute("projectImports",projectImports);
             
-            model.addAttribute("fieldId", StringUtils.isNotBlank(req.getParameter("fieldId"))?Long.valueOf(req.getParameter("fieldId")):null);
-            model.addAttribute("designTypeId", StringUtils.isNotBlank(req.getParameter("designTypeId"))?Long.valueOf(req.getParameter("designTypeId")):null);
+            model.addAttribute("fieldId", fieldId);
+            model.addAttribute("designTypeId", designTypeId);
             model.addAttribute("startOutputValue",req.getParameter("startOutputValue"));
             model.addAttribute("endOutputValue",req.getParameter("endOutputValue"));
-            model.addAttribute("memberName",req.getParameter("memberName"));
+            model.addAttribute("companyId",companyId);
             model.addAttribute("startDate",req.getParameter("startDate"));
             model.addAttribute("endDate",req.getParameter("endDate"));
         }catch (Exception e){

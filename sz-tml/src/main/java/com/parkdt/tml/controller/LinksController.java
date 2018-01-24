@@ -4,8 +4,13 @@ import com.parkdt.tml.domain.OffiContent;
 import com.parkdt.tml.domain.OffiDesign;
 import com.parkdt.tml.domain.SysAreasExpertise;
 import com.parkdt.tml.domain.SysGoodType;
-import com.parkdt.tml.service.*;
-import org.apache.commons.lang3.StringUtils;
+import com.parkdt.tml.service.BannerService;
+import com.parkdt.tml.service.ContentService;
+import com.parkdt.tml.service.DesignService;
+import com.parkdt.tml.service.ProjectService;
+import com.parkdt.tml.service.SysAreasExpertiseService;
+import com.parkdt.tml.service.SysCityService;
+import com.parkdt.tml.service.SysGoodTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,48 +74,49 @@ public class LinksController {
         List<SysAreasExpertise> sysAreasExpertises = sysAreasExpertiseService.getAllSysAreasExpertise();
         //得到所有类型
         List<SysGoodType> sysGoodTypes = sysGoodTypeService.getAllSysGoodType();
+        //得到所有的项目导入方
+        List<Map> projectImports = projectService.queryBySql("select company_id,company_name from t_project_importer_info",null);
         try {
             Date startDate = getRelType(req.getParameter("startDate"), Date.class);
             Date endDate = getRelType(req.getParameter("endDate"), Date.class);
             boolean isOne = false;
             String oneStr = req.getParameter("oneStr");
-            if (oneStr == null || "".equals(oneStr)) {
+            if(oneStr==null||"".equals(oneStr)){
                 oneStr = "1";
             }
-            if ("1".equals(oneStr)) {
+            if("1".equals(oneStr)){
                 isOne = true;
             }
-            model.addAttribute("oneStr", oneStr);
-            Long fieldId = getRelType(req.getParameter("fieldId"), Long.class);
-            Long designTypeId = getRelType(req.getParameter("designTypeId"), Long.class);
-            Double startOutputValue = getRelType(req.getParameter("startOutputValue"), Double.class);
-            Double endOutputValue = getRelType(req.getParameter("endOutputValue"), Double.class);
-            String memberName = req.getParameter("memberName");
-            if (memberName == null || memberName.trim().equals("")) {
-                memberName = null;
-            }
-            Map params = new HashMap();
-            params.put("startDate", startDate);
-            params.put("endDate", endDate);
-            params.put("isOne", isOne);
-            params.put("fieldId", fieldId);
-            params.put("designTypeId", designTypeId);
-            params.put("startOutputValue", startOutputValue);
-            params.put("endOutputValue", endOutputValue);
-            params.put("memberName", memberName);
-            List<Map> projectDeliverys = projectService.queryProjectDelivery(params);
-            model.addAttribute("sysAreasExpertises", sysAreasExpertises);
-            model.addAttribute("sysGoodTypes", sysGoodTypes);
-            model.addAttribute("projectDeliverys", projectDeliverys);
+            model.addAttribute("oneStr",oneStr);
+            Long fieldId = getRelType(req.getParameter("fieldId"),Long.class);
+            Long designTypeId = getRelType(req.getParameter("designTypeId"),Long.class);
+            Double startOutputValue = getRelType(req.getParameter("startOutputValue"),Double.class);
+            Double endOutputValue = getRelType(req.getParameter("endOutputValue"),Double.class);
+            Long companyId = getRelType(req.getParameter("companyId"),Long.class);
 
-            model.addAttribute("fieldId", StringUtils.isNotBlank(req.getParameter("fieldId")) ? Long.valueOf(req.getParameter("fieldId")) : null);
-            model.addAttribute("designTypeId", StringUtils.isNotBlank(req.getParameter("designTypeId")) ? Long.valueOf(req.getParameter("designTypeId")) : null);
-            model.addAttribute("startOutputValue", req.getParameter("startOutputValue"));
-            model.addAttribute("endOutputValue", req.getParameter("endOutputValue"));
-            model.addAttribute("memberName", req.getParameter("memberName"));
-            model.addAttribute("startDate", req.getParameter("startDate"));
-            model.addAttribute("endDate", req.getParameter("endDate"));
-        } catch (Exception e) {
+            Map params = new HashMap();
+            params.put("startDate",startDate);
+            params.put("endDate",endDate);
+            params.put("isOne",isOne);
+            params.put("fieldId",fieldId);
+            params.put("designTypeId",designTypeId);
+            params.put("startOutputValue",startOutputValue);
+            params.put("endOutputValue",endOutputValue);
+            params.put("companyId",companyId);
+            List<Map> projectDeliverys = projectService.queryProjectDelivery(params);
+            model.addAttribute("sysAreasExpertises",sysAreasExpertises);
+            model.addAttribute("sysGoodTypes",sysGoodTypes);
+            model.addAttribute("projectDeliverys",projectDeliverys);
+            model.addAttribute("projectImports",projectImports);
+
+            model.addAttribute("fieldId", fieldId);
+            model.addAttribute("designTypeId", designTypeId);
+            model.addAttribute("startOutputValue",req.getParameter("startOutputValue"));
+            model.addAttribute("endOutputValue",req.getParameter("endOutputValue"));
+            model.addAttribute("companyId",companyId);
+            model.addAttribute("startDate",req.getParameter("startDate"));
+            model.addAttribute("endDate",req.getParameter("endDate"));
+        }catch (Exception e){
             LOGGER.error(e.toString());
         }
         return "resCenter";

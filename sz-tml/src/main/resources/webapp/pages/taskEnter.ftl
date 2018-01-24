@@ -46,7 +46,16 @@
                             </#if>
                         </#list>
                     </select>
-                    <input type="text" placeholder="导入项目方" name="memberName" value="${memberName}"/>
+                    <select name="companyId">
+                        <option value="">类型</option>
+                        <#list projectImports as item>
+                            <#if companyId==item.id>
+                                <option value="${item['company_id']}" selected="selected">${item['company_name']}</option>
+                            <#else>
+                                <option value="${item['company_id']}">${item['company_name']}</option>
+                            </#if>
+                        </#list>
+                    </select>
                     <div class="row">
                         <input type="text" placeholder="项目产值" name="startOutputValue" value="${startOutputValue}"/>
                         <span class="sp">~</span>
@@ -72,7 +81,7 @@
                         <span>${item.output_value}</span>
                     </p>
                     <p>项目导入方:
-                        <span>${item.nick_name}</span>
+                        <span>${item.company_name}</span>
                     </p>
                     <p>发布时间:
                         <span>${item.create_time?date("yyyy-MM-dd")}</span>

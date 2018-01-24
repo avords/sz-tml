@@ -389,7 +389,7 @@
   </update>
   
   <select id="queryProjectDelivery" parameterType="java.util.Map" resultType="java.util.Map">
-    select DISTINCT d.id,b.project_name,d.output_value,d.pv,DATE_FORMAT(b.create_time,'%Y-%m-%d') create_time,claime_num,DATE_FORMAT(d.plan_end_time,'%Y-%m-%d') plan_end_time,l.nick_name from t_project_delivery d 
+    select DISTINCT d.id,b.project_name,d.output_value,d.pv,DATE_FORMAT(b.create_time,'%Y-%m-%d') create_time,claime_num,DATE_FORMAT(d.plan_end_time,'%Y-%m-%d') plan_end_time,im.company_name,im.company_id from t_project_delivery d 
     <choose>
       <when test="isOne==true">
         INNER JOIN t_project_base_information b on(d.type=0 AND d.object_id=b.id)
@@ -400,7 +400,7 @@
       </otherwise>
     </choose>
     LEFT JOIN t_project_information i on(d.object_id=i.id)
-    LEFT JOIN t_personal_login_info l on(b.member_id=l.id)
+    LEFT JOIN t_project_importer_info im on(im.member_id=b.member_id)
     WHERE 1=1
     AND d.is_del=0
     <if test="fieldId!=null">
@@ -421,8 +421,8 @@
     <if test="endDate!=null">
       AND b.create_time &lt;=#{endDate}
     </if>
-    <if test="memberName!=null">
-      AND l.nick_name=#{memberName}
+    <if test="companyId!=null">
+      AND im.company_id=#{companyId}
     </if>
     ORDER BY b.create_time DESC 
   </select>
