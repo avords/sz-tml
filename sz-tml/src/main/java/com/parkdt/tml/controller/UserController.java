@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +49,29 @@ public class UserController extends BaseController {
     protected void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
     }
+
+    @RequestMapping("personal")
+    public String toPersonal(Model model, HttpServletRequest req) {
+
+        Long memberId = getMemberId();
+
+        if (0 == memberId) {
+            return "redirect:/auth/login";
+        }
+
+        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(memberId);
+        if (personalBaseInfo == null) {
+            personalBaseInfo = new PersonalBaseInfo();
+            personalBaseInfo.setBirthday(new Date());
+            personalBaseInfo.setMemberId(memberId);
+        }
+        model.addAttribute("personalBaseInfo", personalBaseInfo);
+        List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
+        model.addAttribute("teamBasicInformations", teamBasicInformations);
+
+        return "personal";
+    }
+
 
     @RequestMapping("savePersonal")
     public String savePersonal(Model model, HttpServletRequest req, PersonalBaseInfo personalBaseInfo) {
@@ -85,21 +107,11 @@ public class UserController extends BaseController {
 
                     personalLoginInfo = infoExists.get(0);
 
+                    //号码存在则更新opnid
                     int result = userService.updatePersonalLoginInfo(personalLoginInfo);
 
                     if (result > 0) {
-
-                        PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(personalLoginInfo.getId());
-                        if (personalBaseInfo == null) {
-                            personalBaseInfo = new PersonalBaseInfo();
-                            personalBaseInfo.setBirthday(new Date());
-                            personalBaseInfo.setMemberId(personalLoginInfo.getId());
-                        }
-                        model.addAttribute("personalBaseInfo", personalBaseInfo);
-                        List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
-                        model.addAttribute("teamBasicInformations", teamBasicInformations);
-
-                        return "personal";
+                        return "redirect:/auth/personal";
                     }
                 } else {
                     String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
@@ -108,19 +120,10 @@ public class UserController extends BaseController {
                     personalLoginInfo.setPhone(personalLoginInfo.getPhone());
                     personalLoginInfo.setRegistrationTime(new Date());
                     if (userService.saveSelective(personalLoginInfo) > 0) {
+
                         personalLoginInfo = userService.getPersonalLoginInfoByOpenId(personalLoginInfo.getWechatId());
                         if (personalLoginInfo.getId() != 0) {
-                            PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(personalLoginInfo.getId());
-                            if (personalBaseInfo == null) {
-                                personalBaseInfo = new PersonalBaseInfo();
-                                personalBaseInfo.setBirthday(new Date());
-                                personalBaseInfo.setMemberId(personalLoginInfo.getId());
-                            }
-                            model.addAttribute("personalBaseInfo", personalBaseInfo);
-                            List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
-                            model.addAttribute("teamBasicInformations", teamBasicInformations);
-
-                            return "personal";
+                            return "redirect:/auth/personal";
                         }
                     }
                 }
@@ -141,18 +144,7 @@ public class UserController extends BaseController {
 
         logger.info("login:" + openId);
         if (null != userInfo) {
-
-            PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(userInfo.getId());
-            if (personalBaseInfo == null) {
-                personalBaseInfo = new PersonalBaseInfo();
-                personalBaseInfo.setBirthday(new Date());
-                personalBaseInfo.setMemberId(userInfo.getId());
-            }
-            model.addAttribute("personalBaseInfo", personalBaseInfo);
-            List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
-            model.addAttribute("teamBasicInformations", teamBasicInformations);
-
-            return "personal";
+            return "redirect:/auth/personal";
         } else {
             PersonalLoginInfo personalLoginInfo1 = new PersonalLoginInfo();
             personalLoginInfo1.setWechatId(openId);

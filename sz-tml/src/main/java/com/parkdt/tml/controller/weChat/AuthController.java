@@ -57,18 +57,6 @@ public class AuthController {
 
     @RequestMapping("personal")
     public String personal() {
-
-        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + WeChatConfig.getAppid() + "&redirect_uri=";
-        String redirect_uri = WeChatConfig.getWebUrl() + "user/register";
-        url += redirect_uri;
-        url += "&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect";
-        System.out.println();
-        System.out.println("publish : " + url);
-        return "redirect:" + url;
-    }
-
-    @RequestMapping("info")
-    public String info() {
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + WeChatConfig.getAppid() + "&redirect_uri=";
         String redirect_uri = WeChatConfig.getWebUrl() + "user/personal";
         url += redirect_uri;

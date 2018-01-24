@@ -45,6 +45,6 @@ public class BaseController {
             return openId;
         }
 
-        return "000";
+        return "";
     }
 }
