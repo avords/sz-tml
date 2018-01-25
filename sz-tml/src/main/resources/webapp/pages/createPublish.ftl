@@ -5,6 +5,8 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <title>项目发布-基础信息</title>
     <link href="/css/style.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
@@ -112,8 +114,8 @@
             <p class="title">邀请的项目经理</p>
             <div class="invite">
                 <input type="hidden" name="type" value="0">
-                <input type="button" value="+ 已有心仪的项目经理">
-                <input type="button" value="+ 直接发布到一级市场" class="alt">
+                <input type="button" value="+ 已有心仪的项目经理" data-val="1">
+                <input type="button" value="+ 直接发布到一级市场" class="alt" data-val="2">
             </div>
             <input type="button" value="保存" class="save" id="saveButton">
             <#--<input type="button" value="确认提交">-->
@@ -129,7 +131,7 @@
             $('input[name="type"]').val($(this).attr('data-val'));
         });
         $('select[name="provinceId"]').change(function () {
-            var provinceName = $('select[name="provinceId"]:selected').html();
+            var provinceName = $(this).find("option:selected").html();
             $('input[name="provinceName"]').val(provinceName);
             var provinceId = $(this).val();
             $.ajax({
@@ -148,12 +150,12 @@
             });
         });
         $('select[name="cityId"]').change(function () {
-            var cityName = $('select[name="cityId"]:selected').html();
+            var cityName = $(this).find("option:selected").html();
             $('input[name="cityName"]').val(cityName);
         });
         $('select[name="cycleId"]').change(function () {
-            var cycleValue = $('select[name="cycleId"]:selected').html();
-            var cycleUnit = $('select[name="cycleId"]:selected').attr('data-unit');
+            var cycleValue = $(this).find("option:selected").html();
+            var cycleUnit = $(this).find("option:selected").attr('data-unit');
             
             $('input[name="cycleValue"]').val(cycleValue);
             $('input[name="cycleUnit"]').val(cycleUnit);
@@ -168,6 +170,16 @@
         $('#saveButton').click(function () {
             var planStartTime = $('input[name="planStartTime"]').val();
             var planEndTime = $('input[name="planEndTime"]').val();
+            var projectName = $('input[name="projectName"]').val();
+            var projectNum = $('input[name="projectNum"]').val();
+            if(!projectName){
+                alert('请输入项目名称');
+                return false;
+            }
+            if(!projectNum){
+                alert('请输入项目编号');
+                return false;
+            }
             if (planStartTime !== null || planStartTime !== undefined || planStartTime !== '') {
                 if(!isdate(planStartTime)){
                     alert('项目开始时间格式为:yyyy-MM-dd格式')

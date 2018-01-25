@@ -3,6 +3,7 @@ package com.parkdt.tml.service;
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
 import com.parkdt.tml.domain.ProjectInformation;
+import com.parkdt.tml.domain.ProjectInformationTemp;
 
 import java.util.List;
 import java.util.Map;
@@ -32,4 +33,6 @@ public interface ProjectService {
     List<Map> queryProjectList(Map params);
     
     Long getImportCompanyIdByMemberId(Long memberId);
+    
+    int saveProjectInformationTemp(ProjectInformationTemp projectInformationTemp);
 }

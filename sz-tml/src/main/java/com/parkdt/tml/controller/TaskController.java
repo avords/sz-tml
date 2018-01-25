@@ -2,6 +2,7 @@ package com.parkdt.tml.controller;
 
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
+import com.parkdt.tml.domain.ProjectInformationTemp;
 import com.parkdt.tml.domain.SysAreasExpertise;
 import com.parkdt.tml.domain.SysCity;
 import com.parkdt.tml.domain.SysGoodType;
@@ -142,9 +143,10 @@ public class TaskController extends BaseController{
     }
     @RequestMapping("savePublish")
     @ResponseBody
-    public boolean savePublish(Model model, HttpServletRequest req) {
-        
-        return true;
+    public boolean savePublish(Model model, HttpServletRequest req, ProjectInformationTemp projectInformationTemp) {
+        projectInformationTemp.setCreateTime(new Date());
+        int i = projectService.saveProjectInformationTemp(projectInformationTemp); 
+        return i==0?false:true;
     }
     @RequestMapping("enter")
     public String enter(Model model, HttpServletRequest req) {

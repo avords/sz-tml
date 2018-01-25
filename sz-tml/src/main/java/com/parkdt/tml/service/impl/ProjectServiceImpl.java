@@ -5,6 +5,7 @@ import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
 import com.parkdt.tml.domain.ProjectImporterInfo;
 import com.parkdt.tml.domain.ProjectInformation;
+import com.parkdt.tml.domain.ProjectInformationTemp;
 import com.parkdt.tml.domain.ProjectModule;
 import com.parkdt.tml.domain.SysGoodType;
 import com.parkdt.tml.mapper.*;
@@ -41,6 +42,8 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectClaimRecordMapper projectClaimRecordMapper;
     @Autowired
     private ProjectImporterInfoMapper projectImporterInfoMapper;
+    @Autowired
+    private ProjectInformationTempMapper projectInformationTempMapper;
 
     @Override
     public List<ProjectInformation> getAllProject() {
@@ -130,4 +133,11 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return null;
     }
+
+    @Override
+    public int saveProjectInformationTemp(ProjectInformationTemp projectInformationTemp) {
+        return projectInformationTempMapper.insertSelective(projectInformationTemp);
+    }
+
+
 }
