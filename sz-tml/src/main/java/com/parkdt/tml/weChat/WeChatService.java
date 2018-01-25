@@ -2,18 +2,18 @@ package com.parkdt.tml.weChat;
 
 import com.alibaba.fastjson.JSONObject;
 import com.parkdt.tml.config.WeChatConfig;
+import com.parkdt.tml.taskService.WeChatTokenService;
 import com.parkdt.tml.utils.HttpPostClient;
 import com.parkdt.tml.weChat.message.MessageFactory;
+import com.parkdt.tml.weChat.result.WxMpUser;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -79,6 +79,17 @@ public class WeChatService {
         System.out.println("openid = " + openid);
 
         return openid;
+    }
+
+    public WxMpUser getWxMpUser(String openId) {
+
+        StringBuffer url = new StringBuffer("https://api.weixin.qq.com/cgi-bin/user/info?");
+        url.append("access_token=" + WeChatTokenService.getAccessToken() + "&openid=" + openId);
+        url.append("&lang=zh_CN");
+        String result = HttpPostClient.doHttpPost(url.toString(), null, null);
+        System.out.println(result);
+
+        return WxMpUser.fromJson(result);
     }
 
     private static Map<String, String> parse(HttpServletRequest request) {
