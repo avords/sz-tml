@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 @Order(1)
 //重点
-@WebFilter(filterName = "loginFilter", urlPatterns = {"/*"})
+@WebFilter(filterName = "securityFilter", urlPatterns = {"/*"})
 public class SecurityFilter implements Filter {
     @Autowired
     private WeChatService weChatService;
