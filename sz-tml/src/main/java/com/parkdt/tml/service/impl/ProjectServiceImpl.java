@@ -3,6 +3,7 @@ package com.parkdt.tml.service.impl;
 import com.parkdt.tml.domain.ProjectAnnex;
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
+import com.parkdt.tml.domain.ProjectImporterInfo;
 import com.parkdt.tml.domain.ProjectInformation;
 import com.parkdt.tml.domain.ProjectModule;
 import com.parkdt.tml.domain.SysGoodType;
@@ -38,6 +39,8 @@ public class ProjectServiceImpl implements ProjectService {
     private SysGoodTypeService sysGoodTypeService;
     @Autowired
     private ProjectClaimRecordMapper projectClaimRecordMapper;
+    @Autowired
+    private ProjectImporterInfoMapper projectImporterInfoMapper;
 
     @Override
     public List<ProjectInformation> getAllProject() {
@@ -117,5 +120,14 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<Map> queryProjectList(Map params) {
         return projectInformationMapper.queryProjectList(params);
+    }
+
+    @Override
+    public Long getImportCompanyIdByMemberId(Long memberId) {
+        ProjectImporterInfo projectImporterInfo = projectImporterInfoMapper.getImportCompanyIdByMemberId(memberId);
+        if(projectImporterInfo!=null){
+            return projectImporterInfo.getCompanyId();
+        }
+        return null;
     }
 }

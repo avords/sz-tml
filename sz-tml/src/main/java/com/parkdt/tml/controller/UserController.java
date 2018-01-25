@@ -56,7 +56,7 @@ public class UserController extends BaseController {
         Long memberId = getMemberId();
 
         if (0 == memberId) {
-            return "redirect:/auth/login";
+            return "redirect:/user/login";
         }
         PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(memberId);
         if (personalBaseInfo == null) {
@@ -149,7 +149,7 @@ public class UserController extends BaseController {
 
         logger.info("login:" + openId);
         if (null != userInfo) {
-            return "redirect:/auth/personal";
+            return "redirect:/user/personal";
         } else {
             PersonalLoginInfo personalLoginInfo1 = new PersonalLoginInfo();
             personalLoginInfo1.setWechatId(openId);

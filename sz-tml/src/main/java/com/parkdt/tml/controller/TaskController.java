@@ -5,10 +5,14 @@ import com.parkdt.tml.domain.ProjectDelivery;
 import com.parkdt.tml.domain.SysAreasExpertise;
 import com.parkdt.tml.domain.SysCity;
 import com.parkdt.tml.domain.SysGoodType;
+import com.parkdt.tml.domain.SysProjectCycle;
+import com.parkdt.tml.domain.SysTypeInfo;
 import com.parkdt.tml.service.ProjectService;
 import com.parkdt.tml.service.SysAreasExpertiseService;
 import com.parkdt.tml.service.SysCityService;
 import com.parkdt.tml.service.SysGoodTypeService;
+import com.parkdt.tml.service.SysProjectCycleService;
+import com.parkdt.tml.service.SysTypeInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +51,10 @@ public class TaskController extends BaseController{
     private SysAreasExpertiseService sysAreasExpertiseService;
     @Autowired
     private SysCityService sysCityService;
-
+    @Autowired
+    private SysTypeInfoService sysTypeInfoService;
+    @Autowired
+    private SysProjectCycleService sysProjectCycleService;
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
@@ -102,11 +109,43 @@ public class TaskController extends BaseController{
     }
     @RequestMapping("createPublish")
     public String createPublish(Model model, HttpServletRequest req) {
-
         Long memberId = getMemberId();
+        Long companyId = projectService.getImportCompanyIdByMemberId(memberId);
+        //得到所有领域
+        List<SysAreasExpertise> sysAreasExpertises = sysAreasExpertiseService.getAllSysAreasExpertise();
+        //得到所有类型
+        List<SysGoodType> sysGoodTypes = sysGoodTypeService.getAllSysGoodType();
+        //所有的省份
+        List<SysCity> provinces = sysCityService.getAllProvince();
+        //区域
+        List<SysTypeInfo> areas = sysTypeInfoService.getByTypeId(8L);
+        //项目周期
+        List<SysProjectCycle> sysProjectCycles = sysProjectCycleService.getAll();
+        //获取类型
+        List<SysTypeInfo> acquisitionTypes = sysTypeInfoService.getByTypeId(9L);
+        //来源
+        List<SysTypeInfo> sources = sysTypeInfoService.getByTypeId(10L);
+        //结果要求results_required_ids
+        List<SysTypeInfo> resultsRequired = sysTypeInfoService.getByTypeId(11L);
+        
+        model.addAttribute("memberId",memberId);
+        model.addAttribute("companyId",companyId);
+        model.addAttribute("sysAreasExpertises",sysAreasExpertises);
+        model.addAttribute("sysGoodTypes",sysGoodTypes);
+        model.addAttribute("provinces",provinces);
+        model.addAttribute("areas",areas);
+        model.addAttribute("sysProjectCycles",sysProjectCycles);
+        model.addAttribute("acquisitionTypes",acquisitionTypes);
+        model.addAttribute("sources",sources);
+        model.addAttribute("resultsRequired",resultsRequired);
         return "createPublish";
     }
-
+    @RequestMapping("savePublish")
+    @ResponseBody
+    public boolean savePublish(Model model, HttpServletRequest req) {
+        
+        return true;
+    }
     @RequestMapping("enter")
     public String enter(Model model, HttpServletRequest req) {
         //得到所有领域

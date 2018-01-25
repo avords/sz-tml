@@ -30,4 +30,6 @@ public interface ProjectService {
     List<Map> queryProjectClaimByMemberId(Long memberId);
 
     List<Map> queryProjectList(Map params);
+    
+    Long getImportCompanyIdByMemberId(Long memberId);
 }
