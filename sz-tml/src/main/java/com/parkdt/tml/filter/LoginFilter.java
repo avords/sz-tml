@@ -1,5 +1,6 @@
 package com.parkdt.tml.filter;
 
+import com.parkdt.tml.consist.Constant;
 import com.parkdt.tml.domain.PersonalLoginInfo;
 import com.parkdt.tml.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,10 @@ public class LoginFilter implements Filter {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             String uri = request.getRequestURI();
             if(!isExcludes(uri)) {//如果不排除
-                String openId = (String) request.getSession().getAttribute("openId");
+                String openId = (String) request.getSession().getAttribute(Constant.SESSION_OPEN_ID);
                 PersonalLoginInfo personalLoginInfo = userService.getPersonalLoginInfoByOpenId(openId);
                 if(personalLoginInfo!=null){//已经绑定了吗
+                    request.getSession().setAttribute(Constant.SESSION_USER,personalLoginInfo);
                     filterChain.doFilter(servletRequest, servletResponse);
                 }else{
                     response.sendRedirect("/user/login");

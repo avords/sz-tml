@@ -1,5 +1,6 @@
 package com.parkdt.tml.filter;
 
+import com.parkdt.tml.consist.Constant;
 import com.parkdt.tml.weChat.WeChatService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class SecurityFilter implements Filter {
             String code = request.getParameter("code");
             if(StringUtils.isNotBlank(code)){
                 String opentId = weChatService.getOpenId(code);
-                request.getSession().setAttribute("openId",opentId);
+                request.getSession().setAttribute(Constant.SESSION_OPEN_ID,opentId);
             }
             filterChain.doFilter(servletRequest, servletResponse);
         }

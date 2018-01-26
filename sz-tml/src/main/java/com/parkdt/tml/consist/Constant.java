@@ -9,7 +9,8 @@ public class Constant {
     public static final int USER_ROLE_DESIGNER = 2;//设计师
     public static final int USER_ROLE_PROJECT_MANAGER = 3;//项目经理
     public static final int USER_ROLE_PROJECT_PUBLISHER = 4;//项目导入方
-
+    public static final String SESSION_USER="userLogin";
+    public static final String SESSION_OPEN_ID="openId";
 
     public static enum Project_status {
         //项目状态（2采编中2、4认领中、5进行中6、已完成、7已取消、8已暂停）
