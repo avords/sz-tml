@@ -117,8 +117,8 @@
                 <input type="button" value="+ 已有心仪的项目经理" data-val="1">
                 <input type="button" value="+ 直接发布到一级市场" class="alt" data-val="2">
             </div>
-            <input type="button" value="保存" class="save" id="saveButton">
-            <#--<input type="button" value="确认提交">-->
+            <#--<input type="button" value="保存" class="save" id="saveButton">-->
+            <input type="button" value="确认提交" id="saveButton">
         </form>
     </div>
 </div>
@@ -166,12 +166,22 @@
                 return false;
             return true;
         }
-        
+        function isDecimal(str){
+            var patrn = /^\d{1,18}(\.\d{1,2})?$/;
+            if (!patrn.exec(str))
+                return false;
+            return true;
+        }
         $('#saveButton').click(function () {
             var planStartTime = $('input[name="planStartTime"]').val();
             var planEndTime = $('input[name="planEndTime"]').val();
             var projectName = $('input[name="projectName"]').val();
             var projectNum = $('input[name="projectNum"]').val();
+            
+            var constructionArea = $('input[name="constructionArea"]').val();
+            var planningArea = $('input[name="planningArea"]').val();
+            var putAmount = $('input[name="putAmount"]').val();
+            
             if(!projectName){
                 alert('请输入项目名称');
                 return false;
@@ -180,15 +190,33 @@
                 alert('请输入项目编号');
                 return false;
             }
-            if (planStartTime !== null || planStartTime !== undefined || planStartTime !== '') {
+            if (planStartTime) {
                 if(!isdate(planStartTime)){
                     alert('项目开始时间格式为:yyyy-MM-dd格式')
                     return false;
                 }
             }
-            if (planEndTime !== null || planEndTime !== undefined || planEndTime !== '') {
+            if (planEndTime) {
                 if(!isdate(planEndTime)){
                     alert('项目结束时间格式为:yyyy-MM-dd格式')
+                    return false;
+                }
+            }
+            if(constructionArea){
+                if(!isDecimal(constructionArea)){
+                    alert("建筑面积必须为数字");
+                    return false;
+                }
+            }
+            if(planningArea){
+                if(!isDecimal(planningArea)){
+                    alert("用地面积必须为数字");
+                    return false;
+                }
+            }
+            if(putAmount){
+                if(!isDecimal(putAmount)){
+                    alert("项目金额必须为数字");
                     return false;
                 }
             }
