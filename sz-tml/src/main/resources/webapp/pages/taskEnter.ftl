@@ -90,7 +90,15 @@
 
                 <div class="info">
                     <p>工作类型:
-                        <span>审核员</span>
+                        <span>
+                            <#if item.job_type=1>
+                                设计师
+                            <#elseif item.job_type=2>
+                                审核员
+                            <#else>
+                                其他
+                            </#if>
+                        </span>
                     </p>
                     <p>浏览量/认领数:
                         <span>${item.pv}/${item.claime_num}</span>
@@ -100,8 +108,10 @@
                     </p>
                 </div>
                 <div class="op">
-                    <input type="button" value="认领" class="claim" onclick="window.location.href='/task/detail/${item.id}'"/>
-                    <input type="button" value="分享" class="share" />
+                    <#if (item.plan_end_time?date) gt .now?date>
+                        <input type="button" value="认领" class="claim" onclick="window.location.href='/task/detail/${item.id}'"/>
+                    </#if>
+                    <#--<input type="button" value="分享" class="share" />-->
                 </div>
             </div>
         </li>

@@ -389,7 +389,7 @@
   </update>
   
   <select id="queryProjectDelivery" parameterType="java.util.Map" resultType="java.util.Map">
-    select DISTINCT d.id,b.project_name,d.output_value,d.pv,DATE_FORMAT(b.create_time,'%Y-%m-%d') create_time,claime_num,DATE_FORMAT(d.plan_end_time,'%Y-%m-%d') plan_end_time,im.company_name,im.company_id from t_project_delivery d 
+    select DISTINCT d.id,b.project_name,d.output_value,d.pv,DATE_FORMAT(b.create_time,'%Y-%m-%d') create_time,claime_num,DATE_FORMAT(d.plan_end_time,'%Y-%m-%d') plan_end_time,im.company_name,im.company_id,d.job_type from t_project_delivery d 
     <choose>
       <when test="isOne==true">
         INNER JOIN t_project_base_information b on(d.type=0 AND d.object_id=b.id)
@@ -426,4 +426,11 @@
     </if>
     ORDER BY b.create_time DESC 
   </select>
+  
+  <update id="updatePVById" parameterType="java.lang.Long">
+    UPDATE t_project_delivery set pv=IFNULL(pv,0)+1 WHERE id=#{id}
+  </update>
+  <update id="updateClaimeNumById" parameterType="java.lang.Long">
+    UPDATE t_project_delivery set claime_num=IFNULL(claime_num,0)+1 WHERE id=#{id}
+  </update>
 </mapper>

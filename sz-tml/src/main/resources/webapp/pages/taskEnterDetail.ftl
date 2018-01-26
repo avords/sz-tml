@@ -38,7 +38,7 @@
             </#if>
         </div>
         <div class="container article">
-            <form action="/task/saveClaime" method="post">
+            <form action="" id="data_form">
                 <input type="hidden" name="projectDeliveryId" value="${projectDelivery.id}"/>
                 <p class="title">认领方案</p>
                 <div class="claim">
@@ -65,15 +65,34 @@
                 <div class="plane">
                     <textarea cols="30" rows="5" placeholder="请输入报名说明..." name="workPlan"></textarea>
                 </div>
-                <div class="row">
-                    <input type="submit" value="认领"/>
-                </div>
+                <#if (projectDelivery.planEndTime?date) gt .now?date>
+                    <div class="data_form">
+                        <input type="button" value="认领" id="saveButton"/>
+                    </div>
+                </#if>
             </form>
         </div>
     </div>
 
 <script>
     $(function () {
+        $('#saveButton').click(function () {
+            $.ajax({
+                type:"POST",
+                dataType: "json",
+                url: "/task/saveClaime",
+                data: $('#data_form').serialize(),
+                success: function(response){
+                    if(response==true){
+                        alert('认领成功');
+                        window.location.href='/task/enter';
+                    } else{
+                        alert('之前已认领')
+                    }
+                }
+            });
+        });
+        
         $('.invite input[type="button"]').click(function () {
             $(this).siblings('input[type="button"]').addClass("alt");
             $(this).removeClass('alt');

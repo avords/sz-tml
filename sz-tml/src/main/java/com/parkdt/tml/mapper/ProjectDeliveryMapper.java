@@ -21,4 +21,8 @@ public interface ProjectDeliveryMapper {
     int updateByPrimaryKey(ProjectDelivery record);
 
     List<Map> queryProjectDelivery(Map params);
+
+    Integer updatePVById(Long id);
+    
+    Integer updateClaimeNumById(Long id);
 }

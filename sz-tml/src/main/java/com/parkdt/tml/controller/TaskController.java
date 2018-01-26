@@ -8,6 +8,7 @@ import com.parkdt.tml.domain.SysCity;
 import com.parkdt.tml.domain.SysGoodType;
 import com.parkdt.tml.domain.SysProjectCycle;
 import com.parkdt.tml.domain.SysTypeInfo;
+import com.parkdt.tml.service.ProjectDeliveryService;
 import com.parkdt.tml.service.ProjectService;
 import com.parkdt.tml.service.SysAreasExpertiseService;
 import com.parkdt.tml.service.SysCityService;
@@ -56,6 +57,8 @@ public class TaskController extends BaseController{
     private SysTypeInfoService sysTypeInfoService;
     @Autowired
     private SysProjectCycleService sysProjectCycleService;
+    @Autowired
+    private ProjectDeliveryService projectDeliveryService;
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
@@ -205,15 +208,17 @@ public class TaskController extends BaseController{
     @RequestMapping("detail/{projectDeliveryId}")
     public String taskDetail(Model model, HttpServletRequest req, @PathVariable Long projectDeliveryId) {
 
-        Long memberId = getMemberId();
-
+        //更新浏览人数
+        projectDeliveryService.updatePVById(projectDeliveryId);
         ProjectDelivery projectDelivery = projectService.getProjectDelivery(projectDeliveryId);
+        
         model.addAttribute("projectDelivery",projectDelivery);
         return "taskEnterDetail";
     }
     @RequestMapping("saveClaime")
-    public String saveClaime(ProjectClaimRecord projectClaimRecord,Model model, HttpServletRequest req) {
-
+    @ResponseBody
+    public boolean saveClaime(ProjectClaimRecord projectClaimRecord,Model model, HttpServletRequest req) {
+        boolean flag =false;
         //判断此人是否认领
         Long memberId=getMemberId();
         projectClaimRecord.setMemberId(memberId);
@@ -222,9 +227,12 @@ public class TaskController extends BaseController{
         boolean isClaimed = projectService.isClaimed(projectClaimRecord.getProjectDeliveryId(),memberId);
         //保存认领记录
         if(!isClaimed){
-            projectService.saveProjectClaimeRecord(projectClaimRecord);   
+            projectService.saveProjectClaimeRecord(projectClaimRecord);
+            //更新认领人数
+            projectDeliveryService.updateClaimeNumById(projectClaimRecord.getProjectDeliveryId());
+            flag = true;
         }
-        return "redirect:/task/detail/"+projectClaimRecord.getProjectDeliveryId();
+        return flag;
     }
     @RequestMapping("getCitys")
     @ResponseBody
