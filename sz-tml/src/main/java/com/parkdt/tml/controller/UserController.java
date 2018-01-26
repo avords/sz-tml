@@ -1,5 +1,6 @@
 package com.parkdt.tml.controller;
 
+import com.parkdt.tml.consist.Constant;
 import com.parkdt.tml.domain.PersonalBaseInfo;
 import com.parkdt.tml.domain.PersonalLoginInfo;
 import com.parkdt.tml.domain.PersonalVerificationCodeRecord;
@@ -123,7 +124,7 @@ public class UserController extends BaseController {
                     personalLoginInfo.setPassword(password);
                     personalLoginInfo.setWechatId(getOpenId());
                     personalLoginInfo.setRegistrationTime(new Date());
-                    personalLoginInfo.setRoleId(2);
+                    personalLoginInfo.setRoleId(Constant.USER_ROLE_DESIGNER);
                     if (userService.saveSelective(personalLoginInfo) > 0) {
 
                         personalLoginInfo = userService.getPersonalLoginInfoByOpenId(personalLoginInfo.getWechatId());
