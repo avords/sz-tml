@@ -74,9 +74,13 @@ public class UserController extends BaseController {
 
         PersonalLoginInfo loginInfo = userService.getPersonalLoginInfoById(memberId);
 
+        WxMpUser wxMpUser = weChatService.getWxMpUser(getOpenId());
         if (!StringKit.isNotEmpty(loginInfo.getHeader())) {
-            WxMpUser wxMpUser = weChatService.getWxMpUser(getOpenId());
             loginInfo.setHeader(wxMpUser.getHeadImgUrl());
+        }
+
+        if (!StringKit.isNotEmpty(personalBaseInfo.getName())) {
+            personalBaseInfo.setName(wxMpUser.getNickname());
         }
 
         model.addAttribute("loginInfo", loginInfo);
