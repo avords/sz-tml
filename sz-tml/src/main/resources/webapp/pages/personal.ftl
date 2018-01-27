@@ -17,7 +17,7 @@
     <div class="wrapper">
         <div class="info_head">
             <div class="user_pic">
-                <img src="/images/user-pic.gif" alt="" />
+                <img src="${loginInfo.header}" alt="" />
                 <a class="add_user_pic" href="javascript:void(0)">+</a>
             </div>
         </div>

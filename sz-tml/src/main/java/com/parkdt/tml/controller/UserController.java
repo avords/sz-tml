@@ -11,6 +11,9 @@ import com.parkdt.tml.service.UserService;
 import com.parkdt.tml.utils.EncryptUtil;
 import com.parkdt.tml.utils.RandomUtils;
 import com.parkdt.tml.utils.SMSUtil;
+import com.parkdt.tml.utils.StringKit;
+import com.parkdt.tml.weChat.WeChatService;
+import com.parkdt.tml.weChat.result.WxMpUser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
@@ -43,6 +46,9 @@ public class UserController extends BaseController {
     private UserService userService;
     @Autowired
     private TeamService teamService;
+
+    @Autowired
+    private WeChatService weChatService;
     @Autowired
     private PersonalVerificationCodeRecordService personalVerificationCodeRecordService;
 
@@ -65,6 +71,15 @@ public class UserController extends BaseController {
             personalBaseInfo.setBirthday(new Date());
             personalBaseInfo.setMemberId(memberId);
         }
+
+        PersonalLoginInfo loginInfo = userService.getPersonalLoginInfoById(memberId);
+
+        if (!StringKit.isNotEmpty(loginInfo.getHeader())) {
+            WxMpUser wxMpUser = weChatService.getWxMpUser(getOpenId());
+            loginInfo.setHeader(wxMpUser.getHeadImgUrl());
+        }
+
+        model.addAttribute("loginInfo", loginInfo);
         model.addAttribute("personalBaseInfo", personalBaseInfo);
         List<TeamBasicInformation> teamBasicInformations = teamService.getAllTeamBasicInfo();
         model.addAttribute("teamBasicInformations", teamBasicInformations);
@@ -92,7 +107,7 @@ public class UserController extends BaseController {
         userService.updatePersonalLoginInfo(personalLoginInfo);
         int i = userService.updatePersonInfo(personalBaseInfo);
 
-        return i==0?false:true;
+        return i == 0 ? false : true;
     }
 
     @RequestMapping("register")
@@ -125,6 +140,10 @@ public class UserController extends BaseController {
                     personalLoginInfo.setWechatId(getOpenId());
                     personalLoginInfo.setRegistrationTime(new Date());
                     personalLoginInfo.setRoleId(Constant.USER_ROLE_DESIGNER);
+
+                    WxMpUser wxMpUser = weChatService.getWxMpUser(getOpenId());
+                    personalLoginInfo.setHeader(wxMpUser.getHeadImgUrl());
+
                     if (userService.saveSelective(personalLoginInfo) > 0) {
 
                         personalLoginInfo = userService.getPersonalLoginInfoByOpenId(personalLoginInfo.getWechatId());
