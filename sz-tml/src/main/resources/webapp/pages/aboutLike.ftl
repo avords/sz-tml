@@ -50,14 +50,21 @@
 </nav>
 <div class="wrapper">
     <div class="platform active">
-    ${sheji.content}
+        <h2>${sheji.description}</h2>
+        ${sheji.content}
         <#list designList as item>
             <img class="top30" src="${item.img}" alt=""/>
             <p>${item.title}</p>
         </#list>
     </div>
-    <div class="platform">${keji.content}</div>
-    <div class="platform">${kongjian.content}</div>
+    <div class="platform">
+        <h2>${keji.description}</h2>
+        ${keji.content}
+    </div>
+    <div class="platform">
+        <h2>${kongjian.description}</h2>
+        ${kongjian.content}
+    </div>
 </div>
 </body>
 

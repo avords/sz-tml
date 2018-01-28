@@ -52,21 +52,6 @@ public class LinksController {
     @Autowired
     private SysAreasExpertiseService sysAreasExpertiseService;
 
-    @RequestMapping("platform")
-    public String platform(Model model, HttpServletRequest req) {
-        //功能
-        List<OffiContent> gnList = contentService.getContentByPartId(2L);
-        model.addAttribute("gnList", gnList);
-        //价格
-        List<OffiContent> jgList = contentService.getContentByPartId(3L);
-        model.addAttribute("jgList", jgList);
-        //下载
-        List<OffiContent> xzList = contentService.getContentByPartId(5L);
-        model.addAttribute("xzList", xzList);
-
-        return "likePlatfom";
-    }
-
     @RequestMapping("Resources")
     public String Resources(Model model, HttpServletRequest req) {
 
@@ -148,12 +133,27 @@ public class LinksController {
         model.addAttribute("sheji", content1);
         model.addAttribute("designList", allDesign);
         //立可科技
-        OffiContent content2 = contentService.getContentByContentId(1059L);
+        OffiContent content2 = contentService.getContentByContentId(925L);
         model.addAttribute("keji", content2);
         //立可空间
-        OffiContent content3 = contentService.getContentByContentId(1061L);
+        OffiContent content3 = contentService.getContentByContentId(930L);
         model.addAttribute("kongjian", content3);
 
         return "aboutLike";
+    }
+
+    @RequestMapping("platform")
+    public String platform(Model model, HttpServletRequest req) {
+        //功能
+        List<OffiContent> gnList = contentService.getContentByPartId(2L);
+        model.addAttribute("gnList", gnList);
+        //价格
+        List<OffiContent> jgList = contentService.getContentByPartId(3L);
+        model.addAttribute("jgList", jgList);
+        //下载
+        List<OffiContent> xzList = contentService.getContentByPartId(5L);
+        model.addAttribute("xzList", xzList);
+
+        return "likePlatfom";
     }
 }
