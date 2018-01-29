@@ -50,27 +50,6 @@ public class MyMenu {
         taskCenter.put("sub_button", taskCenterSubMenuArray);
         button.add(taskCenter);
 
-
-        JSONObject personal = new JSONObject();
-        personal.put("name", "个人中心");
-        JSONArray personalSubMenuArray = new JSONArray();
-
-        JSONObject infoBind = new JSONObject();
-        infoBind.put("type", "view");
-        infoBind.put("name", "用户注册");
-        infoBind.put("url", WeChatConfig.getWebUrl() + "auth/login");
-        personalSubMenuArray.add(infoBind);
-
-        JSONObject personalInfo = new JSONObject();
-        personalInfo.put("type", "view");
-        personalInfo.put("name", "个人信息");
-        personalInfo.put("url", WeChatConfig.getWebUrl() + "auth/login");
-        personalSubMenuArray.add(personalInfo);
-
-        personal.put("sub_button", personalSubMenuArray);
-        button.add(personal);
-
-
         JSONObject like = new JSONObject();
         like.put("name", "立可空间");
         JSONArray likeSubMenuArray = new JSONArray();
@@ -95,6 +74,13 @@ public class MyMenu {
 
         like.put("sub_button", likeSubMenuArray);
         button.add(like);
+
+        JSONObject personal = new JSONObject();
+
+        personal.put("type", "view");
+        personal.put("name", "个人中心");
+        personal.put("url", WeChatConfig.getWebUrl() + "auth/login");
+        button.add(personal);
 
         menuJson.put("button", button);
 
