@@ -38,8 +38,8 @@ public class SecurityFilter implements Filter {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
             String code = request.getParameter("code");
             if(StringUtils.isNotBlank(code)){
-                String opentId = weChatService.getOpenId(code);
-                request.getSession().setAttribute(Constant.SESSION_OPEN_ID,opentId);
+                String openId = weChatService.getOpenId(code);
+                request.getSession().setAttribute(Constant.SESSION_OPEN_ID,openId);
             }
             filterChain.doFilter(servletRequest, servletResponse);
         }
