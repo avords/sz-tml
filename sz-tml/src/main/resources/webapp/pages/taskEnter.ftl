@@ -18,9 +18,9 @@
                     <a href="#">切换</a>
                     <a class="active" href="javascript:void(0);" onclick="tabSC();">
                         <#if oneStr=='1'>
-                            一级市场
-                        <#else>
                             二级市场
+                        <#else>
+                            一级市场
                         </#if>
                     </a>
                 </div>

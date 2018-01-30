@@ -48,11 +48,11 @@
                 <div class="row">
                     <div class="claim" style="width:62%;">
                         <span style="width: 30%">工作周期</span>
-                        <input type="date" placeholder="开始时间" style="width: 70%" name="startTime">
+                        <input type="text" placeholder="开始时间" style="width: 70%" name="startTime">
                     </div>
                     <span class="sp">~</span>
                     <div class="claim" style="width:30%;float:right;">
-                        <input type="date" placeholder="结束时间" style="width:100%;" name="endTime">
+                        <input type="text" placeholder="结束时间" style="width:100%;" name="endTime">
                     </div>
                 </div>
                 <p class="title">邀请设计师</p>
@@ -77,6 +77,20 @@
 <script>
     $(function () {
         $('#saveButton').click(function () {
+            var startDate = $('input[name="startTime"]').val();
+            var endDate = $('input[name="endTime"]').val();
+            if (startDate) {
+                if(!isdate(startDate)){
+                    alert('工作周期格式为:yyyy-MM-dd格式');
+                    return false;
+                }
+            }
+            if (endDate) {
+                if(!isdate(endDate)){
+                    alert('工作周期格式为:yyyy-MM-dd格式');
+                    return false;
+                }
+            }
             $.ajax({
                 type:"POST",
                 dataType: "json",
