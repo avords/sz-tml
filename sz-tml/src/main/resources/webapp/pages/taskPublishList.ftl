@@ -69,8 +69,8 @@
         </tr>
         <tr>
             <td class="center">${item['project_name']}</td>
-            <td>${item['province_name']}${item['type_name']}</td>
-            <td>${item['city_name']}</td>
+            <td>${item['type_name']}</td>
+            <td>${item['province_name']}${item['city_name']}</td>
             <td>${item['claime_num']}</td>
         </tr>
         </#list>
