@@ -46,7 +46,7 @@
                             </#if>
                         </#list>
             </select>
-            <select name="companyId">
+            <#--<select name="companyId">
                 <option value="">项目导入方</option>
                 <#list projectImports as item>
                     <#if companyId==item['company_id']>
@@ -55,16 +55,16 @@
                         <option value="${item['company_id']}">${item['company_name']}</option>
                     </#if>
                 </#list>
-            </select>
+            </select>-->
             <div class="row">
                 <input type="text" placeholder="项目产值" name="startOutputValue" value="${startOutputValue}"/>
                 <span class="sp">~</span>
                 <input type="text" style="float:right" name="endOutputValue" value="${endOutputValue}"/>
             </div>
             <div class="row">
-                <input type="date" placeholder="发布时间" name="startDate" value="${startDate}"/>
+                <input type="text" placeholder="发布时间" name="startDate" value="${startDate}"/>
                 <span class="sp">~</span>
-                <input type="date" style="float:right" name="endDate" value="${endDate}"/>
+                <input type="text" style="float:right" name="endDate" value="${endDate}"/>
             </div>
             <input type="button" value="搜索" onclick="search();">
         </form>
