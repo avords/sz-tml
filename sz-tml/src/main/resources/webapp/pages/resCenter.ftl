@@ -24,7 +24,7 @@
                         </#if>
             </a>
         </div>
-        <form action="/task/enter" class="data_form" id="search_from" method="post">
+        <form action="/links/Resources?search=1" class="data_form" id="search_from" method="post">
             <input type="hidden" name="oneStr" value="${oneStr}">
             <select name="fieldId">
                 <option value="">领域</option>
@@ -46,16 +46,16 @@
                             </#if>
                         </#list>
             </select>
-            <#--<select name="companyId">
+            <select name="companyId">
                 <option value="">项目导入方</option>
                 <#list projectImports as item>
-                    <#if companyId==item['company_id']>
+                    <#if companyId==item['company_id']||(companyName??&&item['company_name']==companyName)>
                         <option value="${item['company_id']}" selected="selected">${item['company_name']}</option>
                     <#else>
                         <option value="${item['company_id']}">${item['company_name']}</option>
                     </#if>
                 </#list>
-            </select>-->
+            </select>
             <div class="row">
                 <input type="text" placeholder="项目产值" name="startOutputValue" value="${startOutputValue}"/>
                 <span class="sp">~</span>
@@ -108,8 +108,10 @@
                         </p>
                     </div>
                     <div class="op">
-                        <input type="button" value="认领" class="claim" onclick="window.location.href='/task/detail/${item.id}'"/>
-                        <input type="button" value="分享" class="share" />
+                        <#if (item.plan_end_time?date) gt .now?date>
+                            <input type="button" value="认领" class="claim" onclick="window.location.href='/task/detail/${item.id}'"/>
+                        </#if>
+                        <#--<input type="button" value="分享" class="share" />-->
                     </div>
                 </div>
             </li>
@@ -127,13 +129,13 @@
         var endDate = $('input[name="endDate"]').val();
         if (startDate) {
             if(!isdate(startDate)){
-                alert('项目开始时间格式为:yyyy-MM-dd格式');
+                alert('项目时间格式为:yyyy-MM-dd格式');
                 return false;
             }
         }
         if (endDate) {
             if(!isdate(endDate)){
-                alert('项目结束时间格式为:yyyy-MM-dd格式');
+                alert('项目时间格式为:yyyy-MM-dd格式');
                 return false;
             }
         }

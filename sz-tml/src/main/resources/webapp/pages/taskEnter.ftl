@@ -62,9 +62,9 @@
                         <input type="text" style="float:right" name="endOutputValue" value="${endOutputValue}"/>
                     </div>
                     <div class="row">
-                        <input type="text" placeholder="开始时间" name="startDate" value="${startDate}"/>
+                        <input type="text" placeholder="发布时间" name="startDate" value="${startDate}"/>
                         <span class="sp">~</span>
-                        <input type="text" placeholder="结束时间" style="float:right" name="endDate" value="${endDate}"/>
+                        <input type="text" style="float:right" name="endDate" value="${endDate}"/>
                     </div>
                     <input type="button" value="搜索" onclick="search();">
                 </form>
@@ -129,13 +129,13 @@
         var endDate = $('input[name="endDate"]').val();
         if (startDate) {
             if(!isdate(startDate)){
-                alert('项目开始时间格式为:yyyy-MM-dd格式');
+                alert('项目发布时间格式为:yyyy-MM-dd格式');
                 return false;
             }
         }
         if (endDate) {
             if(!isdate(endDate)){
-                alert('项目结束时间格式为:yyyy-MM-dd格式');
+                alert('项目发布时间格式为:yyyy-MM-dd格式');
                 return false;
             }
         }

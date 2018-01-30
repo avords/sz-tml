@@ -11,6 +11,7 @@ import com.parkdt.tml.service.ProjectService;
 import com.parkdt.tml.service.SysAreasExpertiseService;
 import com.parkdt.tml.service.SysCityService;
 import com.parkdt.tml.service.SysGoodTypeService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,10 @@ public class LinksController {
             params.put("startOutputValue",startOutputValue);
             params.put("endOutputValue",endOutputValue);
             params.put("companyId",companyId);
-            params.put("companyName","资源中心");
+            if(StringUtils.isBlank(req.getParameter("search"))){
+                params.put("companyName","资源中心");
+                model.addAttribute("companyName","资源中心");
+            }
             List<Map> projectDeliverys = projectService.queryProjectDelivery(params);
             model.addAttribute("sysAreasExpertises",sysAreasExpertises);
             model.addAttribute("sysGoodTypes",sysGoodTypes);
