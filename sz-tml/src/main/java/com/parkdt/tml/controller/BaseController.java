@@ -23,22 +23,28 @@ public class BaseController {
 
     @Autowired
     private UserService userService;
-
-    public Long getMemberId() {
+    public PersonalLoginInfo getCurrentUser(){
         HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = req.getSession();
         PersonalLoginInfo personalLoginInfo = (PersonalLoginInfo) session.getAttribute(Constant.SESSION_USER);
         if(personalLoginInfo!=null){
-            return personalLoginInfo.getId();
+            return personalLoginInfo;
         }
         String openId = getOpenId();
 
         if (StringKit.isNotEmpty(openId)) {
             PersonalLoginInfo user = userService.getPersonalLoginInfoByOpenId(openId);
-            return user == null ? 0L : user.getId();
+            return user;
+        }
+        return null;
+    }
+    public Long getMemberId() {
+        PersonalLoginInfo personalLoginInfo = getCurrentUser();
+        if(personalLoginInfo==null){
+            return 0L;
         }
         //测试
-        return 0L;
+        return personalLoginInfo.getId();
     }
 
     public String getOpenId() {
