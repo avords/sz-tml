@@ -424,6 +424,9 @@
     <if test="companyId!=null">
       AND im.company_id=#{companyId}
     </if>
+    <if test="companyName!=null">
+      AND im.company_name=#{companyName}
+    </if>
     ORDER BY b.create_time DESC 
   </select>
   

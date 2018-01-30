@@ -66,7 +66,7 @@
                 <span class="sp">~</span>
                 <input type="date" style="float:right" name="endDate" value="${endDate}"/>
             </div>
-            <input type="button" value="搜索" onclick="$('#search_from').submit();">
+            <input type="button" value="搜索" onclick="search();">
         </form>
     </div>
 </div>
@@ -90,7 +90,15 @@
 
                     <div class="info">
                         <p>工作类型:
-                            <span>审核员</span>
+                            <span>
+                                <#if item.job_type=1>
+                                    设计师
+                                <#elseif item.job_type=2>
+                                    审核员
+                                <#else>
+                                    其他
+                                </#if>
+                        </span>
                         </p>
                         <p>浏览量/认领数:
                             <span>${item.pv}/${item.claime_num}</span>
@@ -108,6 +116,29 @@
         </#list>
 </ul>
 <script>
+    function isdate(str){
+        var patrn = /^\d{4}-\d{2}-\d{2}$/;
+        if (!patrn.exec(str))
+            return false;
+        return true;
+    }
+    function search() {
+        var startDate = $('input[name="startDate"]').val();
+        var endDate = $('input[name="endDate"]').val();
+        if (startDate) {
+            if(!isdate(startDate)){
+                alert('项目开始时间格式为:yyyy-MM-dd格式');
+                return false;
+            }
+        }
+        if (endDate) {
+            if(!isdate(endDate)){
+                alert('项目结束时间格式为:yyyy-MM-dd格式');
+                return false;
+            }
+        }
+        $('#search_from').submit();
+    }
     function tabSC() {
         var oneStr = $('input[name="oneStr"]').val();
         if(oneStr=='1'){

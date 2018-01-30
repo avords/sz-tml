@@ -192,13 +192,13 @@
             }
             if (planStartTime) {
                 if(!isdate(planStartTime)){
-                    alert('项目开始时间格式为:yyyy-MM-dd格式')
+                    alert('项目开始时间格式为:yyyy-MM-dd格式');
                     return false;
                 }
             }
             if (planEndTime) {
                 if(!isdate(planEndTime)){
-                    alert('项目结束时间格式为:yyyy-MM-dd格式')
+                    alert('项目结束时间格式为:yyyy-MM-dd格式');
                     return false;
                 }
             }

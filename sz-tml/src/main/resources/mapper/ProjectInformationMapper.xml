@@ -551,7 +551,7 @@
   </select>
 
   <select id="queryProjectList" parameterType="java.util.Map" resultType="java.util.Map">
-    SELECT
+    SELECT DISTINCT 
     c.id,
     c.project_name,
     a.detailed_address,
@@ -567,11 +567,17 @@
     LEFT JOIN t_project_base_information AS c ON (a.project_base_id = c.id)
     LEFT JOIN t_sys_good_type AS b ON (a.design_type_id = b.id)
     LEFT JOIN t_project_importer_info AS d ON c.member_id = d.member_id
-    LEFT JOIN t_project_top AS e ON a.project_base_id = e.project_id AND e.type = 2 and e.member_id=#{memberId}  and e.is_del=0
+    LEFT JOIN t_project_top AS e ON a.project_base_id = e.project_id AND e.type = 2 
+    <if test="memberId!=null">
+      and e.member_id=#{memberId}  
+    </if>
+    and e.is_del=0
 
     left join t_project_delivery pd on pd.project_id = a.project_base_id and pd.type=0
     where 1=1 and c.is_del = 0
-    AND d.member_id=#{memberId}
+    <if test="memberId!=null">
+      AND d.member_id=#{memberId}
+    </if>
     <if test="status != null and status != -1">
       and a.project_status = #{status}
     </if>

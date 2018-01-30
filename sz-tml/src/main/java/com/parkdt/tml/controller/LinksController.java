@@ -88,6 +88,7 @@ public class LinksController {
             params.put("startOutputValue",startOutputValue);
             params.put("endOutputValue",endOutputValue);
             params.put("companyId",companyId);
+            params.put("companyName","资源中心");
             List<Map> projectDeliverys = projectService.queryProjectDelivery(params);
             model.addAttribute("sysAreasExpertises",sysAreasExpertises);
             model.addAttribute("sysGoodTypes",sysGoodTypes);

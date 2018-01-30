@@ -67,7 +67,7 @@ public class TaskController extends BaseController{
     @RequestMapping("publish")
     public String publish(Model model, HttpServletRequest req) {
         Map<String, Object> params = new HashMap<>();
-        params.put("memberId",getMemberId());
+        //params.put("memberId",getMemberId());
         //得到所有类型
         List<SysGoodType> sysGoodTypes = sysGoodTypeService.getAllSysGoodType();
         List<SysCity> provinces = sysCityService.getAllProvince();
