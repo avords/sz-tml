@@ -76,6 +76,14 @@
 
 <script>
     $(function () {
+        
+        function isdate(str){
+            var patrn = /^\d{4}-\d{2}-\d{2}$/;
+            if (!patrn.exec(str))
+                return false;
+            return true;
+        }
+        
         $('#saveButton').click(function () {
             var startDate = $('input[name="startTime"]').val();
             var endDate = $('input[name="endTime"]').val();
