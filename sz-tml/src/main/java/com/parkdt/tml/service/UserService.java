@@ -55,4 +55,6 @@ public interface UserService {
     int saveSelective(PersonalLoginInfo personalLoginInfo);
 
     int updateWeiXinByMemberId(Long id, String openId);
+
+    int updateOpenIdByPhone(String phone, String openId);
 }

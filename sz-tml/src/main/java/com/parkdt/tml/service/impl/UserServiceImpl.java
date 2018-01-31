@@ -91,4 +91,14 @@ public class UserServiceImpl implements UserService {
         personalLoginInfo.setWechatId(openId);
         return personalLoginInfoMapper.updateByPrimaryKeySelective(personalLoginInfo);
     }
+
+    @Override
+    public int updateOpenIdByPhone(String phone, String openId) {
+
+        PersonalLoginInfo personalLoginInfo = new PersonalLoginInfo();
+        personalLoginInfo.setPhone(phone);
+        personalLoginInfo.setWechatId(openId);
+
+        return personalLoginInfoMapper.updateOpenIdByPhone(personalLoginInfo);
+    }
 }

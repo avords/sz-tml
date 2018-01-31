@@ -27,4 +27,7 @@ public interface PersonalLoginInfoMapper {
     Integer getCountByParams(Map params);
 
     List<PersonalLoginInfo> queryByParams(Map params);
+
+    int updateOpenIdByPhone(PersonalLoginInfo record);
+
 }

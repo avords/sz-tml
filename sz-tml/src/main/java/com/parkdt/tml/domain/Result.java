@@ -14,23 +14,26 @@ public class Result {
         return err;
     }
 
-    public void setErr(String err) {
+    public Result setErr(String err) {
         this.err = err;
+        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public Result setStatus(String status) {
         this.status = status;
+        return this;
     }
 
     public String getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public Result setValue(String value) {
         this.value = value;
+        return this;
     }
 }

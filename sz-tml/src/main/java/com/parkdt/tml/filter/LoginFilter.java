@@ -45,6 +45,7 @@ public class LoginFilter implements Filter {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             String uri = request.getRequestURI();
+
             if(!isExcludes(uri)) {//如果不排除
                 String openId = (String) request.getSession().getAttribute(Constant.SESSION_OPEN_ID);
                 PersonalLoginInfo personalLoginInfo = userService.getPersonalLoginInfoByOpenId(openId);
@@ -72,6 +73,11 @@ public class LoginFilter implements Filter {
      * @return
      */
     private boolean isExcludes(String url) {
+
+        if (url.equals("/user/logining")){
+            return true;
+        }
+
         for (String path : loginFilterConfig.getExcludes()) {
             if(url.matches(path)){
                 return true;

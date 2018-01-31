@@ -3,7 +3,7 @@
 
 <head>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <title>用户注册</title>
+    <title>用户登录</title>
     <link href="/css/style.css" rel="stylesheet" />
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 
@@ -19,29 +19,27 @@
     </header>
     <div class="wrapper">
         <div class="container">
-            <h1>用户注册</h1>
-            <form action="/user/registering" class="data_form" method="post">
+            <h1>用户登录</h1>
+            <form class="data_form" method="post">
                 <input type="hidden" name="wechatId" value="${personalLoginInfo.wechatId}"/>
                 <input class="required phone" type="text" placeholder="手机号" name="phone"/>
-                <input class="required {account_pass:[6,8]}" type="password" placeholder="输入密码" name="password"/>
-                <input class="{pwd_is_equal:['password']}" type="password" placeholder="再次输入密码" id="pwd"/>
                 <div class="row">
                     <input type="text" class="required valid_input"  placeholder="验证码" name="smsCode"/>
                     <input type="button" class="valid_btn" value="获取验证码">
                 </div>
-                <input type="button" value="注册" id="subButton">
-                <input type="button" value="登录" class="claim" onclick="window.location.href='/user/login'"/>
+                <input type="button" value="登录" id="subButton">
+                <input type="button" value="注册" class="claim" onclick="window.location.href='/user/register'"/>
             </form>
+
         </div>
     </div>
 <script>
     $(function () {
-
         $('#subButton').click(function () {
             $.ajax({
                 type:"POST",
                 dataType: "json",
-                url: "/user/registering",
+                url: "/user/logining",
                 data: $('.data_form').serialize(),
                 success: function(response){
                     if(response.status=="success"){
@@ -54,23 +52,12 @@
                 }
             });
         });
-        //$('.data_form').valid();
 
         $('.valid_btn').click(function () {
             //验证两次密码是否相等
             var phone = $('input[name="phone"]').val();
-            var pwd = $('input[name="password"]').val();
-            var pwd1 = $('#pwd').val();
             if(phone==''){
                 alert('请输入手机号');
-                return false;
-            }
-            if(pwd==''){
-                alert('请输入密码');
-                return false;
-            }
-            if(pwd!=pwd1){
-                alert('两次输入的密码不一致');
                 return false;
             }
             //发送验证码

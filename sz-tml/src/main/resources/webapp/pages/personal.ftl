@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="container">
-            <form action="/user/savePersonal" class="data_form" id="form" method="post">
+            <form action="/user/personaling" class="data_form" id="form" method="post">
                 <input type="hidden" name="id" value="${personalBaseInfo.id}"/>
                 <input type="hidden" name="memberId" value="${personalBaseInfo.memberId}"/>
                 <input type="text" placeholder="请输入姓名" name="name" value="${personalBaseInfo.name}"/>
@@ -52,7 +52,7 @@
             $.ajax({
                 type:"POST",
                 dataType: "json",
-                url: "/user/savePersonal",
+                url: "/user/personaling",
                 data: $('.data_form').serialize(),
                 success: function(response){
                     if(response==true){

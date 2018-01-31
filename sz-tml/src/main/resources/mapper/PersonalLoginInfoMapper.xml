@@ -205,4 +205,12 @@
     SELECT * FROM t_personal_login_info WHERE 1=1
     <include refid="Base_Column_Query_List"/>
   </select>
+
+  <update id="updateOpenIdByPhone" parameterType="com.parkdt.tml.domain.PersonalLoginInfo" >
+    update t_personal_login_info
+    set
+    wechat_id = #{wechatId,jdbcType=VARCHAR}
+
+    where phone = #{phone,jdbcType=VARCHAR}
+  </update>
 </mapper>
