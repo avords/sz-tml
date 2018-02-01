@@ -23,7 +23,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -228,7 +227,8 @@ public class UserController extends BaseController {
         }
 
         if (!StringKit.isNotEmpty(personalBaseInfo.getName())) {
-            personalBaseInfo.setName(wxMpUser.getNickname());
+            //personalBaseInfo.setName(wxMpUser.getNickname());
+            personalBaseInfo.setPhone(personalBaseInfo.getPhone());
         }
 
         model.addAttribute("loginInfo", loginInfo);
