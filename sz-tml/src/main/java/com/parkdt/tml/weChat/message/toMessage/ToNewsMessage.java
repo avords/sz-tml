@@ -4,11 +4,14 @@ import com.parkdt.tml.weChat.message.artice.Article;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class ToNewsMessage extends ToMessage {
 
+    private Logger logger = LoggerFactory.getLogger(ToNewsMessage.class);
     private int ArticleCount;
 
     private List<Article> Articles;
@@ -55,7 +58,7 @@ public class ToNewsMessage extends ToMessage {
             Url.addCDATA(article.getUrl());
         }
 
-        System.out.println(doc.getRootElement().asXML());
+        logger.info(doc.getRootElement().asXML());
         return doc.getRootElement().asXML();
     }
 

@@ -3,9 +3,13 @@ package com.parkdt.tml.weChat.message.toMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class ToTextMessage extends ToMessage {
+
+    private Logger logger = LoggerFactory.getLogger(ToTextMessage.class);
 
     private String Content;
 
@@ -29,7 +33,7 @@ public class ToTextMessage extends ToMessage {
         Element Content = root.addElement("Content");
         Content.addCDATA(this.getContent());
 
-        System.out.println(doc.getRootElement().asXML());
+        logger.info(doc.getRootElement().asXML());
         return doc.getRootElement().asXML();
     }
 

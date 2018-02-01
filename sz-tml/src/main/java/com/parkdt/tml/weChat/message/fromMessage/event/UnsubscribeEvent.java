@@ -1,10 +1,14 @@
 package com.parkdt.tml.weChat.message.fromMessage.event;
 
 import com.parkdt.tml.weChat.OpenIdToShopIdMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 public class UnsubscribeEvent extends Event {
+
+    private Logger logger = LoggerFactory.getLogger(EventMessageFactory.class);
 
     public UnsubscribeEvent(Map<String, String> param) {
         super(param);
@@ -17,8 +21,8 @@ public class UnsubscribeEvent extends Event {
 
         OpenIdToShopIdMap.remove(this.getFromUserName());
 
-        System.out.println("UnsubscribeEvent成功。");
-        System.out.println("FromUserName: " + this.getFromUserName());
+        logger.info("UnsubscribeEvent成功。");
+        logger.info("FromUserName: " + this.getFromUserName());
         return super.build();
     }
 

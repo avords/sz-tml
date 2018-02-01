@@ -1,10 +1,14 @@
 package com.parkdt.tml.weChat.message.fromMessage.event;
 
 import com.parkdt.tml.weChat.message.MessageType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 public class EventMessageFactory {
+
+    private static Logger logger = LoggerFactory.getLogger(EventMessageFactory.class);
 
     /**
      * 创建回复消息
@@ -15,8 +19,8 @@ public class EventMessageFactory {
     public static String createMessage(Map<String, String> param) {
         Event eventMessage = null;
         String event = param.get("Event");
-        System.out.println();
-        System.out.println("event = " + event);
+
+        logger.info("event = " + event);
 
         if (event.equals(MessageType.EVENT_TYPE_SUBSCRIBE)) {
             eventMessage = new SubscribeEvent(param);
@@ -32,8 +36,7 @@ public class EventMessageFactory {
             eventMessage = new TemplateSendJobFinish(param);
         }
 
-        System.out.println("opendId = " + param.get("FromUserName"));
-
+        logger.info("opendId = " + param.get("FromUserName"));
         eventMessage.setFromUserName(param.get("FromUserName"));
         eventMessage.setToUserName(param.get("ToUserName"));
         return eventMessage.build();

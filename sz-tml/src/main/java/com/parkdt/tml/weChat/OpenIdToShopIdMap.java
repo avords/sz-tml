@@ -4,12 +4,15 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.parkdt.tml.config.WeChatConfig;
 import com.parkdt.tml.utils.HttpPostClient;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class OpenIdToShopIdMap {
+
+    private static Logger logger = LoggerFactory.getLogger(OpenIdToShopIdMap.class);
 
     private static ConcurrentHashMap<String, HashSet<String>> map = new ConcurrentHashMap<String, HashSet<String>>();
 
@@ -21,9 +24,7 @@ public class OpenIdToShopIdMap {
      */
     public static void loadMap() {
         String result = HttpPostClient.doHttpPost(WeChatConfig.getWebUrl(), "merQueryShopUID.mas", null);
-        System.out.println();
-        System.out.println("OpenIdToShopIdMap");
-        System.out.println(result);
+        logger.info("OpenIdToShopIdMap:" + result);
         if (result.indexOf("result") == -1) {
             JSONArray array = JSONArray.parseArray(result);
             for (int i = 0; i < array.size(); i++) {
@@ -73,7 +74,7 @@ public class OpenIdToShopIdMap {
             param.put("shopUIDJson", json.toJSONString());
             param.put("type", "1");
             String result = HttpPostClient.doHttpPost(WeChatConfig.getWebUrl(), "merModifyShopUID.mas", param);
-            System.out.println(result);
+            logger.info(result);
         }
 
     }
@@ -101,7 +102,7 @@ public class OpenIdToShopIdMap {
             param.put("shopUIDJson", json.toJSONString());
             param.put("type", "2");
             String result = HttpPostClient.doHttpPost(WeChatConfig.getWebUrl(), "merModifyShopUID.mas", param);
-            System.out.println(result);
+            logger.info(result);
         }
     }
 

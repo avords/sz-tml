@@ -8,6 +8,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,6 +24,8 @@ import java.util.Set;
 
 
 public class HttpPostClient {
+
+    private static Logger logger = LoggerFactory.getLogger(HttpPostClient.class);
 
     public static String doHttpPost(String webPath, String method, Map<String, String> param) {
         List<NameValuePair> p = null;
@@ -111,8 +115,7 @@ public class HttpPostClient {
                 result += line;
             }
         } catch (Exception e) {
-            System.out.println("发送 POST 请求出现异常！" + e);
-            e.printStackTrace();
+            logger.error("发送 POST 请求出现异常！" + e);
         } finally {
             try {
                 if (in != null) {

@@ -1,10 +1,14 @@
 package com.parkdt.tml.weChat.message.fromMessage.event;
 
 import com.parkdt.tml.weChat.message.toMessage.ToMessageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 public class SubscribeEvent extends Event {
+
+    private Logger logger = LoggerFactory.getLogger(EventMessageFactory.class);
 
     //qrscene_123123
     private String EventKey;
@@ -25,9 +29,7 @@ public class SubscribeEvent extends Event {
 
     @Override
     public String build() {
-        System.out.println();
-        System.out.println("订阅我。。。");
-
+        logger.info("订阅我。。。");
         return ToMessageFactory.subscribeTextMessage(this);
     }
 

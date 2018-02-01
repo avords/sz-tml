@@ -11,6 +11,8 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,8 @@ import java.util.Map;
 
 @Service
 public class WeChatService {
+
+    private static Logger logger = LoggerFactory.getLogger(WeChatService.class);
 
     /**
      * 验证签名
@@ -66,17 +70,16 @@ public class WeChatService {
      * @return
      */
     public String getOpenId(String code) {
-        System.out.println("-------code = " + code + "--------------");
+        logger.info("-------code = " + code + "--------------");
+
         StringBuffer url = new StringBuffer("https://api.weixin.qq.com/sns/oauth2/access_token?");
         url.append("appid=" + WeChatConfig.getAppid() + "&secret=" + WeChatConfig.getAppSecret());
         url.append("&code=" + code + "&grant_type=authorization_code");
         String result = HttpPostClient.doHttpPost(url.toString(), null, null);
-        System.out.println(result);
-
+        logger.info(result);
         JSONObject openidJson = JSONObject.parseObject(result);
         String openid = openidJson.getString("openid");
-        System.out.println();
-        System.out.println("openid = " + openid);
+        logger.info("openid = " + openid);
 
         return openid;
     }
@@ -87,7 +90,7 @@ public class WeChatService {
         url.append("access_token=" + WeChatTokenService.getAccessToken() + "&openid=" + openId);
         url.append("&lang=zh_CN");
         String result = HttpPostClient.doHttpPost(url.toString(), null, null);
-        System.out.println(result);
+        logger.info(result);
 
         return WxMpUser.fromJson(result);
     }
@@ -108,9 +111,12 @@ public class WeChatService {
             @SuppressWarnings("unchecked")
             List<Element> elementList = root.elements();
             // 遍历所有子节点
-            for (Element e : elementList)
+            for (Element e : elementList) {
                 map.put(e.getName(), e.getText());
-            System.out.println("我是 " + map.get("Content") + ", 我的openid=" + map.get("FromUserName"));
+            }
+
+            logger.info("我是 " + map.get("Content") + ", 我的openid=" + map.get("FromUserName"));
+
             // 释放资源
             inputStream.close();
             inputStream = null;

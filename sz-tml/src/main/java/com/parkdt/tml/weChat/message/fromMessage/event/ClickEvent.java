@@ -4,12 +4,16 @@ import com.parkdt.tml.weChat.OpenIdToShopIdMap;
 import com.parkdt.tml.weChat.message.artice.Article;
 import com.parkdt.tml.weChat.message.artice.ArticlesFactory;
 import com.parkdt.tml.weChat.message.toMessage.ToMessageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 
 
 public class ClickEvent extends Event {
+
+    private Logger logger = LoggerFactory.getLogger(ClickEvent.class);
 
     /**
      * 事件KEY值，与自定义菜单接口中KEY值对应
@@ -29,8 +33,8 @@ public class ClickEvent extends Event {
 
     @Override
     public String build() {
-        System.out.println("EventKey = " + EventKey);
 
+        logger.info("EventKey = " + EventKey);
         if (EventKeySet.MERCHANT_IN.equals(EventKey)) {
             return ToMessageFactory.merchantInTextMessage(this);
         }

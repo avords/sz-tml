@@ -1,12 +1,15 @@
 package com.parkdt.tml.weChat.message.artice;
 
 import com.parkdt.tml.config.WeChatConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ArticlesFactory {
+    private static Logger logger = LoggerFactory.getLogger(ArticlesFactory.class);
 
     /**
      * 订阅时推送的图文消息
@@ -28,8 +31,8 @@ public class ArticlesFactory {
         List<Article> Articles = new ArrayList<Article>();
         Article article = new Article();
         article.setPicUrl(WeChatConfig.getWebUrl() + "img/receiveOrderLogo.png");
-        System.out.println();
-        System.out.println("receiveOrderLogo.png");
+
+        logger.info("receiveOrderLogo.png");
         Articles.add(article);
         return Articles;
     }

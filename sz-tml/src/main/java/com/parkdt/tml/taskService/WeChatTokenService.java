@@ -4,12 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.parkdt.tml.config.WeChatConfig;
 import com.parkdt.tml.utils.HttpPostClient;
 import com.parkdt.tml.utils.StringKit;
-import com.parkdt.tml.weChat.MyMenu;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WeChatTokenService {
+    private Logger logger = LoggerFactory.getLogger(WeChatTokenService.class);
 
     private static String access_token = "";
 
@@ -25,7 +27,7 @@ public class WeChatTokenService {
         synchronized (access_token) {
             do {
                 String result = HttpPostClient.doHttpGet(url.toString());
-                System.out.println(result);
+                logger.info(result);
                 JSONObject json = JSONObject.parseObject(result);
                 String token = json.getString("access_token");
                 if (StringKit.isNotEmpty(token)) {

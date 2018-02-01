@@ -1,6 +1,9 @@
 package com.parkdt.tml.controller.weChat;
 
 import com.parkdt.tml.config.WeChatConfig;
+import com.parkdt.tml.utils.HttpPostClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "/auth")
 public class AuthController {
+    private Logger logger = LoggerFactory.getLogger(HttpPostClient.class);
 
     @RequestMapping("myTake")
     public String take(Model model, HttpServletRequest req) {
@@ -17,8 +21,8 @@ public class AuthController {
         String redirect_uri = WeChatConfig.getWebUrl() + "biz/take";
         url += redirect_uri;
         url += "&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect";
-        System.out.println();
-        System.out.println("publish : " + url);
+
+        logger.info("myTake : " + url);
         return "redirect:" + url;
     }
 
@@ -28,8 +32,7 @@ public class AuthController {
         String redirect_uri = WeChatConfig.getWebUrl() + "biz/publish";
         url += redirect_uri;
         url += "&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect";
-        System.out.println();
-        System.out.println("publish : " + url);
+        logger.info("myPublish : " + url);
         return "redirect:" + url;
     }
 
@@ -39,8 +42,7 @@ public class AuthController {
         String redirect_uri = WeChatConfig.getWebUrl() + "task/publish";
         url += redirect_uri;
         url += "&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect";
-        System.out.println();
-        System.out.println("publish : " + url);
+        logger.info("taskPublish : " + url);
         return "redirect:" + url;
     }
 
@@ -50,8 +52,7 @@ public class AuthController {
         String redirect_uri = WeChatConfig.getWebUrl() + "task/enter";
         url += redirect_uri;
         url += "&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect";
-        System.out.println();
-        System.out.println("publish : " + url);
+        logger.info("taskEnter : " + url);
         return "redirect:" + url;
     }
 
@@ -61,8 +62,7 @@ public class AuthController {
         String redirect_uri = WeChatConfig.getWebUrl() + "user/personal";
         url += redirect_uri;
         url += "&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect";
-        System.out.println();
-        System.out.println("publish : " + url);
+        logger.info("personal : " + url);
         return "redirect:" + url;
     }
 
@@ -72,8 +72,7 @@ public class AuthController {
         String redirect_uri = WeChatConfig.getWebUrl() + "user/login";
         url += redirect_uri;
         url += "&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect";
-        System.out.println();
-        System.out.println("publish : " + url);
+        logger.info("login : " + url);
         return "redirect:" + url;
     }
 }
