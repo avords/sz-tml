@@ -5,12 +5,14 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <title>用户注册</title>
     <link href="/css/style.css" rel="stylesheet" />
+    <link type="text/css" href="/css/validate.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 
     <script type="text/javascript" src="/js/jquery.validate.js"></script>
     <script type="text/javascript" src="/js/jquery.validate_zh.js"></script>
     <script type="text/javascript" src="/js/jquery.metadata.js"></script>
     <script type="text/javascript" src="/js/additional-methods.js"></script>
+    <script type="text/javascript" src="/js/jquery-mvalidate.js"></script>
 </head>
 
 <body>
@@ -45,11 +47,11 @@
                 data: $('.data_form').serialize(),
                 success: function(response){
                     if(response.status=="success"){
-                        alert(response.value);
+                        $.mvalidateTip(response.value);
                         window.location.href='/auth/login';
                     }
                     if(response.status=="error"){
-                        alert(response.value);
+                        $.mvalidateTip(response.value);
                     }
                 }
             });
