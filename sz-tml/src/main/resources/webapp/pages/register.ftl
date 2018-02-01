@@ -46,7 +46,7 @@
                 success: function(response){
                     if(response.status=="success"){
                         alert(response.value);
-                        window.location.href='/user/personal';
+                        window.location.href='/auth/login';
                     }
                     if(response.status=="error"){
                         alert(response.value);

@@ -57,9 +57,10 @@ public class UserController extends BaseController {
     public String login(Model model, HttpServletRequest req, PersonalLoginInfo personalLoginInfo) {
 
         String openId = getOpenId();
+        logger.info("login openid:" + openId);
+
         PersonalLoginInfo userInfo = userService.getPersonalLoginInfoByOpenId(openId);
 
-        logger.info("login:" + openId);
         if (null != userInfo) {
             return "redirect:/user/personal";
         } else {
@@ -75,7 +76,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public Result logining(Model model, HttpServletRequest req, PersonalLoginInfo personalLoginInfo) {
         Result result = new Result();
-
+        logger.info("logining openid:" + personalLoginInfo.getWechatId());
         if (personalLoginInfo == null || StringUtils.isBlank(personalLoginInfo.getWechatId())) {
             result.setStatus("error");
             result.setValue("openid不能为空");
@@ -125,9 +126,9 @@ public class UserController extends BaseController {
     public String register(Model model, HttpServletRequest req, PersonalLoginInfo personalLoginInfo) {
 
         String openId = getOpenId();
+        logger.info("register openid:" + openId);
         PersonalLoginInfo userInfo = userService.getPersonalLoginInfoByOpenId(openId);
 
-        logger.info("login:" + openId);
         if (null != userInfo) {
             return "redirect:/user/personal";
         } else {
@@ -144,6 +145,9 @@ public class UserController extends BaseController {
     public Result registering(Model model, HttpServletRequest req, PersonalLoginInfo personalLoginInfo) {
 
         Result result = new Result();
+
+        logger.info("registering openid:" + personalLoginInfo.getWechatId());
+
         if (personalLoginInfo == null || StringUtils.isBlank(personalLoginInfo.getWechatId())) {
             result.setStatus("error");
             result.setValue("openid不能为空");
@@ -189,12 +193,15 @@ public class UserController extends BaseController {
                             result.setStatus("success").setValue("注册成功");
                             return result;
                         }
-                    }else{
+
+                        result.setStatus("success").setValue("注册成功");
+                        return result;
+                    } else {
                         result.setStatus("error").setValue("注册成功失败");
                         return result;
                     }
                 }
-            }else{
+            } else {
                 result.setStatus("error").setValue("验证码不对");
                 return result;
             }
@@ -208,27 +215,28 @@ public class UserController extends BaseController {
     public String personal(Model model, HttpServletRequest req) {
 
         Long memberId = getMemberId();
-
+        logger.info("personal memberId:" + memberId);
         if (0 == memberId) {
             return "redirect:/user/login";
         }
+
+        PersonalLoginInfo loginInfo = userService.getPersonalLoginInfoById(memberId);
+
         PersonalBaseInfo personalBaseInfo = userService.getPersonalBaseInfoByMemberId(memberId);
         if (personalBaseInfo == null) {
             personalBaseInfo = new PersonalBaseInfo();
             personalBaseInfo.setBirthday(new Date());
             personalBaseInfo.setMemberId(memberId);
+            personalBaseInfo.setPhone(loginInfo.getPhone());
         }
 
-        PersonalLoginInfo loginInfo = userService.getPersonalLoginInfoById(memberId);
+        if (!StringKit.isNotEmpty(personalBaseInfo.getPhone())) {
+            personalBaseInfo.setPhone(loginInfo.getPhone());
+        }
 
         WxMpUser wxMpUser = weChatService.getWxMpUser(getOpenId());
         if (!StringKit.isNotEmpty(loginInfo.getHeader())) {
             loginInfo.setHeader(wxMpUser.getHeadImgUrl());
-        }
-
-        if (!StringKit.isNotEmpty(personalBaseInfo.getName())) {
-            //personalBaseInfo.setName(wxMpUser.getNickname());
-            personalBaseInfo.setPhone(personalBaseInfo.getPhone());
         }
 
         model.addAttribute("loginInfo", loginInfo);
@@ -242,24 +250,35 @@ public class UserController extends BaseController {
 
     @RequestMapping("personaling")
     @ResponseBody
-    public boolean personaling(Model model, HttpServletRequest req, PersonalBaseInfo personalBaseInfo) {
+    public Result personaling(Model model, HttpServletRequest req, PersonalBaseInfo personalBaseInfo) {
 
-        Long teamId = personalBaseInfo.getTeamId();
+        Result result = new Result();
+        logger.info("personaling memberId:" + personalBaseInfo.getMemberId());
+        try {
+            Long teamId = personalBaseInfo.getTeamId();
 
-        if (teamId != null) {
-            TeamBasicInformation teamBasicInformation = teamService.getByTeamId(teamId);
-            if (teamBasicInformation != null) {
-                personalBaseInfo.setTeamName(teamBasicInformation.getName());
+            if (teamId != null) {
+                TeamBasicInformation teamBasicInformation = teamService.getByTeamId(teamId);
+                if (teamBasicInformation != null) {
+                    personalBaseInfo.setTeamName(teamBasicInformation.getName());
+                }
             }
-        }
-        personalBaseInfo.setAuthenticationType((short) 1);
-        PersonalLoginInfo personalLoginInfo = new PersonalLoginInfo();
-        personalLoginInfo.setId(personalBaseInfo.getMemberId());
-        personalLoginInfo.setNickName(personalBaseInfo.getName());
-        userService.updatePersonalLoginInfo(personalLoginInfo);
-        int i = userService.updatePersonInfo(personalBaseInfo);
+            personalBaseInfo.setAuthenticationType((short) 1);
+            PersonalLoginInfo personalLoginInfo = new PersonalLoginInfo();
+            personalLoginInfo.setId(personalBaseInfo.getMemberId());
+            personalLoginInfo.setNickName(personalBaseInfo.getName());
+            userService.updatePersonalLoginInfo(personalLoginInfo);
+            int i = userService.updatePersonInfo(personalBaseInfo);
 
-        return i == 0 ? false : true;
+            if (i == 0) {
+                result.setStatus("error").setValue("信息绑定失败");
+            } else {
+                result.setStatus("success").setValue("信息绑定成功");
+            }
+        } catch (Exception e) {
+            result.setStatus("error").setValue("信息绑定失败,请重试");
+        }
+        return result;
     }
 
     @RequestMapping("sendSms")

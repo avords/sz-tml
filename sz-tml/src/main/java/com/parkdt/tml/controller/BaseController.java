@@ -60,6 +60,8 @@ public class BaseController {
             openId = weChatService.getOpenId(code);
             session.setAttribute(Constant.SESSION_OPEN_ID,openId);
         }
+
+        //openId = "omd-50l-i3ZLcO5-t69oyLarlmAM";
         return openId;
     }
 }

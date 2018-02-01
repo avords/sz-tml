@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 @Order(2)
 //重点
-@WebFilter(filterName = "loginFilter", urlPatterns = {"/user/*","/biz/*","/links/*","/task/*"})
+@WebFilter(filterName = "loginFilter", urlPatterns = {"/user/*", "/biz/*", "/links/*", "/task/*"})
 public class LoginFilter implements Filter {
 
     @Autowired
@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
      */
     @Autowired
     private LoginFilterConfig loginFilterConfig;
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -46,17 +46,17 @@ public class LoginFilter implements Filter {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             String uri = request.getRequestURI();
 
-            if(!isExcludes(uri)) {//如果不排除
+            if (!isExcludes(uri)) {//如果不排除
                 String openId = (String) request.getSession().getAttribute(Constant.SESSION_OPEN_ID);
                 PersonalLoginInfo personalLoginInfo = userService.getPersonalLoginInfoByOpenId(openId);
-                if(personalLoginInfo!=null){//已经绑定了吗
-                    request.getSession().setAttribute(Constant.SESSION_USER,personalLoginInfo);
+                if (personalLoginInfo != null) {//已经绑定了吗
+                    request.getSession().setAttribute(Constant.SESSION_USER, personalLoginInfo);
                     filterChain.doFilter(servletRequest, servletResponse);
-                }else{
+                } else {
                     response.sendRedirect("/user/login");
                     return;
                 }
-            }else{
+            } else {
                 filterChain.doFilter(servletRequest, servletResponse);
             }
         }
@@ -69,21 +69,22 @@ public class LoginFilter implements Filter {
 
     /**
      * 是否需要排除
+     *
      * @param url
      * @return
      */
     private boolean isExcludes(String url) {
 
-        if (url.equals("/user/logining")){
+        if (url.equals("/user/logining") || url.equals("/user/registering")|| url.equals("/user/personal")) {
             return true;
         }
 
         for (String path : loginFilterConfig.getExcludes()) {
-            if(url.matches(path)){
+            if (url.matches(path)) {
                 return true;
             }
         }
         return false;
     }
-    
+
 }

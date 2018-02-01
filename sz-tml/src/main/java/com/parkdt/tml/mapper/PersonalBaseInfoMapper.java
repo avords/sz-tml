@@ -20,4 +20,7 @@ public interface PersonalBaseInfoMapper {
     PersonalBaseInfo getByMemberId(Long memberId);
 
     PersonalBaseInfo getByOpenId(Long memberId);
+
+    int updateByMemberId(PersonalBaseInfo record);
+
 }

@@ -18,7 +18,7 @@
         <div class="info_head">
             <div class="user_pic">
                 <img src="${loginInfo.header}" alt="" />
-                <a class="add_user_pic" href="javascript:void(0)">+</a>
+                <#--<a class="add_user_pic" href="javascript:void(0)">+</a>-->
             </div>
         </div>
         <div class="container">
@@ -55,13 +55,12 @@
                 url: "/user/personaling",
                 data: $('.data_form').serialize(),
                 success: function(response){
-                    if(response==true){
-                        alert('保存成功');
-                        /*window.location.href='http://weixin.teamlinks.cn/task/enter';*/
+                    if(response.status=="success"){
+                        alert(response.value);
                         window.location.href='/task/enter';
-                    } else{
-                        //发送验证码失败
-                        alert('保存失败，请重试')
+                    }
+                    if(response.status=="error"){
+                        alert(response.value);
                     }
                 }
             });
