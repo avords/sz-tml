@@ -49,6 +49,12 @@
                 return;
             }
 
+            var smsCode = $.trim($('input[name="smsCode"]').val());
+            if (!smsCode) {
+                $.mvalidateTip("请输入验证码！");
+                return;
+            }
+
             $.ajax({
                 type:"POST",
                 dataType: "json",
@@ -56,7 +62,7 @@
                 data: $('.data_form').serialize(),
                 success: function(response){
                     if(response.status=="success"){
-                        $.mvalidateTip(response.value);
+                        alert(response.value);
                         window.location.href='/user/personal';
                     }
                     if(response.status=="error"){

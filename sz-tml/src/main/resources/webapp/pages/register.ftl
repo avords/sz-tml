@@ -40,6 +40,33 @@
     $(function () {
 
         $('#subButton').click(function () {
+
+            var phone = $.trim($('input[name="phone"]').val());
+            if (!phone) {
+                $.mvalidateTip("请输入号码！");
+                return;
+            } else if (!/^0?1[3|4|5|8]\d{9}$/.test(phone)) {
+                $.mvalidateTip("你输入的手机号码不正确！");
+                return;
+            }
+
+            var pwd = $('input[name="password"]').val();
+            var pwd1 = $('#pwd').val();
+            if(pwd==''){
+                $.mvalidateTip('请输入密码');
+                return false;
+            }
+            if(pwd!=pwd1){
+                $.mvalidateTip('两次输入的密码不一致');
+                return false;
+            }
+
+            var smsCode = $.trim($('input[name="smsCode"]').val());
+            if (!smsCode) {
+                $.mvalidateTip("请输入验证码！");
+                return;
+            }
+
             $.ajax({
                 type:"POST",
                 dataType: "json",
@@ -47,7 +74,7 @@
                 data: $('.data_form').serialize(),
                 success: function(response){
                     if(response.status=="success"){
-                        $.mvalidateTip(response.value);
+                        alert(response.value);
                         window.location.href='/auth/login';
                     }
                     if(response.status=="error"){
@@ -59,24 +86,27 @@
         //$('.data_form').valid();
 
         $('.valid_btn').click(function () {
-            //验证两次密码是否相等
-            var phone = $('input[name="phone"]').val();
+
+            var phone = $.trim($('input[name="phone"]').val());
+            if (!phone) {
+                $.mvalidateTip("请输入号码！");
+                return;
+            } else if (!/^0?1[3|4|5|8]\d{9}$/.test(phone)) {
+                $.mvalidateTip("你输入的手机号码不正确！");
+                return;
+            }
+
             var pwd = $('input[name="password"]').val();
             var pwd1 = $('#pwd').val();
-            if(phone==''){
-                alert('请输入手机号');
-                return false;
-            }
             if(pwd==''){
-                alert('请输入密码');
+                $.mvalidateTip('请输入密码');
                 return false;
             }
             if(pwd!=pwd1){
-                alert('两次输入的密码不一致');
+                $.mvalidateTip('两次输入的密码不一致');
                 return false;
             }
-            //发送验证码
-            var phone = $('input[name="phone"]').val();
+
             $.ajax({
                 type:"POST",
                 dataType: "json",

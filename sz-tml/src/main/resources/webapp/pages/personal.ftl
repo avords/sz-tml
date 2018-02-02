@@ -58,7 +58,7 @@
                 data: $('.data_form').serialize(),
                 success: function(response){
                     if(response.status=="success"){
-                        $.mvalidateTip(response.value);
+                        alert(response.value);
                         window.location.href='/task/enter';
                     }
                     if(response.status=="error"){
