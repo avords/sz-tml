@@ -78,47 +78,51 @@ public class UserController extends BaseController {
         Result result = new Result();
         logger.info("logining openid:" + personalLoginInfo.getWechatId());
         if (personalLoginInfo == null || StringUtils.isBlank(personalLoginInfo.getWechatId())) {
-            result.setStatus("error");
-            result.setValue("openid不能为空");
-            return result;
+            return result.setStatus("error").setValue("openid不能为空");
         }
 
         if (personalLoginInfo == null || StringUtils.isBlank(personalLoginInfo.getPhone())) {
-            result.setStatus("error").setValue("手机号不能为空");
-            return result;
+            return result.setStatus("error").setValue("手机号不能为空");
         }
 
-        String smsCode = req.getParameter("smsCode");
-
-        if (smsCode == null || StringUtils.isBlank(smsCode)) {
-            result.setStatus("error").setValue("验证码不能为空");
-            return result;
+        if (personalLoginInfo == null || StringUtils.isBlank(personalLoginInfo.getPassword())) {
+            return result.setStatus("error").setValue("密码不能为空");
         }
+
         List<PersonalLoginInfo> infoExists = userService.getPersonalLoginInfoByPhone(personalLoginInfo.getPhone());
 
         if (!CollectionUtils.isEmpty(infoExists)) {
+
+            if (infoExists.size() > 1) {
+                return result.setStatus("error").setValue("此号码绑定多个账户，请联系管理员处理");
+            }
+
+            PersonalLoginInfo loginInfo = infoExists.get(0);
+
+            try {
+                String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
+
+                if (!loginInfo.getPassword().equals(password)) {
+                    return result.setStatus("error").setValue("密码不对");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             String openId = personalLoginInfo.getWechatId();
             String phone = personalLoginInfo.getPhone();
 
-            PersonalVerificationCodeRecord personalVerificationCodeRecord = personalVerificationCodeRecordService.queryValidateCodeByPhoneAndType(personalLoginInfo.getPhone(), (short) 2);
-            if (personalVerificationCodeRecord != null && personalVerificationCodeRecord.getCode().equals(smsCode)) {
+            int count = userService.updateOpenIdByPhone(phone, openId);
 
-                int count = userService.updateOpenIdByPhone(phone, openId);
-
-                if (count > 0) {
-                    result.setStatus("success").setValue("登录成功");
-                    return result;
-                } else {
-                    result.setStatus("error").setValue("更新openid失败");
-                    return result;
-                }
+            if (count > 0) {
+                return result.setStatus("success").setValue("登录成功");
             } else {
-                result.setStatus("error").setValue("验证码不对");
-                return result;
+                return result.setStatus("error").setValue("更新openid失败");
             }
+
         } else {
-            result.setStatus("error").setValue("没有此用户信息，请先注册");
-            return result;
+            return result.setStatus("error").setValue("没有此用户信息，请先注册");
         }
     }
 
@@ -149,21 +153,17 @@ public class UserController extends BaseController {
         logger.info("registering openid:" + personalLoginInfo.getWechatId());
 
         if (personalLoginInfo == null || StringUtils.isBlank(personalLoginInfo.getWechatId())) {
-            result.setStatus("error");
-            result.setValue("openid不能为空");
-            return result;
+            return result.setStatus("error").setValue("openid不能为空");
         }
         if (personalLoginInfo == null || StringUtils.isBlank(personalLoginInfo.getPhone())) {
-            result.setStatus("error").setValue("手机号不能为空");
-            return result;
+            return result.setStatus("error").setValue("手机号不能为空");
         }
         try {
 
             String smsCode = req.getParameter("smsCode");
 
             if (smsCode == null || StringUtils.isBlank(smsCode)) {
-                result.setStatus("error").setValue("验证码不能为空");
-                return result;
+                return result.setStatus("error").setValue("验证码不能为空");
             }
             //判断验证码是否正确
             PersonalVerificationCodeRecord personalVerificationCodeRecord = personalVerificationCodeRecordService.queryValidateCodeByPhoneAndType(personalLoginInfo.getPhone(), (short) 2);
@@ -173,9 +173,7 @@ public class UserController extends BaseController {
                 List<PersonalLoginInfo> infoExists = userService.getPersonalLoginInfoByPhone(personalLoginInfo.getPhone());
 
                 if (!CollectionUtils.isEmpty(infoExists)) {
-                    result.setStatus("error").setValue("此号码以注册过，请登录");
-                    return result;
-
+                    return result.setStatus("error").setValue("此号码以注册过，请登录");
                 } else {
                     String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
                     personalLoginInfo.setPassword(password);
@@ -190,20 +188,16 @@ public class UserController extends BaseController {
 
                         personalLoginInfo = userService.getPersonalLoginInfoByOpenId(personalLoginInfo.getWechatId());
                         if (personalLoginInfo.getId() != 0) {
-                            result.setStatus("success").setValue("注册成功");
-                            return result;
+                            return result.setStatus("success").setValue("注册成功");
                         }
 
-                        result.setStatus("success").setValue("注册成功");
-                        return result;
+                        return result.setStatus("success").setValue("注册成功");
                     } else {
-                        result.setStatus("error").setValue("注册成功失败");
-                        return result;
+                        return result.setStatus("error").setValue("注册成功失败");
                     }
                 }
             } else {
-                result.setStatus("error").setValue("验证码不对");
-                return result;
+                return result.setStatus("error").setValue("验证码不对");
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
