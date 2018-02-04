@@ -187,14 +187,14 @@
     select
     <include refid="Base_Column_List" />
     from t_personal_login_info
-    where wechat_id = #{wechat_id,jdbcType=VARCHAR}
+    where is_disable = 0 and wechat_id = #{wechat_id,jdbcType=VARCHAR}
   </select>
 
   <select id="getPersonalLoginInfoByPhone" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from t_personal_login_info
-    where phone = #{phone,jdbcType=VARCHAR}
+    where is_disable = 0 and phone = #{phone,jdbcType=VARCHAR}
   </select>
 
   <select id="getCountByParams" parameterType="java.util.Map" resultType="java.lang.Integer">
@@ -211,6 +211,6 @@
     set
     wechat_id = #{wechatId,jdbcType=VARCHAR}
 
-    where phone = #{phone,jdbcType=VARCHAR}
+    where is_disable = 0 and phone = #{phone,jdbcType=VARCHAR}
   </update>
 </mapper>
