@@ -61,52 +61,62 @@ public class LinksController {
         //得到所有类型
         List<SysGoodType> sysGoodTypes = sysGoodTypeService.getAllSysGoodType();
         //得到所有的项目导入方
-        List<Map> projectImports = projectService.queryBySql("select distinct company_id,company_name from t_project_importer_info",null);
+        //List<Map> projectImports = projectService.queryBySql("select distinct company_id,company_name from t_project_importer_info",null);
         try {
             Date startDate = getRelType(req.getParameter("startDate"), Date.class);
             Date endDate = getRelType(req.getParameter("endDate"), Date.class);
             boolean isOne = false;
             String oneStr = req.getParameter("oneStr");
-            if(oneStr==null||"".equals(oneStr)){
+            if (oneStr == null || "".equals(oneStr)) {
                 oneStr = "1";
             }
-            if("1".equals(oneStr)){
+            if ("1".equals(oneStr)) {
                 isOne = true;
             }
-            model.addAttribute("oneStr",oneStr);
-            Long fieldId = getRelType(req.getParameter("fieldId"),Long.class);
-            Long designTypeId = getRelType(req.getParameter("designTypeId"),Long.class);
-            Double startOutputValue = getRelType(req.getParameter("startOutputValue"),Double.class);
-            Double endOutputValue = getRelType(req.getParameter("endOutputValue"),Double.class);
-            Long companyId = getRelType(req.getParameter("companyId"),Long.class);
+            model.addAttribute("oneStr", oneStr);
+            Long fieldId = getRelType(req.getParameter("fieldId"), Long.class);
+            Long designTypeId = getRelType(req.getParameter("designTypeId"), Long.class);
+            Double startOutputValue = getRelType(req.getParameter("startOutputValue"), Double.class);
+            Double endOutputValue = getRelType(req.getParameter("endOutputValue"), Double.class);
+            Long companyId = getRelType(req.getParameter("companyId"), Long.class);
+
+            String companyName = req.getParameter("companyName");
+
+
+            if (StringUtils.isBlank(companyName)) {
+                companyName = "资源中心";
+            }
 
             Map params = new HashMap();
-            params.put("startDate",startDate);
-            params.put("endDate",endDate);
-            params.put("isOne",isOne);
-            params.put("fieldId",fieldId);
-            params.put("designTypeId",designTypeId);
-            params.put("startOutputValue",startOutputValue);
-            params.put("endOutputValue",endOutputValue);
-            params.put("companyId",companyId);
-            if(StringUtils.isBlank(req.getParameter("search"))){
-                params.put("companyName","资源中心");
-                model.addAttribute("companyName","资源中心");
-            }
-            List<Map> projectDeliverys = projectService.queryProjectDelivery(params);
-            model.addAttribute("sysAreasExpertises",sysAreasExpertises);
-            model.addAttribute("sysGoodTypes",sysGoodTypes);
-            model.addAttribute("projectDeliverys",projectDeliverys);
-            model.addAttribute("projectImports",projectImports);
+            params.put("startDate", startDate);
+            params.put("endDate", endDate);
+            params.put("isOne", isOne);
+            params.put("fieldId", fieldId);
+            params.put("designTypeId", designTypeId);
+            params.put("startOutputValue", startOutputValue);
+            params.put("endOutputValue", endOutputValue);
+            params.put("companyId", companyId);
+            params.put("companyName", companyName);
 
+            if (StringUtils.isBlank(req.getParameter("search"))) {
+                params.put("companyName", "资源中心");
+                model.addAttribute("companyName", "资源中心");
+            }
+
+            List<Map> projectDeliverys = projectService.queryProjectDelivery(params);
+            model.addAttribute("sysAreasExpertises", sysAreasExpertises);
+            model.addAttribute("sysGoodTypes", sysGoodTypes);
+            model.addAttribute("projectDeliverys", projectDeliverys);
+            //model.addAttribute("projectImports",projectImports);
+            model.addAttribute("companyName", companyName);
             model.addAttribute("fieldId", fieldId);
             model.addAttribute("designTypeId", designTypeId);
-            model.addAttribute("startOutputValue",req.getParameter("startOutputValue"));
-            model.addAttribute("endOutputValue",req.getParameter("endOutputValue"));
-            model.addAttribute("companyId",companyId);
-            model.addAttribute("startDate",req.getParameter("startDate"));
-            model.addAttribute("endDate",req.getParameter("endDate"));
-        }catch (Exception e){
+            model.addAttribute("startOutputValue", req.getParameter("startOutputValue"));
+            model.addAttribute("endOutputValue", req.getParameter("endOutputValue"));
+            model.addAttribute("companyId", companyId);
+            model.addAttribute("startDate", req.getParameter("startDate"));
+            model.addAttribute("endDate", req.getParameter("endDate"));
+        } catch (Exception e) {
             LOGGER.error(e.toString());
         }
         return "resCenter";

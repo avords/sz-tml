@@ -46,16 +46,19 @@
                             </#if>
                         </#list>
             </select>
-            <select name="companyId">
-                <option value="">项目导入方</option>
-                <#list projectImports as item>
-                    <#if companyId==item['company_id']||(companyName??&&item['company_name']==companyName)>
-                        <option value="${item['company_id']}" selected="selected">${item['company_name']}</option>
-                    <#else>
-                        <option value="${item['company_id']}">${item['company_name']}</option>
-                    </#if>
-                </#list>
-            </select>
+
+            <input type="text" placeholder="导入方" name="companyName" value="${companyName}"/>
+
+            <#--<select name="companyId">-->
+                <#--<option value="">项目导入方</option>-->
+                <#--<#list projectImports as item>-->
+                    <#--<#if companyId==item['company_id']||(companyName??&&item['company_name']==companyName)>-->
+                        <#--<option value="${item['company_id']}" selected="selected">${item['company_name']}</option>-->
+                    <#--<#else>-->
+                        <#--<option value="${item['company_id']}">${item['company_name']}</option>-->
+                    <#--</#if>-->
+                <#--</#list>-->
+            <#--</select>-->
             <div class="row">
                 <input type="text" placeholder="项目产值" name="startOutputValue" value="${startOutputValue}"/>
                 <span class="sp">~</span>
