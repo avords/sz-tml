@@ -10,12 +10,6 @@ import java.util.List;
  * Created by Administrator on 2018/1/11.
  */
 public interface UserService {
-    /**
-     * 登录
-     * @param personalLoginInfo
-     * @return
-     */
-    PersonalLoginInfo login(PersonalLoginInfo personalLoginInfo);
 
     /**
      * 更新个人信息
@@ -33,28 +27,23 @@ public interface UserService {
     PersonalLoginInfo getPersonalLoginInfoById(Long id);
     /**
      * 通过用户id得到个人基本信息
-     * @param id
+     * @param memberId
      * @return
      */
     PersonalBaseInfo getPersonalBaseInfoByMemberId(Long memberId);
 
     /**
      * 通过用户openid得到个人登录信息
-     * @param openid
+     * @param wechat_id
      * @return
      */
     PersonalLoginInfo getPersonalLoginInfoByOpenId(String wechat_id);
 
     List<PersonalLoginInfo> getPersonalLoginInfoByPhone(String phone);
 
-
     int updatePersonalLoginInfo(PersonalLoginInfo personalLoginInfo);
 
-    int getCountByPhone(String phone);
-
     int saveSelective(PersonalLoginInfo personalLoginInfo);
-
-    int updateWeiXinByMemberId(Long id, String openId);
 
     int updateOpenIdByPhone(String phone, String openId);
 }
