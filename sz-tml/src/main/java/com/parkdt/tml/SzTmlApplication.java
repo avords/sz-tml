@@ -9,7 +9,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @ServletComponentScan
 public class SzTmlApplication {
 
-	/////////////
 	public static void main(String[] args) {
 		SpringApplication.run(SzTmlApplication.class, args);
 	}

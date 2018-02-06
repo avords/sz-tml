@@ -80,14 +80,18 @@ public class LinksController {
             Double endOutputValue = getRelType(req.getParameter("endOutputValue"), Double.class);
             Long companyId = getRelType(req.getParameter("companyId"), Long.class);
 
+            Map params = new HashMap();
             String companyName = req.getParameter("companyName");
 
-
-            if (StringUtils.isBlank(companyName)) {
+            if (companyName == null) {
                 companyName = "资源中心";
+                params.put("companyName", companyName);
+            } else {
+                if (!companyName.equals("")) {
+                    params.put("companyName", companyName);
+                }
             }
 
-            Map params = new HashMap();
             params.put("startDate", startDate);
             params.put("endDate", endDate);
             params.put("isOne", isOne);
@@ -96,7 +100,6 @@ public class LinksController {
             params.put("startOutputValue", startOutputValue);
             params.put("endOutputValue", endOutputValue);
             params.put("companyId", companyId);
-            params.put("companyName", companyName);
 
             if (StringUtils.isBlank(req.getParameter("search"))) {
                 params.put("companyName", "资源中心");
