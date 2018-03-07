@@ -1,14 +1,19 @@
 package com.parkdt.tml.weChat.message.toMessage;
 
+import com.parkdt.tml.taskService.WeChatTokenService;
 import com.parkdt.tml.weChat.message.Message;
 import com.parkdt.tml.weChat.message.MessageType;
 import com.parkdt.tml.weChat.message.artice.Article;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
 
 
 public class ToMessageFactory {
+
+    private static Logger logger = LoggerFactory.getLogger(ToMessageFactory.class);
 
     /**
      * 关注时回复文本消息
@@ -20,16 +25,12 @@ public class ToMessageFactory {
         ToTextMessage textMessage = new ToTextMessage();
 
         StringBuffer res = new StringBuffer();
-        //res.append("1.可以登录单店铺，多店铺，圈子。登录成功后会自动推送订单；");
-//		res.append("/r/n");
-//		res.append("登录成功后，回复对应数字可以确认订单");
-//		res.append("/r/n");
-        //res.append("2.可以点击消息进入收单台，确认订单。");
-
         res.append("感谢关注\"teamlinks立可平台\",参与资源中心签到活动");
         res.append("\r\n");
-        res.append("<a href=\"http://wei.yesaaa.cn/app/index.php?i=334&c=entry&rid=903&do=app_qd&m=meepo_xianchang\">点此进入</a>");
-        textMessage.setContent(res.toString());
+        res.append("\r\n<a href=\"http://wei.yesaaa.cn/app/index.php?i=334&c=entry&rid=903&do=app_qd&m=meepo_xianchang\">点此进入</a>");
+        //textMessage.setContent(res.toString());
+
+        textMessage.setContent(WeChatTokenService.getSubscribeText());
 
         return textMessage(fromMessage, textMessage);
     }
