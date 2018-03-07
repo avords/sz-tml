@@ -41,7 +41,10 @@ public class WeChatTokenService {
                 String token = json.getString("access_token");
 
                 OffiContent content = contentService.getContentByContentId(2000L);
-                SubscribeText = content.getContent();
+
+                if (null != content) {
+                    SubscribeText = content.getContent();
+                }
 
                 if (StringKit.isNotEmpty(token)) {
                     access_token = token;
