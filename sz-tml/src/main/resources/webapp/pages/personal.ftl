@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="container">
-            <form action="/user/personaling" class="data_form" id="form" method="post">
+            <form action="/user/changePersonal" class="data_form" id="form" method="post">
                 <input type="hidden" name="id" value="${personalBaseInfo.id}"/>
                 <input type="hidden" name="memberId" value="${personalBaseInfo.memberId}"/>
                 <input type="text" placeholder="请输入姓名" name="name" value="${personalBaseInfo.name}"/>
@@ -45,6 +45,7 @@
                 <input type="text" placeholder="请输入所在公司" name="company" value="${personalBaseInfo.company}"/>
                 <input type="text" placeholder="请输入个人描述" name="personalDescription" value="${personalBaseInfo.personalDescription}"/>
                 <input type="button" value="完善个人信息" id="subButton">
+                <input type="button" value="切换账号" id="changeButton">
             </form>
         </div>
     </div>
@@ -67,6 +68,25 @@
                 }
             });
         });
+
+        $('#changeButton').click(function () {
+            $.ajax({
+                type:"POST",
+                dataType: "json",
+                url: "/user/changePersonal",
+                data: $('.data_form').serialize(),
+                success: function(response){
+                    if(response.status=="success"){
+                        alert(response.value);
+                        window.location.href='/auth/login';
+                    }
+                    if(response.status=="error"){
+                        $.mvalidateTip(response.value);
+                    }
+                }
+            });
+        });
+
     });
 </script>
 </body>

@@ -30,4 +30,5 @@ public interface PersonalLoginInfoMapper {
 
     int updateOpenIdByPhone(PersonalLoginInfo record);
 
+    int updateWechatIdEmpty(String wechat_id);
 }

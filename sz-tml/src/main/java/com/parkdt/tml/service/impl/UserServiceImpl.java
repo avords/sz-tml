@@ -77,4 +77,10 @@ public class UserServiceImpl implements UserService {
 
         return personalLoginInfoMapper.updateOpenIdByPhone(personalLoginInfo);
     }
+
+    @Override
+    public int updateWechatIdEmpty(String wechat_id) {
+        return personalLoginInfoMapper.updateWechatIdEmpty(wechat_id);
+        //return  0;
+    }
 }

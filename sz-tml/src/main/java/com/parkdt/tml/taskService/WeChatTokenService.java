@@ -30,17 +30,7 @@ public class WeChatTokenService {
         url.append("&appid=" + WeChatConfig.getAppid());
         url.append("&secret=" + WeChatConfig.getAppSecret());
 
-        int count1 = 0;
-        synchronized (SubscribeText) {
-            do {
-                OffiContent content = contentService.getContentByContentId(2000L);
-                if (StringKit.isNotEmpty(content.getContent())) {
-                    SubscribeText = content.getContent();
-                    return;
-                }
-                count1++;
-            } while (count1 < 10);
-        }
+        logger.info(url.toString());
 
         int count = 0;
         synchronized (access_token) {
@@ -49,6 +39,10 @@ public class WeChatTokenService {
                 logger.info(result);
                 JSONObject json = JSONObject.parseObject(result);
                 String token = json.getString("access_token");
+
+                OffiContent content = contentService.getContentByContentId(2000L);
+                SubscribeText = content.getContent();
+
                 if (StringKit.isNotEmpty(token)) {
                     access_token = token;
                     return;

@@ -46,4 +46,6 @@ public interface UserService {
     int saveSelective(PersonalLoginInfo personalLoginInfo);
 
     int updateOpenIdByPhone(String phone, String openId);
+
+    int updateWechatIdEmpty(String wechat_id);
 }

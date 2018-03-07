@@ -213,4 +213,9 @@
 
     where is_disable = 0 and phone = #{phone,jdbcType=VARCHAR}
   </update>
+
+  <update id="updateWechatIdEmpty" parameterType="java.lang.String">
+    update t_personal_login_info set wechat_id ='' where wechat_id = #{wechatId,jdbcType=VARCHAR}
+  </update>
+
 </mapper>

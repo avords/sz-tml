@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -272,6 +273,24 @@ public class UserController extends BaseController {
         } catch (Exception e) {
             result.setStatus("error").setValue("信息绑定失败,请重试");
         }
+        return result;
+    }
+
+    @RequestMapping("changePersonal")
+    @ResponseBody
+    public Result changePersonal(Model model, HttpServletRequest req, PersonalBaseInfo personalBaseInfo) {
+
+        logger.info("changePersonal memberId:" + personalBaseInfo.getMemberId());
+        HttpSession session = req.getSession();
+        session.removeAttribute(Constant.SESSION_OPEN_ID);
+        PersonalLoginInfo loginInfo = userService.getPersonalLoginInfoById(personalBaseInfo.getMemberId());
+        logger.info("changePersonal:" + loginInfo.getWechatId());
+
+        Result result = new Result();
+        if (null != loginInfo) {
+            userService.updateWechatIdEmpty(loginInfo.getWechatId());
+        }
+        result.setStatus("success").setValue("切换成功");
         return result;
     }
 
