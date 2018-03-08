@@ -63,7 +63,13 @@ public class UserController extends BaseController {
         PersonalLoginInfo userInfo = userService.getPersonalLoginInfoByOpenId(openId);
 
         if (null != userInfo) {
-            return "redirect:/user/personal";
+            if (userInfo.getCertificationLoginFlag() != 0) {
+                return "redirect:/user/personal";
+            }else{
+                model.addAttribute("personalLoginInfo", userInfo);
+                return "login";
+            }
+
         } else {
             PersonalLoginInfo personalLoginInfo1 = new PersonalLoginInfo();
             personalLoginInfo1.setWechatId(openId);
@@ -106,7 +112,9 @@ public class UserController extends BaseController {
                 if (!loginInfo.getPassword().equals(password)) {
                     return result.setStatus("error").setValue("密码不对");
                 }
-
+                if (loginInfo.getCertificationLoginFlag() == 0) {
+                    return result.setStatus("error").setValue("用户信息未认证，请麻烦登录网站系统进行身份认证");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -178,9 +186,9 @@ public class UserController extends BaseController {
                 } else {
                     String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
                     personalLoginInfo.setPassword(password);
-                    personalLoginInfo.setWechatId(getOpenId());
+                    //personalLoginInfo.setWechatId(getOpenId());
                     personalLoginInfo.setRegistrationTime(new Date());
-                    personalLoginInfo.setRoleId(Constant.USER_ROLE_DESIGNER);
+                    personalLoginInfo.setRoleId(Constant.USER_ROLE_EVERYMAN);
 
                     WxMpUser wxMpUser = weChatService.getWxMpUser(getOpenId());
                     personalLoginInfo.setHeader(wxMpUser.getHeadImgUrl());
@@ -189,10 +197,9 @@ public class UserController extends BaseController {
 
                         personalLoginInfo = userService.getPersonalLoginInfoByOpenId(personalLoginInfo.getWechatId());
                         if (personalLoginInfo.getId() != 0) {
-                            return result.setStatus("success").setValue("注册成功");
+                            return result.setStatus("success").setValue("注册成功,请麻烦登录网站系统进行身份认证");
                         }
-
-                        return result.setStatus("success").setValue("注册成功");
+                        return result.setStatus("success").setValue("注册成功,请麻烦登录网站系统进行身份认证");
                     } else {
                         return result.setStatus("error").setValue("注册成功失败");
                     }

@@ -7,8 +7,10 @@ public class Constant {
     //用户角色
     public static final int USER_ROLE_EVERYMAN = 1;//普通人
     public static final int USER_ROLE_DESIGNER = 2;//设计师
+
     public static final int USER_ROLE_PROJECT_MANAGER = 3;//项目经理
     public static final int USER_ROLE_PROJECT_PUBLISHER = 4;//项目导入方
+
     public static final String SESSION_USER="userLogin";
     public static final String SESSION_OPEN_ID="openId";
 
