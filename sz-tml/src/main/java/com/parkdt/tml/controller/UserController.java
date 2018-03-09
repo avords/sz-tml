@@ -118,7 +118,7 @@ public class UserController extends BaseController {
                     return result.setStatus("error").setValue("密码不对");
                 }
                 if (loginInfo.getCertificationLoginFlag() == 0) {
-                    return result.setStatus("certificat").setValue("用户信息未认证，请麻烦登录网站系统进行身份认证");
+                    return result.setStatus("certificat").setValue("用户未认证，请登录网站进行身份认证");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

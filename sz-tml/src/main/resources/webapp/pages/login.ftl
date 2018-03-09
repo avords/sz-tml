@@ -84,7 +84,7 @@
                         window.location.href='/user/personal';
                     }
                     if(response.status=="certificat"){
-                        alert(response.value);
+                        //alert(response.value);
                         window.location.href='/user/certificat';
                     }
                     if(response.status=="error"){

@@ -75,7 +75,7 @@ public class LoginFilter implements Filter {
      */
     private boolean isExcludes(String url) {
 
-        if (url.equals("/user/logining") || url.equals("/user/registering")|| url.equals("/user/personal")) {
+        if (url.equals("/user/logining") || url.equals("/user/registering")|| url.equals("/user/personal")|| url.equals("/user/certificat")) {
             return true;
         }
 

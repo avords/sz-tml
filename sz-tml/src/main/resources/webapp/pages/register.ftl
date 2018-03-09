@@ -101,6 +101,10 @@
                         alert(response.value);
                         window.location.href='/auth/login';
                     }
+                    if(response.status=="certificat"){
+                        //alert(response.value);
+                        window.location.href='/user/certificat';
+                    }
                     if(response.status=="error"){
                         $.mvalidateTip(response.value);
                     }

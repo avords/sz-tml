@@ -3,7 +3,7 @@
 
 <head>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
-    <title>立可-认证</title>
+    <title>立可-身份认证</title>
     <link href="/css/style.css" rel="stylesheet"/>
     <style>
         .user_pic {
@@ -60,15 +60,15 @@
     <img class="banner" src="/images/banner1.jpg"/>
 </header>
 <div class="wrapper">
-    请登录网站进行身份认证
     <div class="container">
+        <h1>请登录网站进行身份认证</h1>
         <div class="lkitem">
             <p class="title">项目导入方认证</p>
             <p class="des">与设计师0距离接触</p>
             <p>
                 <img src="/images/c-rza.png">
             </p>
-            <a href="#">立即认证</a>
+            <a href="http://www.teamlinks.cn/login.do">立即认证</a>
         </div>
         <div class="lkitem">
             <p class="title">设计方认证</p>
@@ -76,7 +76,7 @@
             <p>
                 <img src="/images/c-rzb.png">
             </p>
-            <a class="#" href="#">立即认证</a>
+            <a href="http://www.teamlinks.cn/login.do">立即认证</a>
         </div>
     </div>
 </div>
