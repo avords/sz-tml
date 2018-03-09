@@ -64,10 +64,14 @@ public class UserController extends BaseController {
 
         if (null != userInfo) {
             if (userInfo.getCertificationLoginFlag() != 0) {
+                String phone = userInfo.getPhone();
+                int count = userService.updateOpenIdByPhone(phone, openId);
                 return "redirect:/user/personal";
             } else {
-                //model.addAttribute("personalLoginInfo", userInfo);
-                return "certificat";
+                PersonalLoginInfo personalLoginInfo1 = new PersonalLoginInfo();
+                personalLoginInfo1.setWechatId(openId);
+                model.addAttribute("personalLoginInfo", personalLoginInfo1);
+                return "login";
             }
         } else {
             PersonalLoginInfo personalLoginInfo1 = new PersonalLoginInfo();
@@ -127,13 +131,15 @@ public class UserController extends BaseController {
             String openId = personalLoginInfo.getWechatId();
             String phone = personalLoginInfo.getPhone();
 
-            int count = userService.updateOpenIdByPhone(phone, openId);
+            //int count = userService.updateOpenIdByPhone(phone, openId);
 
-            if (count > 0) {
-                return result.setStatus("success").setValue("登录成功");
-            } else {
-                return result.setStatus("error").setValue("更新openid失败");
-            }
+            return result.setStatus("success").setValue("登录成功");
+
+            //if (count > 0) {
+
+            //} else {
+            //    return result.setStatus("error").setValue("更新openid失败");
+            //}
 
         } else {
             return result.setStatus("error").setValue("没有此用户信息，请先注册");
@@ -191,7 +197,7 @@ public class UserController extends BaseController {
                 } else {
                     String password = EncryptUtil.encrypt(personalLoginInfo.getPassword());
                     personalLoginInfo.setPassword(password);
-                    //personalLoginInfo.setWechatId(getOpenId());
+                    personalLoginInfo.setWechatId("_");
                     personalLoginInfo.setRegistrationTime(new Date());
                     personalLoginInfo.setRoleId(Constant.USER_ROLE_EVERYMAN);
 
