@@ -55,6 +55,24 @@ public class WeChatTokenService {
         }
     }
 
+    @Scheduled(fixedRate = 60000)
+    public void refreshSubscribeText() {
+
+        int count = 0;
+        synchronized (SubscribeText) {
+            do {
+                OffiContent content = contentService.getContentByContentId(2000L);
+
+                if (null != content) {
+                    SubscribeText = content.getContent();
+                    logger.info(SubscribeText);
+                    return;
+                }
+                count++;
+            } while (count < 10);
+        }
+    }
+
     public static String getSubscribeText() {
 
         synchronized (SubscribeText) {
