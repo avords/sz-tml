@@ -4,7 +4,7 @@
 <head>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <title>个人资料</title>
-    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/style.css?ver=100" rel="stylesheet" />
     <link type="text/css" href="/css/validate.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 

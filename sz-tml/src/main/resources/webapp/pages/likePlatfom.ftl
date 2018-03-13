@@ -4,7 +4,7 @@
 <head>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
     <title>立可平台</title>
-    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="/css/style.css?ver=100" rel="stylesheet"/>
     <script>
         window.onload = function () {
             var nav = document.getElementsByClassName("nav")[0];

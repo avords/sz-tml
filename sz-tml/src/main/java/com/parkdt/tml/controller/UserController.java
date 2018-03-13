@@ -131,15 +131,13 @@ public class UserController extends BaseController {
             String openId = personalLoginInfo.getWechatId();
             String phone = personalLoginInfo.getPhone();
 
-            //int count = userService.updateOpenIdByPhone(phone, openId);
+            int count = userService.updateOpenIdByPhone(phone, openId);
 
-            return result.setStatus("success").setValue("登录成功");
-
-            //if (count > 0) {
-
-            //} else {
-            //    return result.setStatus("error").setValue("更新openid失败");
-            //}
+            if (count > 0) {
+                return result.setStatus("success").setValue("登录成功");
+            } else {
+                return result.setStatus("error").setValue("更新openid失败");
+            }
 
         } else {
             return result.setStatus("error").setValue("没有此用户信息，请先注册");
