@@ -60,7 +60,7 @@
                 <td class="center">项目名称</td>
                 <td style="width:5em;">项目类型</td>
                 <td style="width:6em;">项目建设地</td>
-                <td style="width: 4em;">认领人数</td>
+                <td style="width: 4em;text-align: center">认领人数</td>
             </tr>
         </thead>
         <#list projectInformations as item>
@@ -71,7 +71,7 @@
             <td class="center">${item['project_name']}</td>
             <td>${item['type_name']}</td>
             <td>${item['province_name']}${item['city_name']}</td>
-            <td>${item['claime_num']}</td>
+            <td class="center">${item['claime_num']}</td>
         </tr>
         </#list>
     </table>
