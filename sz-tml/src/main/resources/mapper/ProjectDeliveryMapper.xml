@@ -387,47 +387,221 @@
       cycle_unit = #{cycleUnit,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  
   <select id="queryProjectDelivery" parameterType="java.util.Map" resultType="java.util.Map">
-    select DISTINCT d.id,b.project_name,d.output_value,d.pv,DATE_FORMAT(b.create_time,'%Y-%m-%d') create_time,claime_num,DATE_FORMAT(d.plan_end_time,'%Y-%m-%d') plan_end_time,im.company_name,im.company_id,d.job_type from t_project_delivery d 
     <choose>
       <when test="isOne==true">
-        INNER JOIN t_project_base_information b on(d.type=0 AND d.object_id=b.id)
+        select
+        a.id,
+        a.type,
+        DATE_FORMAT(a.create_time,'%Y-%m-%d') create_time,
+        a.status,
+        a.pv,
+        a.claime_num,
+        DATE_FORMAT(a.end_time,'%Y-%m-%d') plan_end_time,
+        a.job_type,
+        a.is_delivery,
+        a.image,
+        c.id as project_id,
+        c.project_name,
+        (CASE WHEN a.end_time>=#{currentTime} THEN 0 ELSE 1 END) as is_time_out,
+        (
+          CASE WHEN t3.authentication_type = 1 or t3.company_id=-1 or t3.company_id is NULL THEN t3.`name`
+          ELSE t3.company_name END
+        ) AS company_name,
+        b.put_amount as output_value,
+        (case WHEN e.id is NULL THEN 0 ELSE 1 END) as is_claim,
+        a.project_status
+        from t_project_delivery as a
+        left join t_project_information as b on(a.project_id=b.project_base_id)
+        left join t_project_base_information as c on(a.project_id=c.id and c.is_del=0)
+        LEFT JOIN t_project_importer_info as t3 on c.member_id=t3.member_id
+        LEFT JOIN t_project_claim_record as e on a.id=e.project_delivery_id AND e.member_id=#{memberId}
+        where a.type=0 and a.project_status in (1,2,3) and a.is_del=0 and a.is_delivery=1
+
+        <if test="fieldId!=null">
+          AND b.field_id=#{fieldId}
+        </if>
+        <if test="designTypeId!=null">
+          AND b.design_type_id=#{designTypeId}
+        </if>
+        <if test="startOutputValue!=null">
+          AND b.put_amount>=#{startOutputValue}
+        </if>
+        <if test="endOutputValue!=null">
+          AND b.put_amount &lt;=#{endOutputValue}
+        </if>
+        <if test="startDate!=null">
+          AND a.create_time>=#{startDate}
+        </if>
+        <if test="endDate!=null">
+          AND a.create_time &lt;=#{endDate}
+        </if>
+        <if test="companyName!=null">
+          and CASE WHEN t3.authentication_type = 1 or t3.company_id=-1 or t3.company_id is NULL THEN t3.`name` like CONCAT("%",#{companyName},"%")
+          ELSE t3.company_name like CONCAT("%",#{companyName},"%") END
+        </if>
+        
+        <!--后台sql条件保留start-->
+        <if test="title != null">
+          and (<!-- d.nick_name like CONCAT("%",#{title},"%") or --> c.project_name like CONCAT('%',#{title},'%'))
+        </if>
+        <if test="projectId != null and projectId != -1">
+          and a.project_id=#{projectId}
+        </if>
+        <if test="minValue != null">
+          and b.put_amount <![CDATA[>=]]> #{minValue}
+        </if>
+        <if test="maxValue != null">
+          and b.put_amount <![CDATA[<=]]> #{maxValue}
+        </if>
+        <if test="startTime != null">
+          and a.create_time <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="endTime != null">
+          and a.create_time <![CDATA[<=]]> #{endTime}
+        </if>
+        <if test="type != null and type != -1">
+          and b.design_type_id = #{type}
+        </if>
+        <if test="areasId != null and areasId != -1">
+          and  b.field_id=#{areasId}
+        </if>
+        <if test="memberName != null">
+          and CASE WHEN t3.authentication_type = 1 or t3.company_id=-1 or t3.company_id is NULL THEN t3.`name` like CONCAT("%",#{memberName},"%")
+          ELSE t3.company_name like CONCAT("%",#{memberName},"%") END
+        </if>
+        <!--后台sql条件保留end-->
+        GROUP BY a.id
+        <if test="putAmountAsc == -1 and createTimeAsc == -1 and claimeNumAsc == -1 and pvAsc == -1">
+          order by a.create_time desc
+        </if>
+        <if test="putAmountAsc != -1 and putAmountAsc != null">
+          order by b.put_amount desc
+        </if>
+        <if test="createTimeAsc != -1 and createTimeAsc != null">
+          order by a.create_time desc
+        </if>
+        <if test="claimeNumAsc != -1 and claimeNumAsc != null">
+          order by a.claime_num desc
+        </if>
+        <if test="pvAsc != -1 and pvAsc != null">
+          order by pv desc
+        </if>
       </when>
       <otherwise>
-        INNER JOIN t_project_module m on(d.type=1 AND d.object_id=m.id)
-        INNER JOIN t_project_base_information b on(m.project_id=b.id)
+        SELECT
+        a.id,
+        a.type,
+        a.pv,
+        DATE_FORMAT(a.create_time,'%Y-%m-%d') create_time,
+        a.claime_num,
+        DATE_FORMAT(a.end_time,'%Y-%m-%d') plan_end_time,
+        a.job_type,
+        a.output_value,
+        a.project_name,
+        m.status as is_claim,
+        CASE
+        WHEN e.authentication_type = 1 or e.company_id=-1 THEN
+        f.nick_name
+        WHEN e.authentication_type = 2 THEN
+        e.company_name
+        END AS company_name
+        FROM
+        t_project_delivery AS a
+        LEFT JOIN t_project_module AS b ON (a.object_id = b.id and b.is_del=0)
+        LEFT JOIN t_project_base_information AS c ON (b.project_id = c.id and c.is_del=0)
+        LEFT JOIN t_project_importer_info AS e ON (c.member_id = e.member_id)
+        LEFT JOIN t_personal_login_info AS f ON (c.member_id = f.id)
+        left join t_personal_areas_expertise as g on (c.member_id = g.member_id)
+        left join t_project_information as h on(a.project_id=h.project_base_id)
+        left join t_project_stage as k on(c.id=k.project_id)
+        left join t_project_claim_record as m on (a.id=m.project_delivery_id)
+        WHERE
+        a.type = 1
+        AND a.project_status = 8
+        AND a.is_del = 0
+        AND a.is_delivery = 1
+        AND a.`status` = 0
+        and a.end_time <![CDATA[>]]> now()
+        <if test="fieldId!=null">
+          and g.id=#{fieldId}
+        </if>
+        <if test="designTypeId!=null">
+          and h.acquisition_type_id=#{designTypeId}
+        </if>
+        <if test="startOutputValue!=null">
+          AND b.output_value>=#{startOutputValue}
+        </if>
+        <if test="endOutputValue!=null">
+          AND b.output_value &lt;=#{endOutputValue}
+        </if>
+        <if test="startDate!=null">
+          AND a.create_time>=#{startDate}
+        </if>
+        <if test="endDate!=null">
+          AND a.create_time &lt;=#{endDate}
+        </if>
+        <if test="companyName!=null">
+          and CASE WHEN e.authentication_type = 1 OR ( e.company_id =- 1 OR e.company_id IS NULL ) THEN f.nick_name like CONCAT("%",#{companyName},"%")
+          ELSE
+          e.company_name like CONCAT("%",#{companyName},"%")
+          END
+        </if>
+
+        <!--后台sql条件保留start-->
+        <if test="title !='' and title != null ">
+          and (f.nick_name like CONCAT("%",#{title},"%") or c.project_name like CONCAT('%',#{title},'%'))
+        </if>
+        <if test="areasId != null and areasId != -1">
+          and g.id=#{areasId}
+        </if>
+        <if test="typeId != null and typeId != -1">
+          and h.acquisition_type_id=#{typeId}
+        </if>
+        <if test="stageId != null and stageId != -1">
+          and k.id=#{stageId}
+        </if>
+        <if test="importerName != null and importerName != ''">
+          and CASE WHEN e.authentication_type = 1 OR ( e.company_id =- 1 OR e.company_id IS NULL ) THEN f.nick_name like CONCAT("%",#{importerName},"%")
+          ELSE
+          e.company_name like CONCAT("%",#{importerName},"%")
+          END
+        </if>
+        <if test="jobType != null and jobType != -1">
+          and a.job_type=#{jobType}
+        </if>
+        <if test="minValue != null">
+          and b.output_value <![CDATA[>=]]> #{minValue}
+        </if>
+        <if test="maxValue != null">
+          and b.output_value <![CDATA[<=]]> #{maxValue}
+        </if>
+        <if test="startTime != null">
+          and a.create_time <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="endTime != null">
+          and a.create_time <![CDATA[<=]]> #{endTime}
+        </if>
+        <!--后台sql条件保留end-->
+        
+        GROUP BY a.id
+        <if test="createTimeAsc == -1 and putAmountAsc == -1 and claimeNumAsc == -1 and pvAsc == -1">
+          order by a.create_time desc
+        </if>
+        <if test="putAmountAsc != -1 and putAmountAsc != null">
+          order by b.output_value  desc
+        </if>
+        <if test="createTimeAsc != -1 and createTimeAsc != null">
+          order by a.create_time desc
+        </if>
+        <if test="claimeNumAsc != -1 and claimeNumAsc != null">
+          order by a.claime_num desc
+        </if>
+        <if test="pvAsc != -1 and pvAsc != null">
+          order by a.pv desc
+        </if>
       </otherwise>
     </choose>
-    LEFT JOIN t_project_information i on(d.object_id=i.id)
-    LEFT JOIN t_project_importer_info im on(im.member_id=b.member_id)
-    WHERE 1=1
-    AND d.is_del=0
-    <if test="fieldId!=null">
-      AND i.field_id=#{fieldId}
-    </if>
-    <if test="designTypeId!=null">
-      AND i.design_type_id=#{designTypeId}
-    </if>
-    <if test="startOutputValue!=null">
-      AND d.output_value>=#{startOutputValue}
-    </if>
-    <if test="endOutputValue!=null">
-      AND d.output_value &lt;=#{endOutputValue}
-    </if>
-    <if test="startDate!=null">
-      AND b.create_time>=#{startDate}
-    </if>
-    <if test="endDate!=null">
-      AND b.create_time &lt;=#{endDate}
-    </if>
-    <if test="companyId!=null">
-      AND im.company_id=#{companyId}
-    </if>
-    <if test="companyName!=null">
-      AND im.company_name=#{companyName}
-    </if>
-    ORDER BY b.create_time DESC 
   </select>
   
   <update id="updatePVById" parameterType="java.lang.Long">

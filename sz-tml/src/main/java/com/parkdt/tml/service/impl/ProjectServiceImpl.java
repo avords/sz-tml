@@ -139,5 +139,11 @@ public class ProjectServiceImpl implements ProjectService {
         return projectInformationTempMapper.insertSelective(projectInformationTemp);
     }
 
+    @Override
+    public ProjectImporterInfo getImportInfoByMemberId(Long memberId) {
+        ProjectImporterInfo projectImporterInfo = projectImporterInfoMapper.getImportCompanyIdByMemberId(memberId);
+        return projectImporterInfo;
+    }
+
 
 }

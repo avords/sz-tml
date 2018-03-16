@@ -2,6 +2,7 @@ package com.parkdt.tml.service;
 
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
+import com.parkdt.tml.domain.ProjectImporterInfo;
 import com.parkdt.tml.domain.ProjectInformation;
 import com.parkdt.tml.domain.ProjectInformationTemp;
 
@@ -35,4 +36,6 @@ public interface ProjectService {
     Long getImportCompanyIdByMemberId(Long memberId);
     
     int saveProjectInformationTemp(ProjectInformationTemp projectInformationTemp);
+
+    ProjectImporterInfo getImportInfoByMemberId(Long memberId);
 }

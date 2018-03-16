@@ -2,6 +2,7 @@ package com.parkdt.tml.controller;
 
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
+import com.parkdt.tml.domain.ProjectImporterInfo;
 import com.parkdt.tml.domain.ProjectInformationTemp;
 import com.parkdt.tml.domain.SysAreasExpertise;
 import com.parkdt.tml.domain.SysCity;
@@ -185,7 +186,15 @@ public class TaskController extends BaseController{
             params.put("designTypeId",designTypeId);
             params.put("startOutputValue",startOutputValue);
             params.put("endOutputValue",endOutputValue);
-            params.put("companyId",companyId);
+            //params.put("companyId",companyId);换为公司名称，与后台统一
+            String companyName = "";
+            ProjectImporterInfo projectImporterInfo = projectService.getImportInfoByMemberId(companyId);
+            if(projectImporterInfo!=null){
+                companyName = projectImporterInfo.getCompanyName();
+            }
+            params.put("companyName",companyName);
+            params.put("currentTime",new Date());
+            params.put("memberId",getMemberId());
             List<Map> projectDeliverys = projectService.queryProjectDelivery(params);
             model.addAttribute("sysAreasExpertises",sysAreasExpertises);
             model.addAttribute("sysGoodTypes",sysGoodTypes);
