@@ -45,16 +45,18 @@
                     报价产值
                     <input type="text" placeholder="请输入产值..." name="outputValue">
                 </div>
+
                 <div class="row">
                     <div class="claim" style="width:62%;">
-                        <span style="width: 30%">工作周期</span>
-                        <input type="text" placeholder="开始时间" style="width: 70%" name="startTime">
+                        工作周期
+                        <input type="text" placeholder="开始时间" style="width:100px;" name="startTime">
                     </div>
                     <span class="sp">~</span>
-                    <div class="claim" style="width:30%;float:right;">
+                    <div class="claim" style="width:30%;">
                         <input type="text" placeholder="结束时间" style="width:100%;" name="endTime">
                     </div>
                 </div>
+
                 <p class="title">邀请设计师</p>
                 <div class="invite">
                     <input type="hidden" name="type" value="0">
