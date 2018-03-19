@@ -29,7 +29,7 @@
                 <input type="hidden" name="memberId" value="${personalBaseInfo.memberId}"/>
                 <input type="text" placeholder="请输入姓名" name="name" value="${personalBaseInfo.name}"/>
                 <input type="text" placeholder="请输入联系电话" name="phone" value="${personalBaseInfo.phone}"/>
-                <input type="date"  placeholder="请输入生日" name="birthday" value="${personalBaseInfo.birthday?string("yyyy-MM-dd")}"/>
+                <input type="date" style="display: none;" placeholder="请输入生日" name="birthday" value="${personalBaseInfo.birthday?string("yyyy-MM-dd")}"/>
                 <input type="text" placeholder="请输入所在地" name="location" value="${personalBaseInfo.location}"/>
                 <input type="text" placeholder="请输入详细地址" name="specificAddress" value="${personalBaseInfo.specificAddress}"/>
                 <select name="teamId">
