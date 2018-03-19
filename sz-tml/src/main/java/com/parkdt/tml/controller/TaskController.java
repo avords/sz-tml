@@ -188,7 +188,7 @@ public class TaskController extends BaseController{
             params.put("endOutputValue",endOutputValue);
             //params.put("companyId",companyId);换为公司名称，与后台统一
             String companyName = "";
-            ProjectImporterInfo projectImporterInfo = projectService.getImportInfoByMemberId(companyId);
+            ProjectImporterInfo projectImporterInfo = projectService.getImportInfoByCompanyId(companyId);
             if(projectImporterInfo!=null){
                 companyName = projectImporterInfo.getCompanyName();
             }

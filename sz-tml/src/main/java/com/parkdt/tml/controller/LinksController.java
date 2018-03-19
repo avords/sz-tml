@@ -33,7 +33,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/links")
-public class LinksController {
+public class LinksController extends BaseController{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class);
 
@@ -105,7 +105,9 @@ public class LinksController {
                 params.put("companyName", "资源中心");
                 model.addAttribute("companyName", "资源中心");
             }
-
+            params.put("currentTime",new Date());
+            params.put("memberId",getMemberId());
+            
             List<Map> projectDeliverys = projectService.queryProjectDelivery(params);
             model.addAttribute("sysAreasExpertises", sysAreasExpertises);
             model.addAttribute("sysGoodTypes", sysGoodTypes);

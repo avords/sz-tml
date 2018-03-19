@@ -140,9 +140,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectImporterInfo getImportInfoByMemberId(Long memberId) {
-        ProjectImporterInfo projectImporterInfo = projectImporterInfoMapper.getImportCompanyIdByMemberId(memberId);
-        return projectImporterInfo;
+    public ProjectImporterInfo getImportInfoByCompanyId(Long companyId) {
+        List<ProjectImporterInfo> projectImporterInfos = projectImporterInfoMapper.getImportInfoByCompanyId(companyId);
+        if(projectImporterInfos!=null&&projectImporterInfos.size()>0){
+            return projectImporterInfos.get(0);
+        }
+        return null;
     }
 
 

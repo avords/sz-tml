@@ -296,4 +296,7 @@
   <select id="getImportCompanyIdByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Long">
     SELECT * FROM t_project_importer_info WHERE member_id=#{memberId}
   </select>
+  <select id="getImportInfoByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    SELECT * FROM t_project_importer_info WHERE company_id=#{memberId}
+  </select>
 </mapper>

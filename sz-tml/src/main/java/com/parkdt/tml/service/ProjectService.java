@@ -37,5 +37,5 @@ public interface ProjectService {
     
     int saveProjectInformationTemp(ProjectInformationTemp projectInformationTemp);
 
-    ProjectImporterInfo getImportInfoByMemberId(Long memberId);
+    ProjectImporterInfo getImportInfoByCompanyId(Long companyId);
 }
