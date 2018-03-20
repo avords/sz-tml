@@ -121,7 +121,7 @@ public class UserController extends BaseController {
                 if (!loginInfo.getPassword().equals(password)) {
                     return result.setStatus("error").setValue("密码不对");
                 }
-                if (loginInfo.getCertificationLoginFlag() == 0) {
+                if (loginInfo.getRoleId() == 0 || loginInfo.getRoleId() == 1) {
                     return result.setStatus("certificat").setValue("用户未认证，请登录网站进行身份认证");
                 }
             } catch (Exception e) {
@@ -205,7 +205,7 @@ public class UserController extends BaseController {
                     if (userService.saveSelective(personalLoginInfo) > 0) {
 
                         personalLoginInfo = userService.getPersonalLoginInfoByOpenId(personalLoginInfo.getWechatId());
-                        if (personalLoginInfo.getId() != 0) {
+                        if (personalLoginInfo.getRoleId() == 0 || personalLoginInfo.getRoleId() == 1) {
                             return result.setStatus("certificat").setValue("注册成功,请登录网站进行身份认证");
                         }
                         return result.setStatus("certificat").setValue("注册成功,请登录网站进行身份认证");
