@@ -57,7 +57,7 @@ public class MyMenu {
         JSONObject recourse = new JSONObject();
         recourse.put("type", "view");
         recourse.put("name", "资源中心");
-        recourse.put("url", WeChatConfig.getWebUrl() + "links/Resources");
+        recourse.put("url", WeChatConfig.getWebUrl() + "links/join");
         likeSubMenuArray.add(recourse);
 
         JSONObject platform = new JSONObject();

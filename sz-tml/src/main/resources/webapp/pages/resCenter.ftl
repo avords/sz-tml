@@ -10,7 +10,7 @@
 
 <body>
 <header>
-    <a href="/links/join"><img class="banner" src="/images/banner2.jpg" /></a>
+    <img class="banner" src="/images/about-banner.jpg"/>
 </header>
 <div class="wrapper">
     <div class="container">
