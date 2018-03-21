@@ -98,6 +98,7 @@ h1 {
 
 .about,
 .platform {
+  font-size: 0.12rem;
   text-align: center;
   margin: 20px auto 20px;
   padding-bottom: 10px;
@@ -194,6 +195,7 @@ h1 {
 .data_form input[type=password],
 .data_form select,
 .data_form textarea {
+  -webkit-appearance: textfield;
   width: 100%;
   border: 1px solid #bbb;
   border-radius: 4px;

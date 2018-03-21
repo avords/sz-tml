@@ -176,4 +176,11 @@ public class LinksController extends BaseController{
 
         return "likePlatfom";
     }
+
+    @RequestMapping("join")
+    public String join(Model model, HttpServletRequest req) {
+        OffiContent content2 = contentService.getContentByContentId(1263L);
+        model.addAttribute("join", content2);
+        return "join";
+    }
 }
