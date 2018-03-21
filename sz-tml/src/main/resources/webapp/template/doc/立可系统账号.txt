@@ -11,7 +11,8 @@ admin 123456
 
 
 线上测试环境数据库
-数据库名 : likekeji
+数据库名 : likekeji 密码 lkkjMYSQL20171108
 112.74.40.244
 root
-lkkjMYSQL20171108
+LKKJ2Q0W1R7T1Y1U2lkkj
+
