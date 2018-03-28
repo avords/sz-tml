@@ -1,5 +1,6 @@
 package com.parkdt.tml.controller;
 
+import com.parkdt.tml.consist.Constant;
 import com.parkdt.tml.domain.PersonalLoginInfo;
 import com.parkdt.tml.domain.ProjectClaimRecord;
 import com.parkdt.tml.domain.ProjectDelivery;
@@ -158,6 +159,8 @@ public class TaskController extends BaseController{
         PersonalLoginInfo personalLoginInfo = getCurrentUser();
         if(personalLoginInfo==null){
             return "redirect:/user/login";
+        }else{
+            req.setAttribute(Constant.SESSION_USER, personalLoginInfo);
         }
         //得到所有领域
         List<SysAreasExpertise> sysAreasExpertises = sysAreasExpertiseService.getAllSysAreasExpertise();
