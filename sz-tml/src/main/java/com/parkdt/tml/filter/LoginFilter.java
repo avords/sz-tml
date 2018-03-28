@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 @Order(2)
 //重点
-@WebFilter(filterName = "loginFilter", urlPatterns = {"/user/*", "/biz/*", "/links/*", "/task/*"})
+@WebFilter(filterName = "loginFilter", urlPatterns = {"/user", "/biz", "/links", "/task"})
 public class LoginFilter implements Filter {
 
     @Autowired
