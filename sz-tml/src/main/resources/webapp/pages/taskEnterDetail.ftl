@@ -24,7 +24,17 @@
             <p>
                 <strong>项目类型</strong>${projectDelivery.projectInformation.sysGoodType.typeName}</p>
             <p>
-                <strong>项目简介</strong>${projectDelivery.projectInformation.projectBaseInformation.details}
+                <strong>工作简介</strong></p>
+            <p>
+                <strong>项目产值</strong></p>
+            <p>
+                <strong>计划时间</strong></p>
+            <p>
+                <strong>项目周期</strong></p>
+            <p>
+                <strong>人员要求</strong></p>
+            <p>
+                <strong>项目详情</strong>${projectDelivery.projectInformation.projectBaseInformation.details}
             </p>
             <#assign projectAnnexes=projectDelivery.projectInformation.projectAnnexes/>
             <#if projectAnnexes??&&projectAnnexes?size gt 0>
