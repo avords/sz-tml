@@ -111,7 +111,7 @@
                         </p>
                     </div>
                     <div class="op">
-                        <#if (item.plan_end_time?date) gt .now?date>
+                        <#if (item.plan_end_time?date) gt .now?date&&userLogin??&&userLogin.roleId!=4>
                             <input type="button" value="认领" class="claim" onclick="window.location.href='/task/detail/${item.id}'"/>
                         </#if>
                         <#--<input type="button" value="分享" class="share" />-->

@@ -2,6 +2,7 @@ package com.parkdt.tml.controller;
 
 import com.parkdt.tml.domain.OffiContent;
 import com.parkdt.tml.domain.OffiDesign;
+import com.parkdt.tml.domain.PersonalLoginInfo;
 import com.parkdt.tml.domain.SysAreasExpertise;
 import com.parkdt.tml.domain.SysGoodType;
 import com.parkdt.tml.service.BannerService;
@@ -55,7 +56,10 @@ public class LinksController extends BaseController{
 
     @RequestMapping("Resources")
     public String Resources(Model model, HttpServletRequest req) {
-
+        PersonalLoginInfo personalLoginInfo = getCurrentUser();
+        if(personalLoginInfo==null){
+            return "redirect:/user/login";
+        }
         //得到所有领域
         List<SysAreasExpertise> sysAreasExpertises = sysAreasExpertiseService.getAllSysAreasExpertise();
         //得到所有类型

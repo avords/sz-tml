@@ -41,19 +41,19 @@
             <form action="" id="data_form">
                 <input type="hidden" name="projectDeliveryId" value="${projectDelivery.id}"/>
                 <p class="title">认领方案</p>
-                <div class="claim">
-                    报价产值
-                    <input type="text" placeholder="请输入产值..." name="outputValue">
+                <div class="claim" style="border: 0px;">
+                    <span style="width: 20%;">报价产值</span>
+                    <input type="text" placeholder="请输入产值..." name="outputValue" style="width:80%;border: 1px solid #bbb;">
                 </div>
 
                 <div class="row">
-                    <div class="claim" style="width:62%;">
-                        工作周期
-                        <input type="text" placeholder="开始时间" style="width:100px;" name="startTime">
+                    <div class="claim" style="width:62%;border: 0px;">
+                        <span style="width: 20%;">工作周期</span>
+                        <input type="text" placeholder="开始时间" style="width:70%;border: 1px solid #bbb;" name="startTime">
                     </div>
-                    <span class="sp">~</span>
-                    <div class="claim" style="width:30%;">
-                        <input type="text" placeholder="结束时间" style="width:100%;" name="endTime">
+                    <span class="sp" style="width: ">~</span>
+                    <div class="claim" style="width:30%;border: 0px;">
+                        <input type="text" placeholder="结束时间" style="width:100%;border: 1px solid #bbb;" name="endTime">
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                 <div class="plane">
                     <textarea cols="30" rows="5" placeholder="请输入报名说明..." name="workPlan"></textarea>
                 </div>
-                <#if (projectDelivery.planEndTime?date) gt .now?date>
+                <#if (projectDelivery.planEndTime?date) gt .now?date&&userLogin??&&userLogin.roleId!=4>
                     <div class="data_form">
                         <input type="button" value="认领" id="saveButton"/>
                     </div>
@@ -145,7 +145,7 @@
                 },1000);
             }
         }
-        countdown('${projectDelivery.planEndTime?string("yyyy-MM-dd")}');
+        countdown('${projectDelivery.endTime?string("yyyy-MM-dd")}');
     });
 </script>
 </body>
