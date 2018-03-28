@@ -55,18 +55,19 @@
             <form action="" id="data_form">
                 <input type="hidden" name="projectDeliveryId" value="${projectDelivery.id}"/>
                 <p class="title">认领方案</p>
+
+                <span style="width: 20%;">报价产值</span>
                 <div class="claim" style="border: 0px;">
-                    <span style="width: 20%;">报价产值</span>
-                    <input type="text" placeholder="请输入产值..." name="outputValue" style="width:80%;border: 1px solid #bbb;">
+                    <input type="text" placeholder="请输入产值..." name="outputValue" style="width:100%;border: 1px solid #bbb;">
                 </div>
 
+                <span style="width: 20%;">工作周期</span>
                 <div class="row">
-                    <div class="claim" style="width:62%;border: 0px;">
-                        <span style="width: 20%;">工作周期</span>
-                        <input type="text" placeholder="开始时间" style="width:70%;border: 1px solid #bbb;" name="startTime">
+                    <div class="claim" style="width:46%;border: 0px;">
+                        <input type="text" placeholder="开始时间" style="width:100%;border: 1px solid #bbb;" name="startTime">
                     </div>
                     <span class="sp" style="width: ">~</span>
-                    <div class="claim" style="width:30%;border: 0px;">
+                    <div class="claim" style="width:46%;border: 0px;">
                         <input type="text" placeholder="结束时间" style="width:100%;border: 1px solid #bbb;" name="endTime">
                     </div>
                 </div>
