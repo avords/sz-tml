@@ -8,9 +8,11 @@ import com.parkdt.tml.domain.ProjectInformation;
 import com.parkdt.tml.domain.ProjectInformationTemp;
 import com.parkdt.tml.domain.ProjectModule;
 import com.parkdt.tml.domain.SysGoodType;
+import com.parkdt.tml.domain.SysTypeInfo;
 import com.parkdt.tml.mapper.*;
 import com.parkdt.tml.service.ProjectService;
 import com.parkdt.tml.service.SysGoodTypeService;
+import com.parkdt.tml.service.SysTypeInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +46,8 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectImporterInfoMapper projectImporterInfoMapper;
     @Autowired
     private ProjectInformationTempMapper projectInformationTempMapper;
+    @Autowired
+    private SysTypeInfoService sysTypeInfoService;
 
     @Override
     public List<ProjectInformation> getAllProject() {
@@ -91,6 +95,8 @@ public class ProjectServiceImpl implements ProjectService {
             projectDelivery.setProjectInformation(projectInformation);
             //得到项目类型
             SysGoodType sysGoodType = sysGoodTypeService.getById(projectInformation.getDesignTypeId());
+            SysTypeInfo acquisitionType = sysTypeInfoService.getById(projectInformation.getAcquisitionTypeId());
+            projectInformation.setAcquisitionType(acquisitionType);
             projectInformation.setSysGoodType(sysGoodType);
         }
         return projectDelivery;

@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface SysTypeInfoService {
     List<SysTypeInfo> getByTypeId(Long typeId);
+    
+    SysTypeInfo getById(Long id);
 }

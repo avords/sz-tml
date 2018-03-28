@@ -22,17 +22,21 @@
             <p>
                 <strong>建设单位</strong>${projectDelivery.projectInformation.constructionUnit}</p>
             <p>
-                <strong>项目类型</strong>${projectDelivery.projectInformation.sysGoodType.typeName}</p>
+                <strong>项目类型</strong>${projectDelivery.projectInformation.acquisitionType.typeName}</p>
             <p>
-                <strong>工作简介</strong></p>
+                <strong>工作简介</strong>${projectDelivery.projectInformation.introduction}</p>
             <p>
-                <strong>项目产值</strong></p>
+                <strong>项目产值</strong><span style="color: red;">${projectDelivery.outputValue?string('0.00')}</span></p>
             <p>
-                <strong>计划时间</strong></p>
+                <strong>计划时间</strong>${projectDelivery.planStartTime?string("yyyy-MM-dd")}~${projectDelivery.planEndTime?string("yyyy-MM-dd")}</p>
+        <#assign unit=projectDelivery.projectInformation.cycleUnit/>
+        <#assign cycleValue=projectDelivery.projectInformation.cycleValue/>
+            <#if cycleValue??&&unit??>
             <p>
-                <strong>项目周期</strong></p>
+                <strong>项目周期</strong>${projectDelivery.projectInformation.cycleValue}<#if unit==1>天<#elseif unit==2>周<#elseif unit==3>月<#elseif unit==4>年</#if></p>
+            </#if>
             <p>
-                <strong>人员要求</strong></p>
+                <strong>人员要求</strong>${projectDelivery.projectInformation.personnelRequirements}</p>
             <p>
                 <strong>项目详情</strong>${projectDelivery.projectInformation.projectBaseInformation.details}
             </p>

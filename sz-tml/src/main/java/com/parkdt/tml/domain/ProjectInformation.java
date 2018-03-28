@@ -74,6 +74,8 @@ public class ProjectInformation implements Serializable {
     
     private SysGoodType sysGoodType;
     
+    private SysTypeInfo acquisitionType;
+            
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -346,5 +348,13 @@ public class ProjectInformation implements Serializable {
 
     public void setSysGoodType(SysGoodType sysGoodType) {
         this.sysGoodType = sysGoodType;
+    }
+
+    public SysTypeInfo getAcquisitionType() {
+        return acquisitionType;
+    }
+
+    public void setAcquisitionType(SysTypeInfo acquisitionType) {
+        this.acquisitionType = acquisitionType;
     }
 }

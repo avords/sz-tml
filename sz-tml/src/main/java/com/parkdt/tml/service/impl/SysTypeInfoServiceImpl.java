@@ -19,4 +19,9 @@ public class SysTypeInfoServiceImpl implements SysTypeInfoService {
     public List<SysTypeInfo> getByTypeId(Long typeId) {
         return sysTypeInfoMapper.getByTypeId(typeId);
     }
+
+    @Override
+    public SysTypeInfo getById(Long id) {
+        return sysTypeInfoMapper.selectByPrimaryKey(id);
+    }
 }
